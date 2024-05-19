@@ -9,7 +9,4 @@
 | Mike | 03120114 |
 | Nick | 03120014 |
 | Tereza | 03120403 |
-<<<<<<< HEAD
-=======
-test3
->>>>>>> f6ea774fe84c1ffa1c6b6c479044d3abf230ade5
+test4
