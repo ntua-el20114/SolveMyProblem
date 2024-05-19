@@ -1,8 +1,11 @@
-# NTUA ECE SAAS 2024 PROJECT
+# NTUA ECE SAAS 2024 PROJECT SolveMyProblem
   
-## TEAM (XX)
-  
-  
-Περιγραφή - οδηγίες
-  
-Περιέχονται φάκελοι για 15 microservices. Ο αριθμός είναι εντελώς ενδεικτικός. Δημιουργήστε ακριβώς όσα απαιτούνται από τη λύση σας.
+## TEAM (40)
+
+## TABLE
+
+| Name | Α.Μ. |
+| --- | --- |
+| Mike | 03120114 |
+| Nick | 03120014 |
+| Tereza | 03120403 |
