@@ -10,6 +10,7 @@ const kafka = new Kafka({
 });
 
 const producer = kafka.producer();
+const consumer = kafka.consumer({ groupId: 'choreographer-group' });
 
 const init = async () => {
   await producer.connect();
@@ -22,4 +23,18 @@ const sendMessage = async (message) => {
   });
 };
 
-module.exports = { init, sendMessage };
+async function receiveMessage(topic) {
+  await consumer.connect();
+  await consumer.subscribe({ topic: topic });
+
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      const value = message.value.toString();
+      console.log(`Received message from ${topic}: ${value}`);
+      
+      // Process the message...
+    },
+  });
+}
+
+module.exports = { init, sendMessage, receiveMessage };

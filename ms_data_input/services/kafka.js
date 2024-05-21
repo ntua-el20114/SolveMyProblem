@@ -10,6 +10,7 @@ const kafka = new Kafka({
 });
 
 const consumer = kafka.consumer({ groupId: 'data_input-group' });
+const producer = kafka.producer();
 
 const init = async () => {
   await consumer.connect();
@@ -23,4 +24,14 @@ const init = async () => {
   });
 };
 
-module.exports = { init };
+async function sendMessage(topic, message) {
+  await producer.connect();
+  await producer.send({
+    topic: topic,
+    messages: [{ value: JSON.stringify(message) }],
+  });
+  console.log(`Sent message to ${topic}: ${JSON.stringify(message)}`);
+  await producer.disconnect();
+}
+
+module.exports = { init, sendMessage };
