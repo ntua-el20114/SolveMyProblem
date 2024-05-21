@@ -1,21 +1,38 @@
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const db = require('./services/database');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express();
+app.use(bodyParser.json());
 
-var app = express();
-const port = 3003;
+app.post('/problems', async (req, res) => {
+  try {
+    const problem = await db.Problem.create(req.body);
+    res.status(201).json(problem);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/problems', async (req, res) => {
+  try {
+    const problems = await db.Problem.findAll();
+    res.status(200).json(problems);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.listen(3000, async () => {
+  console.log('Server is running on port 3000');
 
-app.listen(port, () => {
-    console.log(`Problem list is running on port ${port}`);
-  });
+  try {
+    await db.createDatabaseIfNotExists().then(db.syncModels);
+    await db.sequelize.authenticate();
+    console.log('Database connected!');
 
-module.exports = app;
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+});
+

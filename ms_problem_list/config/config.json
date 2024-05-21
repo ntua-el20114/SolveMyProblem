@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "tery",
+    "password": "tery",
+    "database": "problem_list_DB",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": 1234,
+    "database": "problem_list_DB_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": 1234,
+    "database": "problem_list_DB_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
