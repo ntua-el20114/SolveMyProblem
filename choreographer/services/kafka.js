@@ -17,7 +17,7 @@ const init = async () => {
 
 const sendMessage = async (message) => {
   await producer.send({
-    topic: 'topic-from-choreographer',
+    topic: 'choreographer-to-data-input',
     messages: [{ value: message }],
   });
 };

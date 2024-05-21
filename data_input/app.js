@@ -7,6 +7,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+const port = 3002;
 
 // Kafkannot data_input
 
@@ -21,6 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.listen(port, () => {
+  console.log(`Data input is running on port ${port}`);
+});
 
 module.exports = app;
 

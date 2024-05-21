@@ -6,6 +6,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+const port = 3001;
 
 // Kafkannot
 
@@ -25,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.listen(port, () => {
+  console.log(`Choreographer is running on port ${port}`);
+});
 
 module.exports = app;
 
