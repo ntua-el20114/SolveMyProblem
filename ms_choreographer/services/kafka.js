@@ -32,8 +32,11 @@ async function receiveMessage(topic) {
       const value = message.value.toString();
       console.log(`Received message from ${topic}: ${value}`);
       
-      // Process the message...
-    },
+      // Do something with the message based on the topic
+      if (topic == 'NEW_PROBLEM') {
+        console.log('New problem:', value);
+      }
+    }
   });
 }
 

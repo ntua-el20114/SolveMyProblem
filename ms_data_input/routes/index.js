@@ -3,26 +3,39 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var kafkaService = require('../services/kafka');
 
-/* GET home page. */
+/* GET Data_input page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Data_Input' });
 });
+
 
 router.use(bodyParser.json());
 
 /* POST new problem. */
 router.post('/new-problem', function(req, res, next) {
-  // Validate request body...
-  
+
+  // Check if req.body is an object and not empty
+  if (typeof req.body === 'object' && Object.keys(req.body).length > 0) {
+    next();
+  } else {
+    next(new Error('Empty Object or Non-Object received.'));
+  }
+}, 
+function(req, res, next) {
   // Send message to Kafka
   kafkaService.sendMessage('NEW_PROBLEM', req.body)
     .then(() => {
       res.status(200).send('Problem received and sent to choreographer.\n');
     })
     .catch((error) => {
-      console.error('Error sending message to Kafka:', error);
-      res.status(500).send('Error sending problem to choreographer.');
+      next(error);
     });
+});
+
+// Error-handling middleware function
+router.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!\n');
 });
 
 module.exports = router;

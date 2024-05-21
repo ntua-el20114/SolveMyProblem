@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const kafkaService = require('./services/kafka');
+const cors = require('cors');
 
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+app.use(cors());
 const port = 3002;
 
 // Kafkannot data_input
