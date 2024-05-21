@@ -9,11 +9,11 @@ const kafka = new Kafka({
   brokers: [process.env.KAFKA_BROKER]
 });
 
-const consumer = kafka.consumer({ groupId: 'data_input-group' });
+const consumer = kafka.consumer({ groupId: 'dummy-group' });
 
 const init = async () => {
   await consumer.connect();
-  await consumer.subscribe({ topic: 'topic-from-choreographer', fromBeginning: true });
+  await consumer.subscribe({ topic: 'choreographer-to-data-input', fromBeginning: true });
 
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
