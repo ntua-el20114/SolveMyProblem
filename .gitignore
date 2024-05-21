@@ -70,3 +70,6 @@
 
 # DynamoDB Local files
 **/.dynamodb/
+
+# Pycache directories
+**/__pycache__/
