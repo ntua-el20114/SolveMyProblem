@@ -5,6 +5,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const port = 3004;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -12,5 +13,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.listen(port, () => {
+    console.log(`Solver is running on port ${port}`);
+});
 
 module.exports = app;
