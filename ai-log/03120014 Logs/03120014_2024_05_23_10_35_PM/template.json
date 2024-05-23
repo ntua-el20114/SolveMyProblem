@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": ["coding"],
+        "action": ["choreography design"],
+        "scope": ["backend"],
+        "action experience": [3],
+        "prog lang": ["js-node"],
+        "other prog lang": "<fill in>",
+        "aimodel": ["chatgpt"],
+        "aimodel version": "chatgpt-4.0",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": ["online free"],
+        "experience with tool": [4],
+        "time allocated (h)": "0.1",
+        "time saved estimate (h)": "0.5", 
+        "quality of ai help": [3],
+        "knowledge acquired": [3],
+        "generic feeling - now": [3],
+        "generic feeling - future": [4],
+        "threat level": [1],
+        "notes": "<fill in>"
+    }
+}
