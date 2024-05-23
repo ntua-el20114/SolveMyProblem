@@ -4,7 +4,6 @@ const cors = require('cors');
 const kafkaService = require('./services/kafka');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 
 const app = express();
 app.use(cors());
@@ -27,7 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 app.listen(port, () => {
   console.log(`Choreographer is running on port ${port}`);

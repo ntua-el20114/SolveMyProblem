@@ -2,6 +2,13 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var kafkaService = require('../services/kafka');
+var cors = require('cors');
+
+// configure cors to only accept requests from http://localhost:3000
+var corsOptions = {
+  origin: 'http://localhost:3000'
+}
+router.use(cors(corsOptions)); // use the cors middleware with the specified options
 
 /* GET Data_input page. */
 router.get('/', function(req, res, next) {
