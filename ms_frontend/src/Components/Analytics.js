@@ -1,6 +1,7 @@
 // Analytics.js
 import React from 'react';
 import HomeButton from './HomeButton';
+import '../index.css'; // import the CSS file
 
 function Analytics() {
   return (

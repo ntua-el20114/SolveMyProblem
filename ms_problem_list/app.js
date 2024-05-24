@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./services/database');
 
 const app = express();
+const port = 3003;
 app.use(bodyParser.json());
 
 app.post('/problems', async (req, res) => {
@@ -23,8 +24,8 @@ app.get('/problems', async (req, res) => {
   }
 });
 
-app.listen(3000, async () => {
-  console.log('Server is running on port 3000');
+app.listen(port, async () => {
+  console.log(`Server is running on port: ${port}`);
 
   try {
     await db.createDatabaseIfNotExists().then(db.syncModels);

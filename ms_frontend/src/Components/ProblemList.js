@@ -19,7 +19,6 @@ function ProblemList() {
         <div>
             <HomeButton />
             <h1>Problem List</h1>
-            {/* Render your list of problems here */}
             <button onClick={openModal}>Add New Problem</button>
 
             {isModalOpen && (
@@ -32,6 +31,10 @@ function ProblemList() {
                     </div>
                 </div>
             )}
+
+            <div className='problem-list'>
+               <p>List of Problems HERE</p>
+            </div>
         </div>
     );
 }
