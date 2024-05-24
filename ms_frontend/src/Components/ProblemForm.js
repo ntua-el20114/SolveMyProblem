@@ -4,6 +4,11 @@ import React, { useState } from 'react';
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // Check if any field is empty
+        if (!name || !username || !problemData || !solver) {
+          alert('All fields must be filled out');
+          return;
+        }
         const formData = {
             name,
             username,
@@ -54,6 +59,7 @@ import React, { useState } from 'react';
       <label>
         Solver:
         <select value={solver} onChange={(e) => setSolver(e.target.value)}>
+          <option key={0} value="">Select a solver</option>
           {solvers.map((solver) => (
             <option key={solver} value={solver}>
               {solver}
