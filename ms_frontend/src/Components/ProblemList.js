@@ -1,7 +1,7 @@
 // ProblemList.js
 import React, { useState } from 'react';
 import ProblemForm from './ProblemForm';
-import HomeButton from './HomeButton';
+import Header from './Header';
 import '../index.css'; // import the CSS file
 
 function ProblemList() {
@@ -17,9 +17,8 @@ function ProblemList() {
 
     return (
         <div>
-            <HomeButton />
+            <Header />
             <h1>Problem List</h1>
-            {/* Render your list of problems here */}
             <button onClick={openModal}>Add New Problem</button>
 
             {isModalOpen && (
@@ -32,6 +31,10 @@ function ProblemList() {
                     </div>
                 </div>
             )}
+
+            <div className='problem-list'>
+               <p>List of Problems HERE</p>
+            </div>
         </div>
     );
 }
