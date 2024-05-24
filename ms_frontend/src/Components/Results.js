@@ -1,12 +1,12 @@
 // Results.js
 import React from 'react';
-import HomeButton from './HomeButton';
+import Header from './Header';
 import '../index.css'; // import the CSS file
 
 function Results() {
   return (
     <div>
-      <HomeButton />
+      <Header />
     <h1>Results</h1>
     </div>
   );
