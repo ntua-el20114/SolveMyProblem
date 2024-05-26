@@ -81,7 +81,9 @@
       "Longitude": 23.75884558944574
     }
   ],
+  "LocationDemands": null,
   "NumVehicles": 3,
   "Depot": 0,
+  "VehicleCapacities": null,
   "MaxDistance": 15000
 }

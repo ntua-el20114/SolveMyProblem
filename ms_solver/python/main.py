@@ -12,9 +12,9 @@ def main():
     if problem_type == "routing":
         try:
             result = routing.solve(problem_data['Locations'], 
-                        problem_data['NumVehicles'], 
-                        problem_data['Depot'], 
-                        problem_data['MaxDistance'])
+                                   problem_data['NumVehicles'], 
+                                   problem_data['Depot'], 
+                                   {'MaxDistance':problem_data['MaxDistance']})
         except KeyError:
             print("Error: Wrong arguments provided.")
             sys.exit(1)
