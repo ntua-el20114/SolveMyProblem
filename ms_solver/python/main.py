@@ -14,19 +14,28 @@ def main():
             result = routing.vrp(problem_data['Locations'], 
                                  problem_data['NumVehicles'], 
                                  problem_data['Depot'], 
-                                 problem_data['MaxDistance'],
-                                 problem_data['DistanceSlack'])
+                                 problem_data['MaxDistance'])
         elif problem_type == "CVRP":
             result = routing.cvrp(problem_data['Locations'], 
                                   problem_data['Demands'],
                                   problem_data['NumVehicles'],
                                   problem_data['VehicleCapacities'],
                                   problem_data['Depot'], 
-                                  problem_data['MaxDistance'],
-                                  problem_data["DistanceSlack"])
+                                  problem_data['MaxDistance'])
+        elif problem_type == "VRPTW":
+            result = routing.vrptw(problem_data['Locations'], 
+                                   problem_data['TimeWindows'],
+                                   problem_data['Speed'],
+                                   problem_data['NumVehicles'],
+                                   problem_data['Depot'],
+                                   problem_data['MaxTime'],
+                                   problem_data['TimeSlack'])
     except KeyError:
         result = "Error: Wrong arguments provided."
+    except Exception as e:
+        result = f"Error: {e}"
     print(result)
+    exit(0)
 
 if __name__ == "__main__":
     main()
