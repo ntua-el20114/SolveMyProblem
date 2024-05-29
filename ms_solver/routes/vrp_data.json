@@ -83,6 +83,5 @@
   ],
   "NumVehicles": 3,
   "Depot": 0,
-  "MaxDistance": 15000,
-  "DistanceSlack:": null
+  "MaxDistance": 13000
 }

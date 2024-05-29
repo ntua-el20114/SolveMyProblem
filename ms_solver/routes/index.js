@@ -32,7 +32,7 @@ function solveProblem(problemType, problemData) {
 }
 
 // DELETEME Solve test routing problem using dummy data
-fs.readFile('routes/cvrp_data.json', 'utf8', (err, jsonString) => {
+fs.readFile('routes/vrp_data.json', 'utf8', (err, jsonString) => {
   if (err) {
       console.log("File read failed:", err);
       return;
@@ -40,7 +40,7 @@ fs.readFile('routes/cvrp_data.json', 'utf8', (err, jsonString) => {
   try {
       const dummyData = JSON.parse(jsonString);
       // console.log("Data read from file:", dummyData);
-      solveProblem('CVRP', dummyData)
+      solveProblem('VRP', dummyData)
         .then(result => {
           console.log(result);
         })

@@ -9,16 +9,24 @@ def main():
     problem_data = json.loads(sys.argv[2])
     print("Problem type:", problem_type)
 
-    if problem_type == "routing":
-        try:
-            result = routing.solve(problem_data['Locations'], 
-                                   problem_data['NumVehicles'], 
-                                   problem_data['Depot'], 
-                                   {'MaxDistance':problem_data['MaxDistance']})
-        except KeyError:
-            print("Error: Wrong arguments provided.")
-            sys.exit(1)
-        print(result)
+    try:
+        if problem_type == "VRP":
+            result = routing.vrp(problem_data['Locations'], 
+                                 problem_data['NumVehicles'], 
+                                 problem_data['Depot'], 
+                                 problem_data['MaxDistance'],
+                                 problem_data['DistanceSlack'])
+        elif problem_type == "CVRP":
+            result = routing.cvrp(problem_data['Locations'], 
+                                  problem_data['Demands'],
+                                  problem_data['NumVehicles'],
+                                  problem_data['VehicleCapacities'],
+                                  problem_data['Depot'], 
+                                  problem_data['MaxDistance'],
+                                  problem_data["DistanceSlack"])
+    except KeyError:
+        result = "Error: Wrong arguments provided."
+    print(result)
 
 if __name__ == "__main__":
     main()

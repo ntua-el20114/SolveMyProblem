@@ -85,7 +85,5 @@
   "Demands" : [0, 2, 3 , 4, 5, 4, 3, 2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 4, 3, 2],
   "NumVehicles": 3,
   "VehicleCapacities": [22, 22, 22],
-  "MaxDistance": null,
-  "DistanceSlack": null,
-  "CapacitySlack": 10
+  "MaxDistance": null
 }
