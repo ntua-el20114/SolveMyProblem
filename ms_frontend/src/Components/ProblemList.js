@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import ProblemForm from './ProblemForm';
 import Header from './Header';
 import '../index.css'; // import the CSS file
@@ -17,8 +17,9 @@ function ProblemList() {
     return (
         <div>
             <Header />
-            <h1>Problem List</h1>
-            <button onClick={openProblemModal}>Add New Problem</button>
+            <img src = '/add.png' alt='' onClick={openProblemModal} className='add-button right-to-left-fast'/>
+            <h1 className="left-to-right-slow center-screen">Problem List</h1>
+            
 
             {isProblemModalOpen && (
                 <div className="modal">
@@ -32,7 +33,12 @@ function ProblemList() {
             )}
 
             <div className='problem-list'>
-               <p>List of Problems HERE</p>
+               <ul>
+               <li>Problem 1</li>
+                <li>Problem 2</li>
+                <li>Problem 3</li>
+                <li>Problem 4</li>
+                </ul>
             </div>
         </div>
     );

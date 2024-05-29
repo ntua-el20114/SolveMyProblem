@@ -7,10 +7,9 @@ function Results() {
   return (
     <div>
       <Header />
-    <h1>Results</h1>
+    <h1 className="left-to-right-slow center-screen">Results</h1>
     </div>
   );
-  // Render your results here
 }
 
 export default Results;

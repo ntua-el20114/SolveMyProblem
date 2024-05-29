@@ -7,9 +7,8 @@ function Analytics() {
   return (
   <div>
     <Header />
-    <h1>Analytics</h1>
+    <h1 className="left-to-right-slow center-screen">Analytics</h1>
   </div>);
-  // Render your analytics here
 }
 
 export default Analytics;

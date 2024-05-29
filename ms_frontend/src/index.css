@@ -21,19 +21,52 @@ code {
   align-items: center;
 }
 
-.home-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  color: #fff;
-  background-color: #ff66ce;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-500px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-65px);
+    animation-timing-function: ease-in;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  81% {
+    transform: translateY(-28px);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  95% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+.home-button{
+  border-radius: 50%;
 }
 
 .home-button:hover {
-  background-color: #c2158b;
+  cursor: pointer;
+  transform: scale(1.5);
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 18px #4c0837;
 }
 
 h1 {
@@ -86,12 +119,86 @@ button:hover {
 
 /* ProblemList */
 
+.left-to-right-slow {
+  animation: slide-in 1s ease-in-out forwards;
+  transform: translateX(-100%);
+}
+.left-to-right-fast {
+  animation: slide-in 0.5s ease-in-out forwards;
+  transform: translateX(-100%);
+}
+
+.right-to-left-fast {
+  animation: slide-in 0.5s ease-in-out forwards;
+  transform: translateX(100%);
+}
+
+
+.add-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width:50px;
+  height:50px;
+  border-radius: 50%; /* This will make the image circular */
+  transition: 0.3s ease-in-out;
+  flex: 1 0 25%;
+  max-width: 25%;
+}
+
+.add-button:hover,
+.add-button:focus {
+  text-decoration: none;
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 9px #4c0837; /* This will make the box shadow larger when the image is hovered or focused */
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This will stack the children vertically */
+}
+
 .problem-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 20px;
+  animation: slide-up 0.5s ease-in-out forwards;
+}
+
+.problem-list ul {
+  list-style-type: none; /* Removes the default bullet points */
+  padding: 0; /* Removes the default padding */
+}
+
+.problem-list li {
+  border-radius: 5px;
+  background-color: #c2158b; 
+  border: 1px solid #4c0837; /* Adds a border around the list items */
+  margin-bottom: 10px; /* Adds some space between the list items */
+  padding: 15px; /* Adds some padding inside the list items */
+  font-size: 18px; /* Increases the font size */
+  transition: background-color 0.3s ease; /* Adds a transition effect when the background color changes */
+}
+
+.problem-list li:hover {
+  background-color: #ff66ce; /* Changes the background color when the list item is hovered */
 }
 
 .modal {
@@ -106,6 +213,7 @@ button:hover {
 }
 
 .modal-content {
+  border-radius: 10px;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
