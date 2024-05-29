@@ -32,7 +32,7 @@ function solveProblem(problemType, problemData) {
 }
 
 // DELETEME Solve test routing problem using dummy data
-fs.readFile('routes/vrptw_data.json', 'utf8', (err, jsonString) => {
+fs.readFile('routes/mincostflow_data.json', 'utf8', (err, jsonString) => {
   if (err) {
       console.log("File read failed:", err);
       return;
@@ -40,7 +40,7 @@ fs.readFile('routes/vrptw_data.json', 'utf8', (err, jsonString) => {
   try {
       const dummyData = JSON.parse(jsonString);
       // console.log("Data read from file:", dummyData);
-      solveProblem('VRPTW', dummyData)
+      solveProblem('MinCostFlow', dummyData)
         .then(result => {
           console.log(result);
         })

@@ -30,6 +30,19 @@ def main():
                                    problem_data['Depot'],
                                    problem_data['MaxTime'],
                                    problem_data['TimeSlack'])
+        elif problem_type == "MaxFlow":
+            result = flows.maxflow(problem_data["StartNodes"],
+                                   problem_data["EndNodes"],
+                                   problem_data["Capacities"],
+                                   problem_data["Source"],
+                                   problem_data["Sink"])
+        elif problem_type == "MinCostFlow":
+            result = flows.mincostflow(problem_data["StartNodes"],
+                                       problem_data["EndNodes"],
+                                       problem_data["Capacities"],
+                                       problem_data["UnitCosts"],
+                                       problem_data["Supplies"])
+
     except KeyError:
         result = "Error: Wrong arguments provided."
     except Exception as e:
