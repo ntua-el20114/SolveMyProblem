@@ -26,14 +26,14 @@ code {
   padding: 10px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff66ce;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .home-button:hover {
-  background-color: #0056b3;
+  background-color: #c2158b;
 }
 
 h1 {
@@ -49,15 +49,40 @@ button {
   padding: 10px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff66ce;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #c2158b;
 }
+
+/* Home
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #2c2c2c;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.nav-item {
+  text-decoration: none;
+}
+
+.nav-item button {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+} */
 
 /* ProblemList */
 
@@ -131,14 +156,107 @@ form button {
   padding: 10px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff66ce;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 form button:hover {
-  background-color: #0056b3;
+  background-color: #c2158b;
 }
 
 /*END Problem Form */
+
+
+/* Home */
+@keyframes slide-in {
+  100% {
+      transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  100% {
+      -webkit-transform: translateX(0%);
+  }
+}
+@keyframes slide-bottom {
+  100% {
+      transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes slide-bottom {
+  100% {
+      -webkit-transform: translateY(0%);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+      transform: translateX(0%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+      -webkit-transform: translateX(0%);
+  }
+  100% {
+      -webkit-transform: translateX(-100%);
+  }
+}
+
+.qLinks {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slide-in 0.8s ease-in-out forwards;
+  -webkit-animation: slide-in 0.8s ease-in-out forwards;
+  position: relative;
+  transform: translateX(100%);
+}
+
+.qLink {
+  text-decoration: none;
+  background-color: #ff66ce;
+  padding: 60px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+  border-radius: 30px;
+  transition: 0.2s ease-in-out;
+  flex: 1 0 25%;
+  max-width: 25%;
+}
+.qLink:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+  box-shadow: 1px 1px 1px 2px #c2158b;
+}
+.qLink:last-child {
+  margin-right: 0;
+}
+.qLink img {
+  margin-bottom: 20px;
+  max-width: 50%;
+  flex: 25%;
+}
+
+.qTitle {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+.qSubtitle {
+  color: whitesmoke;
+}
+
+/*END Home */
