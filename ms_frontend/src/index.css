@@ -21,6 +21,19 @@ code {
   align-items: center;
 }
 
+
+.logo{
+  margin-top: 10px;
+  width: 220px;
+  height: 110px;
+  animation: bounceIn 1.5s;
+}
+
+.logo:hover{
+  transform: scale(1.03);
+}
+
+
 @keyframes bounceIn {
   0% {
     transform: translateY(-500px);
@@ -179,7 +192,7 @@ button:hover {
   align-items: center;
   gap: 20px;
   padding: 20px;
-  animation: slide-up 0.5s ease-in-out forwards;
+  
 }
 
 .problem-list ul {
@@ -195,6 +208,7 @@ button:hover {
   padding: 15px; /* Adds some padding inside the list items */
   font-size: 18px; /* Increases the font size */
   transition: background-color 0.3s ease; /* Adds a transition effect when the background color changes */
+  animation: slide-up 2s ease-in-out forwards;
 }
 
 .problem-list li:hover {
