@@ -35,7 +35,7 @@ app.get('/problems', async (req, res) => {
 });
 
 app.listen(port, async () => {
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Problem list is running on port: ${port}`);
 
   try {
     await db.createDatabaseIfNotExists().then(db.syncModels);

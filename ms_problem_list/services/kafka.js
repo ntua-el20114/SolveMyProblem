@@ -15,11 +15,18 @@ const producer = kafka.producer();
 const init = async () => {
   await consumer.connect();
   await consumer.subscribe({ topic: 'choreographer-to-all', fromBeginning: true });
+  await consumer.subscribe({ topic: 'NEW_PROBLEM_RECEIVED', fromBeginning: true });
+  await consumer.subscribe({ topic: 'STATUS_UPDATE', fromBeginning: true });
+
 
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      const receivedMessage = message.value.toString();
-      console.log(`Problem list received message from choreographer: ${receivedMessage}`);
+      if (topic !== 'choreographer-to-all' && topic !== 'NEW_PROBLEM_RECEIVED' && topic !== 'STATUS_UPDATE') {
+        console.log('Unknown topic');
+      return;
+    }
+    const receivedMessage = message.value.toString();
+    console.log(`Problem List received message from choreographer: ${receivedMessage}`);
     },
   });
 };
