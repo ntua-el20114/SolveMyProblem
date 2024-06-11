@@ -1,10 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./services/database');
+const kafkaService = require('./services/kafka');
+const cors = require('cors');
 
 const app = express();
 const port = 3003;
 app.use(bodyParser.json());
+app.use(cors());
+
+// Kafkannot problem list
+
+kafkaService.init()
+  .catch((error) => {
+    console.error('Error initializing Kafka:', error);
+  });
 
 app.post('/problems', async (req, res) => {
   try {
