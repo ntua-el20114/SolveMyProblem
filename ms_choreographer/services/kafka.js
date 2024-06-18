@@ -33,19 +33,19 @@ async function receiveMessage(topic) {
       console.log(`Received message from ${topic}`);
       
       // Do something with the message based on the topic
-      if (topic == 'NEW_PROBLEM') {
+      if (topic == 'NEW_PROBLEM') { //from data_input to list AND solver
         console.log('New problem:', value);
         await sendMessage('NEW_PROBLEM_RECEIVED', value);
       }
-      else if (topic == 'UPDATED_STATUS') {
+      else if (topic == 'UPDATED_STATUS') { //from solver to choreo. 
         console.log('Updated status:', value);
-        await sendMessage('STATUS_UPDATE', value);
+        await sendMessage('STATUS_UPDATE', value); //list receives that
       }
-      else if (topic == 'RESULTS_READY') {
+      else if (topic == 'RESULTS_READY') { //from solver to results
         console.log('Results:', value);
-        await sendMessage('RESULTS', value);
+        await sendMessage('RESULTS', value); 
       }
-      else if (topic == 'UPDATED_LIST') {
+      else if (topic == 'UPDATED_LIST') { //from list to analytics
         console.log('Updated list:', value);
         await sendMessage('UPDATE', value);
       }

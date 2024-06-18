@@ -34,13 +34,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
-    timeSolved: {
+    timeSolved: { 
       type: DataTypes.DATE,
       allowNull: true
     },
     solver: {
       type: DataTypes.ENUM,
-      values: ['Routing', 'Scheduling', 'Network Floats'],
+      values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow'],
       allowNull: false
     },
     status: {

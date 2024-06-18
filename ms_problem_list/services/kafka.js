@@ -1,6 +1,8 @@
 // services/kafka.js
 const { Kafka } = require('kafkajs');
 const dotenv = require('dotenv');
+const db = require('./database');
+const { BULKDELETE } = require('sequelize/lib/query-types');
 
 dotenv.config();
 
@@ -27,6 +29,30 @@ const init = async () => {
     }
     const receivedMessage = message.value.toString();
     console.log(`Problem List received message from choreographer: ${receivedMessage}`);
+    //what will happen when new problem is received
+    if (topic === 'NEW_PROBLEM_RECEIVED') {
+      //add to db
+      try {
+        const problemData = JSON.parse(receivedMessage);
+
+        //Destructure the necessary fields from the problemData
+        const { name, userName, problemData: data, timeSubmitted, solver, status = 'submitted' } = problemData;
+
+        //add the new problem to the db
+        await db.Problem.create({
+          name,
+          userName,
+          problemData: data,
+          timeSubmitted,
+          solver,
+          status
+        });
+
+        console.log('New problem added successfully to the database!')
+      } catch (error) {
+        console.error('Error parsing message or adding problem to the db:', error);
+      }
+    }
     },
   });
 };
