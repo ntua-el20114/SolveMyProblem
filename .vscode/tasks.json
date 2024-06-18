@@ -1,0 +1,125 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Zookeeper",
+            "type": "shell",
+            "command": "cd ../kafka_2.13-3.7.0/ && ./bin/zookeeper-server-start.sh config/zookeeper.properties",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Kafka",
+            "type": "shell",
+            "command": "cd ../kafka_2.13-3.7.0/ && ./bin/kafka-server-start.sh config/server.properties",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Choreographer",
+            "type": "shell",
+            "command": "cd ms_choreographer && node app.js",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Frontend",
+            "type": "shell",
+            "command": "cd ms_frontend && npm start",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Data Input",
+            "type": "shell",
+            "command": "cd ms_data_input && node app.js",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Problem List",
+            "type": "shell",
+            "command": "cd ms_problem_list && node app.js",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Results",
+            "type": "shell",
+            "command": "cd ms_results && node app.js",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Analytics",
+            "type": "shell",
+            "command": "cd ms_analytics && node app.js",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Solver",
+            "type": "shell",
+            "command": "cd ms_solver && node app.js",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        }
+    ]
+}
