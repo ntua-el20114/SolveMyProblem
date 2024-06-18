@@ -1,35 +1,28 @@
 import React, { useState } from 'react';
 import '../index.css';
+import VRPForm from './VRPForm';
+import CVRPForm from './CVRPForm';
 
   function ProblemForm({ closeModal }) {
-  const [inputData, setinputData] = useState(null);
-  const [commandFile, setcommandFile] = useState(null);
-  const [pythonFile, setPythonFile] = useState(null);
+    const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
 
-  const handleFileChange = (e, setFile) => {
-    setFile(e.target.files[0]);
-  };
+    const getInputData = (FormDataFromInput) => {
+      setInputData(FormDataFromInput);
+    };
 
-  const handleSubmit = async (event) => {
+    const handleSubmit = async (event, inputData) => {
       event.preventDefault();
       // Check if any field is empty
-      if (!name || !username || !problemData || !solver || !inputData || !commandFile || !pythonFile) {
+      if (!name || !username || !solver) {
         alert('All fields must be filled out');
         return;
       }
-        // Read files and convert to JSON
-      const inputDataData = await inputData.text();
-      const commandFileData = await commandFile.text();
-      const pythonFileData = await pythonFile.text();
 
       const formData = {
         name,
         username,
-        problemData,
         solver,
-        inputData: JSON.parse(inputDataData),
-        commandFile: JSON.parse(commandFileData),
-        pythonFile: pythonFileData
+        inputData
       };
       try {
           const response = await fetch('http://localhost:3002/new-problem', {
@@ -48,18 +41,22 @@ import '../index.css';
       } catch (error) {
           console.error('Error submitting form:', error);
       }
-  };
+    };
 
 
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
-  const [problemData, setProblemData] = useState('');
   const [solver, setSolver] = useState('');
 
-  const solvers = ['Routing', 'Scheduling', 'Network Floats']; // replace with your actual solvers
+  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Scheduling', 'Network Floats'];
+ 
+  const handleSolverChange = (e) => {
+    setSolver(e.target.value);
+    setInputData('');
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(event) => handleSubmit(event, InputData)}>
       <label>
         Name:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -69,12 +66,8 @@ import '../index.css';
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       </label>
       <label>
-        Problem Data:
-        <textarea value={problemData} onChange={(e) => setProblemData(e.target.value)} />
-      </label>
-      <label>
         Solver:
-        <select value={solver} onChange={(e) => setSolver(e.target.value)}>
+        <select value={solver} onChange={handleSolverChange}>
           <option key={0} value="">Select a solver</option>
           {solvers.map((solver) => (
             <option key={solver} value={solver}>
@@ -83,19 +76,8 @@ import '../index.css';
           ))}
         </select>
       </label>
-      <label>
-        Input Data:
-        <input type="file" accept=".json" onChange={(e) => handleFileChange(e, setinputData)} />
-      </label>
-      <label>
-        Command to run:
-        <input type="file" accept=".json" onChange={(e) => handleFileChange(e, setcommandFile)} />
-      </label>
-      <label>
-        Python File:
-        <input type="file" accept=".py" onChange={(e) => handleFileChange(e, setPythonFile)} />
-      </label>
-      
+      {solver === 'Routing - VRP' && <VRPForm SendToParent={getInputData}/>}
+      {solver === 'Routing - CVRP' && <CVRPForm SendToParent={getInputData}/>}
       <button type="submit">Submit</button>
     </form>
   );

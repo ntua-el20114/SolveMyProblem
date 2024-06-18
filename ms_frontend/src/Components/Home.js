@@ -9,10 +9,25 @@ function Home() {
     <div>
       <Header showHomeButton={false} />
       <br />
-      <Link to="/problems"><button>Problems</button></Link>
-      <Link to="/results"><button>Results</button></Link>
-      <Link to="/analytics"><button>Analytics</button></Link>
+      <div className="qLinks">
+      <Link to="/problems" className="qLink">
+        <img src="/problems.png" alt=""/>
+        <p className="qTitle">Problems</p>
+        <p className="qSubtitle">Display all the problems and add new!</p>
+      </Link>
+      <Link to="/results" className="qLink">
+        <img src="/results.png" alt=""/>
+        <p className="qTitle">Results</p>
+        <p className="qSubtitle">Get results from solved problems!</p>
+      </Link>
+      <Link to="/analytics" className="qLink">
+        <img src="/analytics.png" alt=""/>
+        <p className="qTitle">Analytics</p>
+        <p className="qSubtitle">Watch the analytics of problem submission!</p>
+      </Link>
+      </div>
     </div>
+    
   );
 }
 

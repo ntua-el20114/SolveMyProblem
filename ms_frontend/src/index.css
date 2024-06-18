@@ -21,19 +21,65 @@ code {
   align-items: center;
 }
 
-.home-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  color: #fff;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+
+.logo{
+  margin-top: 10px;
+  width: 220px;
+  height: 110px;
+  animation: bounceIn 1.5s;
+}
+
+.logo:hover{
+  transform: scale(1.03);
+}
+
+
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-500px);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    transform: translateY(-65px);
+    animation-timing-function: ease-in;
+  }
+  72% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  81% {
+    transform: translateY(-28px);
+    animation-timing-function: ease-in;
+  }
+  90% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  95% {
+    transform: translateY(-8px);
+    animation-timing-function: ease-in;
+  }
+  100% {
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+}
+
+.home-button{
+  border-radius: 50%;
 }
 
 .home-button:hover {
-  background-color: #0056b3;
+  cursor: pointer;
+  transform: scale(1.5);
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 18px #4c0837;
 }
 
 h1 {
@@ -49,17 +95,96 @@ button {
   padding: 10px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff66ce;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #c2158b;
 }
 
+/* Home
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #2c2c2c;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.nav-item {
+  text-decoration: none;
+}
+
+.nav-item button {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+} */
+
 /* ProblemList */
+
+.left-to-right-slow {
+  animation: slide-in 1s ease-in-out forwards;
+  transform: translateX(-100%);
+}
+.left-to-right-fast {
+  animation: slide-in 0.5s ease-in-out forwards;
+  transform: translateX(-100%);
+}
+
+.right-to-left-fast {
+  animation: slide-in 0.5s ease-in-out forwards;
+  transform: translateX(100%);
+}
+
+
+.add-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width:50px;
+  height:50px;
+  border-radius: 50%; /* This will make the image circular */
+  transition: 0.3s ease-in-out;
+  flex: 1 0 25%;
+  max-width: 25%;
+}
+
+.add-button:hover,
+.add-button:focus {
+  text-decoration: none;
+  cursor: pointer;
+  transform: scale(1.2);
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 9px #4c0837; /* This will make the box shadow larger when the image is hovered or focused */
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* This will stack the children vertically */
+}
 
 .problem-list {
   display: flex;
@@ -67,6 +192,27 @@ button:hover {
   align-items: center;
   gap: 20px;
   padding: 20px;
+  
+}
+
+.problem-list ul {
+  list-style-type: none; /* Removes the default bullet points */
+  padding: 0; /* Removes the default padding */
+}
+
+.problem-list li {
+  border-radius: 5px;
+  background-color: #c2158b; 
+  border: 1px solid #4c0837; /* Adds a border around the list items */
+  margin-bottom: 10px; /* Adds some space between the list items */
+  padding: 15px; /* Adds some padding inside the list items */
+  font-size: 18px; /* Increases the font size */
+  transition: background-color 0.3s ease; /* Adds a transition effect when the background color changes */
+  animation: slide-up 2s ease-in-out forwards;
+}
+
+.problem-list li:hover {
+  background-color: #ff66ce; /* Changes the background color when the list item is hovered */
 }
 
 .modal {
@@ -81,6 +227,7 @@ button:hover {
 }
 
 .modal-content {
+  border-radius: 10px;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -131,14 +278,107 @@ form button {
   padding: 10px 20px;
   font-size: 1.2em;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff66ce;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 form button:hover {
-  background-color: #0056b3;
+  background-color: #c2158b;
 }
 
 /*END Problem Form */
+
+
+/* Home */
+@keyframes slide-in {
+  100% {
+      transform: translateX(0%);
+  }
+}
+
+@-webkit-keyframes slide-in {
+  100% {
+      -webkit-transform: translateX(0%);
+  }
+}
+@keyframes slide-bottom {
+  100% {
+      transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes slide-bottom {
+  100% {
+      -webkit-transform: translateY(0%);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+      transform: translateX(0%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+      -webkit-transform: translateX(0%);
+  }
+  100% {
+      -webkit-transform: translateX(-100%);
+  }
+}
+
+.qLinks {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slide-in 0.8s ease-in-out forwards;
+  -webkit-animation: slide-in 0.8s ease-in-out forwards;
+  position: relative;
+  transform: translateX(100%);
+}
+
+.qLink {
+  text-decoration: none;
+  background-color: #ff66ce;
+  padding: 60px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+  border-radius: 30px;
+  transition: 0.2s ease-in-out;
+  flex: 1 0 25%;
+  max-width: 25%;
+}
+.qLink:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease-in-out;
+  box-shadow: 1px 1px 1px 2px #c2158b;
+}
+.qLink:last-child {
+  margin-right: 0;
+}
+.qLink img {
+  margin-bottom: 20px;
+  max-width: 50%;
+  flex: 25%;
+}
+
+.qTitle {
+  color: white;
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+.qSubtitle {
+  color: whitesmoke;
+}
+
+/*END Home */

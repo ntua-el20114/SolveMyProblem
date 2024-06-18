@@ -14,7 +14,7 @@ const port = 3001;
 kafkaService.init()
   .then(() => {
     // Send message
-    kafkaService.sendMessage('hello from the choreographer');
+    kafkaService.sendMessage('choreographer-to-all', 'Hello its me the choreographer');
   })
   .catch((error) => {
     console.error('Error initializing Kafka:', error);

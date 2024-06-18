@@ -5,21 +5,27 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const kafka = new Kafka({
-  clientId: 'data_input',
+  clientId: 'analytics',
   brokers: [process.env.KAFKA_BROKER]
 });
 
-const consumer = kafka.consumer({ groupId: 'data_input-group' });
+const consumer = kafka.consumer({ groupId: 'analytics-group' });
 const producer = kafka.producer();
 
 const init = async () => {
   await consumer.connect();
   await consumer.subscribe({ topic: 'choreographer-to-all', fromBeginning: true });
+  await consumer.subscribe({ topic: 'UPDATE', fromBeginning: true });
+
 
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      const receivedMessage = message.value.toString();
-      console.log(`Data input received message from choreographer: ${receivedMessage}`);
+      if (topic !== 'choreographer-to-all' && topic !== 'UPDATE') {
+        console.log('Unknown topic');
+      return;
+    }
+    const receivedMessage = message.value.toString();
+    console.log(`Solver received message from choreographer: ${receivedMessage}`);
     },
   });
 };

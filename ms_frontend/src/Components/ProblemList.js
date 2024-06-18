@@ -1,39 +1,44 @@
-// ProblemList.js
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import ProblemForm from './ProblemForm';
 import Header from './Header';
 import '../index.css'; // import the CSS file
 
 function ProblemList() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isProblemModalOpen, setIsProblemModalOpen] = useState(false);
 
-    const openModal = () => {
-        setIsModalOpen(true);
+    const openProblemModal = () => {
+        setIsProblemModalOpen(true);
     };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const closeProblemModal = () => {
+        setIsProblemModalOpen(false);
     };
 
     return (
         <div>
             <Header />
-            <h1>Problem List</h1>
-            <button onClick={openModal}>Add New Problem</button>
+            <img src = '/add.png' alt='' onClick={openProblemModal} className='add-button right-to-left-fast'/>
+            <h1 className="left-to-right-slow center-screen">Problem List</h1>
+            
 
-            {isModalOpen && (
+            {isProblemModalOpen && (
                 <div className="modal">
                     <div className="modal-content">
-                        <span className="close" onClick={closeModal}>
+                        <span className="close" onClick={closeProblemModal}>
                             &times;
                         </span>
-                        <ProblemForm closeModal={closeModal} />
+                        <ProblemForm closeModal={closeProblemModal} />
                     </div>
                 </div>
             )}
 
             <div className='problem-list'>
-               <p>List of Problems HERE</p>
+               <ul>
+               <li>Problem 1</li>
+                <li>Problem 2</li>
+                <li>Problem 3</li>
+                <li>Problem 4</li>
+                </ul>
             </div>
         </div>
     );
