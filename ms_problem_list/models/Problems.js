@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     timeSubmitted: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE(6),
       allowNull: false
     },
     timeSolved: { 
-      type: DataTypes.DATE,
+      type: DataTypes.DATE(6),
       allowNull: true
     },
     solver: {

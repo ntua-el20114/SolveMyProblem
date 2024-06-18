@@ -11,10 +11,10 @@ app.use(cors());
 
 // Kafkannot problem list
 
-kafkaService.init()
-  .catch((error) => {
-    console.error('Error initializing Kafka:', error);
-  });
+//kafkaService.init()
+//  .catch((error) => {
+//    console.error('Error initializing Kafka:', error);
+//  });
 
 app.post('/problems', async (req, res) => {
   try {
@@ -38,9 +38,12 @@ app.listen(port, async () => {
   console.log(`Problem list is running on port: ${port}`);
 
   try {
-    await db.createDatabaseIfNotExists().then(db.syncModels);
-    await db.sequelize.authenticate();
+    await db.createDatabaseIfNotExists();
+    await db.syncModels();
     console.log('Database connected!');
+
+    await kafkaService.init();
+    console.log('Kafka initialized!');
 
   } catch (error) {
     console.error('Unable to connect to the database:', error);

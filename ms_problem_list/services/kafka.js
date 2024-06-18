@@ -20,7 +20,6 @@ const init = async () => {
   await consumer.subscribe({ topic: 'NEW_PROBLEM_RECEIVED', fromBeginning: true });
   await consumer.subscribe({ topic: 'STATUS_UPDATE', fromBeginning: true });
 
-
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       if (topic !== 'choreographer-to-all' && topic !== 'NEW_PROBLEM_RECEIVED' && topic !== 'STATUS_UPDATE') {
@@ -33,22 +32,23 @@ const init = async () => {
     if (topic === 'NEW_PROBLEM_RECEIVED') {
       //add to db
       try {
-        const problemData = JSON.parse(receivedMessage);
-
-        //Destructure the necessary fields from the problemData
-        const { name, userName, problemData: data, timeSubmitted, solver, status = 'submitted' } = problemData;
+        const formData = JSON.parse(receivedMessage);
+        const { name, username, inputData, solver } = formData;
 
         //add the new problem to the db
-        await db.Problem.create({
-          name,
-          userName,
-          problemData: data,
-          timeSubmitted,
-          solver,
-          status
-        });
+        const NewProblem = {
+          name: name,
+          userName: username,
+          problemData: inputData, //store input data as json
+          timeSubmitted : new Date(),
+          solver: solver,
+          status: 'submitted'
+        };
+        console.log(NewProblem);
 
-        console.log('New problem added successfully to the database!')
+        await db.Problem.create(NewProblem);
+        console.log('New problem added successfully to the database!');
+
       } catch (error) {
         console.error('Error parsing message or adding problem to the db:', error);
       }
