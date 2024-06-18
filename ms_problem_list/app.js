@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const db = require('./services/database');
 const kafkaService = require('./services/kafka');
 const cors = require('cors');
+var initModels = require("./models/init-models");
+let sequelize;
+let models;
 
 const app = express();
 const port = 3003;
@@ -18,7 +21,9 @@ app.use(cors());
 
 app.post('/problems', async (req, res) => {
   try {
-    const problem = await db.Problem.create(req.body);
+    sequelize = await db.getSequelizeInstance();
+    models = initModels(sequelize);
+    const problem = await models.Problems.create(req.body);
     res.status(201).json(problem);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -27,7 +32,9 @@ app.post('/problems', async (req, res) => {
 
 app.get('/problems', async (req, res) => {
   try {
-    const problems = await db.Problem.findAll();
+    sequelize = await db.getSequelizeInstance();
+    models = initModels(sequelize);
+    const problems = await models.Problems.findAll();
     res.status(200).json(problems);
   } catch (error) {
     res.status(500).json({ error: error.message });

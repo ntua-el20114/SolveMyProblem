@@ -1,8 +1,8 @@
 // services/kafka.js
 const { Kafka } = require('kafkajs');
 const dotenv = require('dotenv');
-const db = require('./database');
-const { BULKDELETE } = require('sequelize/lib/query-types');
+const { getSequelizeInstance } = require('./database');
+var initModels = require("../models/init-models");
 
 dotenv.config();
 
@@ -15,6 +15,10 @@ const consumer = kafka.consumer({ groupId: 'problem_list-group' });
 const producer = kafka.producer();
 
 const init = async () => {
+  const sequelize = await getSequelizeInstance();
+  var models = initModels(sequelize);
+  console.log("after kafka init", sequelize);
+  
   await consumer.connect();
   await consumer.subscribe({ topic: 'choreographer-to-all', fromBeginning: true });
   await consumer.subscribe({ topic: 'NEW_PROBLEM_RECEIVED', fromBeginning: true });
@@ -46,7 +50,7 @@ const init = async () => {
         };
         console.log(NewProblem);
 
-        await db.Problem.create(NewProblem);
+        await models.Problems.create(NewProblem);
         console.log('New problem added successfully to the database!');
 
       } catch (error) {

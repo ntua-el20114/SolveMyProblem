@@ -8,8 +8,9 @@ const initialSequelize = new Sequelize("", process.env.DB_USER, process.env.DB_P
     logging: false, // Set to true if you want to see the SQL queries
   });
   
-  let sequelize;
+  
   const db = {};
+  db.sequelize=initialSequelize;
   
   db.Sequelize = Sequelize;
   db.initialSequelize = initialSequelize;
@@ -24,13 +25,13 @@ const createDatabaseIfNotExists = async () => {
         console.log('Database created or already exists.');
 
         //Reinitialize sequelize with the correct name
-        sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+        db.sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
             host: process.env.DB_HOST,
             dialect: process.env.DB_DIALECT,
             logging: false, // Set to true if you want to see the SQL queries
         });
-
-        db.sequelize = sequelize;
+        db.sequelize.authenticate();
+        //console.log("create function:",db.sequelize);
 
     } catch (error) {
         console.error('Error creating database:', error);
@@ -39,17 +40,18 @@ const createDatabaseIfNotExists = async () => {
 
 // Synchronize models with database
 const syncModels = async () => {
-    if (!sequelize) {
+    if (!db.sequelize) {
         console.error('Sequelize instance is not initialized.');
         return;
     }
 
     try {
         // Importing the Problem model
-        db.Problem = require('../models/Problems')(sequelize, Sequelize.DataTypes);
+        db.Problem = require('../models/Problems')(db.sequelize, Sequelize.DataTypes);
 
-        await sequelize.authenticate();
-        await sequelize.sync();
+        await db.sequelize.authenticate();
+        await db.sequelize.sync();
+        //console.log("sync models function:", db.sequelize);
 
         console.log('Models synchronized with database.');
     } catch (error) {
@@ -57,9 +59,18 @@ const syncModels = async () => {
     }
 };
 
+const getSequelizeInstance = () => {
+    if (!db.sequelize) {
+        console.error('Sequelize instance is not initialized.');
+        return null; // Or handle this case as needed
+    }
+    return db.sequelize;
+};
+
 
 module.exports = {
     ...db,
     createDatabaseIfNotExists,
-    syncModels
+    syncModels,
+    getSequelizeInstance
 };

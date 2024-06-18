@@ -10,8 +10,9 @@
  */
 //'use strict';
 
-module.exports = (sequelize, DataTypes) => {
-  const Problem = sequelize.define('Problem', {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes){
+  return sequelize.define('Problems', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -50,9 +51,8 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'submitted'
     }
   }, {
+    sequelize,
     tableName: 'Problems',
     timestamps: false
   });
-  
-  return Problem;
 };
