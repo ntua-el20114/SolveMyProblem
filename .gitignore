@@ -52,10 +52,6 @@
 **/*.tgz
 
 # dotenv environment variables file
-<<<<<<< HEAD
-
-=======
->>>>>>> 5eb1ca036ca9bce9d5b82ecc3c98b8d780e5444d
 **/.env.test
 
 # parcel-bundler cache (https://parceljs.org/)
