@@ -215,6 +215,50 @@ button:hover {
   background-color: #ff66ce; /* Changes the background color when the list item is hovered */
 }
 
+.problem-list table {
+  width: 100%;
+  border-collapse: separate; /* Change to 'separate' to allow border-spacing to take effect */
+  margin: 20px 0; /* Adds some margin around the table */
+  border-spacing: 0 10px; /* Creates space between rows */
+}
+
+.problem-list th, .problem-list td {
+  text-align: left; /* Aligns the text to the left */
+  padding: 15px; /* Adds padding inside the table cells */
+}
+
+.problem-list th {
+  animation: slide-up 1s ease-in-out forwards;
+  background-color: #4c0837;
+  color: #fff; /* Sets the text color of the headers to white */
+  font-size: 18px; /* Increases the font size for the headers */
+}
+
+
+.problem-list td {
+  background-color: #c2158b;
+  animation: slide-up 2s ease-in-out forwards;
+  transition: background-color 0.3s ease;
+}
+
+.problem-list th:first-child, .problem-list td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.problem-list th:last-child, .problem-list td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+  
+.problem-list tr {
+  padding: 15px; /* Adds padding inside the div, effectively replacing tr padding */
+}
+
+.problem-list td:hover {
+  background-color: #ff66ce; /* Changes the background color when the list item is hovered */
+}
+
 .modal {
   position: fixed;
   z-index: 1;

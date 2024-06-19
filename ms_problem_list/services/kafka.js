@@ -17,7 +17,7 @@ const producer = kafka.producer();
 const init = async () => {
   const sequelize = await getSequelizeInstance();
   var models = initModels(sequelize);
-  console.log("after kafka init", sequelize);
+  //console.log("after kafka init", sequelize);
   
   await consumer.connect();
   await consumer.subscribe({ topic: 'choreographer-to-all', fromBeginning: true });
@@ -50,8 +50,16 @@ const init = async () => {
         };
         console.log(NewProblem);
 
-        await models.Problems.create(NewProblem);
+        const problemWithId = await models.Problems.create(NewProblem);
         console.log('New problem added successfully to the database!');
+
+        const message = {
+          problemId: problemWithId.id,
+          userName: username,
+          solver: solver,
+          status: 'submitted',
+        }
+        sendMessage('UPDATED_LIST', message);
 
       } catch (error) {
         console.error('Error parsing message or adding problem to the db:', error);

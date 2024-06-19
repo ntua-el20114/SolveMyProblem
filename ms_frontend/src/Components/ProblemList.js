@@ -55,13 +55,32 @@ function ProblemList() {
                 </div>
             )}
 
-            <div className='problem-list'>
-               <ul>
-               {problems.map((problem, index) => (
-                        <li key={index}>{problem.name}</li> // Assuming each problem has a 'name' property
-                    ))}
-                </ul>
-            </div>
+<div className='problem-list'>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>User Name</th>
+                <th>Time Submitted</th>
+                <th>Time Solved</th>
+                <th>Solver</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {problems.map((problem) => (
+                <tr key={problem.id}>
+                    <td>{problem.name}</td>
+                    <td>{problem.userName}</td>
+                    <td>{new Date(problem.timeSubmitted).toLocaleString()}</td>
+                    <td>{problem.timeSolved ? new Date(problem.timeSolved).toLocaleString() : 'N/A'}</td>
+                    <td>{problem.solver}</td>
+                    <td>{problem.status}</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
         </div>
     );
 }
