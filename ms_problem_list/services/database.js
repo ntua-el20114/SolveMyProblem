@@ -6,14 +6,14 @@ const initialSequelize = new Sequelize("", process.env.DB_USER, process.env.DB_P
     host: process.env.DB_HOST,
     dialect: 'mysql', //process.env.DB_DIALECT,
     logging: false, // Set to true if you want to see the SQL queries
-  });
+});
   
   
-  const db = {};
-  db.sequelize=initialSequelize;
-  
-  db.Sequelize = Sequelize;
-  db.initialSequelize = initialSequelize;
+const db = {};
+db.sequelize=initialSequelize;
+
+db.Sequelize = Sequelize;
+db.initialSequelize = initialSequelize;
 
 // Function to create the database if it doesn't exist
 const createDatabaseIfNotExists = async () => {
