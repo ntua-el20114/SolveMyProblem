@@ -21,11 +21,12 @@ const init = async () => {
   await consumer.connect();
   await consumer.subscribe({ topic: 'choreographer-to-all', fromBeginning: true });
   await consumer.subscribe({ topic: 'UPDATE', fromBeginning: true });
+  await consumer.subscribe({ topic: 'UPDATE_STATUS', fromBeginning: true });
 
 
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      if (topic !== 'choreographer-to-all' && topic !== 'UPDATE') {
+      if (topic !== 'choreographer-to-all' && topic !== 'UPDATE' && topic !== 'UPDATE_STATUS') {
         console.log('Unknown topic');
       return;
     }
@@ -51,6 +52,19 @@ const init = async () => {
         console.log('New analytics added successfully to the database!');
       } catch (error) {
         console.error('Error parsing message or adding problem to the db:', error);
+      }
+    }
+    else if (topic === "UPDATE_STATUS"){
+      try {
+        const formData = JSON.parse(receivedMessage);
+        console.log(formData);
+        const {problemId, status } = formData;
+
+        //update the status of the analytics in the db
+        await models.Analytics.update({status: status}, {where: {problemId: problemId}});
+        console.log('Analytics status updated successfully in the database!');
+      } catch (error) {
+        console.error('Error parsing message or updating status in the db:', error);
       }
     }
   }
