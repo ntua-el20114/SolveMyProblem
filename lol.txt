@@ -1,0 +1,9 @@
+status update:
+submitted --> pending
+list updates status to pending when solver receives the problem
+so list should send problem with id to `solver (topic: newproblemwith).
+then solver sends ack and with that, the status: pending
+
+pending --> solved
+
+    

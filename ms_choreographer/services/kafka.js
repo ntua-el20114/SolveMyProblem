@@ -29,6 +29,7 @@ async function receiveMessage(topic) {
   await consumer.subscribe({ topic: 'UPDATED_STATUS', fromBeginning: true });
   await consumer.subscribe({ topic: 'RESULTS_READY', fromBeginning: true });
   await consumer.subscribe({ topic: 'UPDATED_LIST', fromBeginning: true });
+  await consumer.subscribe({ topic: 'UPDATED_LIST_STATUS', fromBeginning: true });
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
@@ -36,13 +37,21 @@ async function receiveMessage(topic) {
       console.log(`Received message from ${topic}`);
       
       // Do something with the message based on the topic
-      if (topic == 'NEW_PROBLEM') { //from data_input to list AND solver
+      if (topic == 'NEW_PROBLEM') { //from data_input to list
         console.log('New problem:', value);
         await sendMessage('NEW_PROBLEM_RECEIVED', value);
+      }
+      else if (topic == 'NEW_PROBLEM_WITH_ID') { //from list
+        console.log('New problem with ID:', value);
+        await sendMessage('NEW_PROBLEM_WITH_ID_RECEIVED', value); //to solver
       }
       else if (topic == 'UPDATED_STATUS') { //from solver to choreo. 
         console.log('Updated status:', value);
         await sendMessage('STATUS_UPDATE', value); //list receives that
+      }
+      else if (topic == 'UPDATED_LIST_STATUS') { //prob list sends that
+        console.log('Updated status to analytics:', value);
+        await sendMessage('UPDATE_STATUS', value); //analytics receives that
       }
       else if (topic == 'RESULTS_READY') { //from solver to results
         console.log('Results:', value);

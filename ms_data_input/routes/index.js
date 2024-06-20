@@ -28,6 +28,7 @@ router.post('/new-problem', function(req, res, next) {
     next(new Error('Empty Object or Non-Object received.'));
   }
 }, 
+
 function(req, res, next) {
   // Send message to Kafka
   kafkaService.sendMessage('NEW_PROBLEM', req.body)
