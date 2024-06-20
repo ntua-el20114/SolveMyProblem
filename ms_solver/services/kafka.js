@@ -25,9 +25,11 @@ const init = async () => {
       }
       const receivedMessage = message.value.toString();
       console.log(`Solver received message from choreographer: ${receivedMessage}`);
+      console.log('New problem with ID:', receivedMessage);
 
       //receives new problem:
       if (topic === 'NEW_PROBLEM_WITH_ID_RECEIVED') {
+        console.log('New problem with ID:', receivedMessage);
         const topending = {
           problemId : receivedMessage.problemId,
           status: 'pending'

@@ -71,17 +71,22 @@ const init = async () => {
       //what will happen when status is updated (to pending or solved)
       if (topic === 'STATUS_UPDATE') {
         if (receivedMessage.status === 'pending') {
-          //update db
-          const problem = await models.Problems.findByPk(receivedMessage.problemWithId);
-          problem.status = receivedMessage.status;
-          await problem.save();
-          
-          //update analytics (via updated_list)
-          const message = {
-            problemId: receivedMessage.problemWithId,
-            status: receivedMessage.status
+          try {
+            //update db
+            const problem = await models.Problems.findByPk(receivedMessage.problemWithId);
+            problem.status = receivedMessage.status;
+            await problem.save();
+            
+            //update analytics (via updated_list)
+            const message = {
+              problemId: receivedMessage.problemWithId,
+               status: receivedMessage.status
+            }
+            sendMessage('UPDATED_LIST_STATUS', message)
+          } catch (error) {
+            console.error('Error updating status in the db:', error);
           }
-          sendMessage('UPDATED_LIST_STATUS', message)
+          
         }
       //if statement for 'solved' status update
       }
