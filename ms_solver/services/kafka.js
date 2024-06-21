@@ -25,19 +25,41 @@ const init = async () => {
       }
       const receivedMessage = message.value.toString();
       console.log(`Solver received message from choreographer: ${receivedMessage}`);
-      console.log('New problem with ID:', receivedMessage);
 
       //receives new problem:
       if (topic === 'NEW_PROBLEM_WITH_ID_RECEIVED') {
-        console.log('New problem with ID:', receivedMessage);
-        const topending = {
-          problemId : receivedMessage.problemId,
-          status: 'pending'
+        try {
+          const formData = JSON.parse(receivedMessage);
+          console.log(formData);
+          const { problemId, inputData, timeSubmitted, solver, status } = formData;
+
+          const NewProblem = {
+            problemId: problemId,
+            inputData: inputData,
+            timeSubmitted: timeSubmitted,
+            solver: solver,
+            status: status
+          };
+
+          console.log('New problem with ID:', NewProblem.problemId);
+          console.log('New problem with status:', NewProblem.status);
+
+          //change the status to pending and send it back to the list
+          //change the status to pending for the NewProblem of the solver
+          NewProblem.status = 'pending';
+
+          const toPending = {
+            problemId : NewProblem.problemId,
+            status: NewProblem.status
+          }
+          await sendMessage('UPDATED_STATUS', toPending);
+
+        } catch (error) {
+          console.log('Error receiving message from list', error);
         }
-        sendMessage('UPDATED_STATUS', topending);
       }
-    },
-  });
+    }
+    });
 };
 
 async function sendMessage(topic, message) {

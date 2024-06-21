@@ -32,7 +32,7 @@ const init = async () => {
       }
       const receivedMessage = message.value.toString();
       console.log(`Problem List received message from choreographer: ${receivedMessage}`);
-
+      
       //what will happen when new problem is received
       if (topic === 'NEW_PROBLEM_RECEIVED') {
       //add to db
@@ -60,8 +60,21 @@ const init = async () => {
             solver: solver,
             status: 'submitted',
           }
-          sendMessage('UPDATED_LIST', message);
-          sendMessage('NEW_PROBLEM_WITH_ID', problemWithId);
+          await sendMessage('UPDATED_LIST', message);
+          
+          //for sending to solver (problem with id)
+          const NewProblemwithId = {
+            problemId: problemWithId.id,  // Add id at the start
+            name: problemWithId.name,
+            userName: problemWithId.userName,
+            problemData: problemWithId.problemData,
+            timeSubmitted: problemWithId.timeSubmitted,
+            solver: problemWithId.solver,
+            status: problemWithId.status
+          };
+          console.log(NewProblemwithId);
+
+          await sendMessage('NEW_PROBLEM_WITH_ID', NewProblemwithId);
 
         } catch (error) {
           console.error('Error parsing message or adding problem to the db:', error);
@@ -70,27 +83,27 @@ const init = async () => {
 
       //what will happen when status is updated (to pending or solved)
       if (topic === 'STATUS_UPDATE') {
-        if (receivedMessage.status === 'pending') {
-          try {
-            //update db
-            const problem = await models.Problems.findByPk(receivedMessage.problemWithId);
-            problem.status = receivedMessage.status;
-            await problem.save();
-            
-            //update analytics (via updated_list)
-            const message = {
-              problemId: receivedMessage.problemWithId,
-               status: receivedMessage.status
-            }
-            sendMessage('UPDATED_LIST_STATUS', message)
-          } catch (error) {
-            console.error('Error updating status in the db:', error);
-          }
+        const updateMessage = JSON.parse(receivedMessage);
+        const { problemId, status } = updateMessage
+        const pending = {
+          problemId: problemId,
+          status: status
+        }
+        console.log(pending);
           
+        const problem = await models.Problems.findByPk(pending.problemId);
+        if (problem) {
+          problem.status = pending.status;
+          await problem.save();
+
+          const messagetosend = {
+            problemId: pending.problemId,
+            status: pending.status
+          };
+          await sendMessage('UPDATED_LIST_STATUS', messagetosend);
         }
       //if statement for 'solved' status update
       }
-
     },
   });
 };

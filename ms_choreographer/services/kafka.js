@@ -26,6 +26,7 @@ const sendMessage = async (topic, message) => {
 async function receiveMessage(topic) {
   await consumer.connect();
   await consumer.subscribe({ topic: 'NEW_PROBLEM', fromBeginning: true });
+  await consumer.subscribe({ topic: 'NEW_PROBLEM_WITH_ID', fromBeginning: true });
   await consumer.subscribe({ topic: 'UPDATED_STATUS', fromBeginning: true });
   await consumer.subscribe({ topic: 'RESULTS_READY', fromBeginning: true });
   await consumer.subscribe({ topic: 'UPDATED_LIST', fromBeginning: true });
