@@ -42,6 +42,11 @@ def main():
                                        problem_data["Capacities"],
                                        problem_data["UnitCosts"],
                                        problem_data["Supplies"])
+        elif problem_type == "EmpSch":
+            result = scheduling.employee_scheduling(problem_data["NumEmployees"],
+                                                    problem_data["NumShifts"],
+                                                    problem_data["NumDays"],
+                                                    problem_data["ShiftRequests"])
 
     except KeyError:
         result = "Error: Wrong arguments provided."
