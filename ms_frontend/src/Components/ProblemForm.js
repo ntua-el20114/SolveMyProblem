@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import '../index.css';
 import VRPForm from './VRPForm';
 import CVRPForm from './CVRPForm';
+import VRPTWForm from './VRPTWForm';
+import MaxFlowForm from './MaxFlowForm';
+import MinFlowForm from './MinFlowForm';
+import SchedulingForm from './SchedulingForm';
 
   function ProblemForm({ closeModal }) {
     const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
@@ -15,6 +19,10 @@ import CVRPForm from './CVRPForm';
       // Check if any field is empty
       if (!name || !username || !solver) {
         alert('All fields must be filled out');
+        return;
+      }
+      if (inputData == ''){
+        alert('Check data before submitting.')
         return;
       }
 
@@ -48,7 +56,7 @@ import CVRPForm from './CVRPForm';
   const [username, setUsername] = useState('');
   const [solver, setSolver] = useState('');
 
-  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Scheduling', 'Network Floats'];
+  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Scheduling'];
  
   const handleSolverChange = (e) => {
     setSolver(e.target.value);
@@ -78,6 +86,11 @@ import CVRPForm from './CVRPForm';
       </label>
       {solver === 'Routing - VRP' && <VRPForm SendToParent={getInputData}/>}
       {solver === 'Routing - CVRP' && <CVRPForm SendToParent={getInputData}/>}
+      {solver === 'Routing - VRPTW' && <VRPTWForm SendToParent={getInputData}/>}
+      {solver === 'Max Flow' && <MaxFlowForm SendToParent={getInputData}/>}
+      {solver === 'Min Cost Flow' && <MinFlowForm SendToParent={getInputData}/>}
+      {solver === 'Scheduling' && <SchedulingForm SendToParent={getInputData}/>}
+
       <button type="submit">Submit</button>
     </form>
   );

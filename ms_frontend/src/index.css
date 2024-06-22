@@ -259,9 +259,42 @@ button:hover {
   background-color: #ff66ce; /* Changes the background color when the list item is hovered */
 }
 
+.problem-list .scrollbox {
+  max-height: 450px; /* Adjust the height as needed */
+  overflow-y: auto; /* Adds vertical scrollbar when necessary */
+  width: calc(100% - 10px); /* Adjust width to account for padding */
+  padding-right: 10px;
+}
+
+.problem-list .scrollbox thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+  border: 1px solid #4c0837;
+  border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+  background: #c2158b;  
+  border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+  background: #ff66ce;  
+  }
+
 .modal {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0;
   width: 100%;

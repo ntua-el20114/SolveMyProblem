@@ -54,8 +54,8 @@ function ProblemList() {
                     </div>
                 </div>
             )}
-
 <div className='problem-list'>
+    <div className="scrollbox">
     <table>
         <thead>
             <tr>
@@ -80,6 +80,7 @@ function ProblemList() {
             ))}
         </tbody>
     </table>
+    </div>
 </div>
         </div>
     );
