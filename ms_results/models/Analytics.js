@@ -8,7 +8,7 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes){
-  return sequelize.define('Analytics', {
+  return sequelize.define('Results', {
     problemId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -23,15 +23,22 @@ module.exports = function(sequelize, DataTypes){
       values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow', 'Scheduling'],
       allowNull: false
     },
-    status: {
-      type: DataTypes.ENUM,
-      values: ['submitted', 'pending', 'solved'],
-      allowNull: false,
-      defaultValue: 'submitted'
-    }
+    problemData: {
+      type: DataTypes.JSON,
+      allowNull: false
+    },
+    timeSubmitted: {
+      type: DataTypes.DATE(6),
+      allowNull: false
+    },
+    //solver keeps the timestamp of the moment that the problem started solving "pending"
+    SecondsOfSolve: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+  }
   }, {
     sequelize,
-    tableName: 'Analytics',
+    tableName: 'Results',
     timestamps: false
   });
 };
