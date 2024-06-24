@@ -49,6 +49,8 @@ def main():
                                                     problem_data["ShiftRequests"],
                                                     problem_data["MinShiftsPerEmployee"],
                                                     problem_data["MaxShiftsPerEmployee"])
+        elif problem_type == "JobShop":
+            result = scheduling.job_shop(problem_data["JobsData"])
     except KeyError:
         result = "Error: Wrong arguments provided."
     except Exception as e:
