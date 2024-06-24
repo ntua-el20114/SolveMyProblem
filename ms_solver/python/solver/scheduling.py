@@ -31,12 +31,14 @@ def daily_shifts(shifts, solver, num_employees, num_days, num_shifts):
                     break
     return daily_shifts
 
-def employee_scheduling(num_employees, num_shifts, num_days, shift_requests=None):
+def employee_scheduling(num_employees, num_shifts, num_days, shift_requests=None,
+                        min_shifts_per_employee=None, max_shifts_per_employee=None):
     """
     Tries to find an optimal assignment of employees to shifts.
-    The work load should be evenly distributed among the employees.
     Each employee can request to be assigned to specific shifts.
     The optimal assignment maximizes the number of fulfilled shift requests.
+    If no minimum and maximum number of shifts is given, they are spread evenly among employees.
+    It is assumed that each employee can work at most one shift per day and that each shift is assigned to exactly one employee.
     """
     all_employees = range(num_employees)
     all_shifts = range(num_shifts)
@@ -67,15 +69,17 @@ def employee_scheduling(num_employees, num_shifts, num_days, shift_requests=None
             for d in all_days:
                 model.add_at_most_one(shifts[(e, d, s)] for s in all_shifts)
 
-        # Try to distribute the shifts evenly, so that each employee works
-        # min_shifts_per_employee shifts. If this is not possible, because the total
-        # number of shifts is not divisible by the number of employees, some employees will
-        # be assigned one more shift.
-        min_shifts_per_employee = (num_shifts * num_days) // num_employees
-        if num_shifts * num_days % num_employees == 0:
-            max_shifts_per_employee = min_shifts_per_employee
-        else:
-            max_shifts_per_employee = min_shifts_per_employee + 1
+        # If no min/max shifts per employee are given, try to distribute shifts evenly
+        if min_shifts_per_employee is None:
+            min_shifts_per_employee = (num_shifts * num_days) // num_employees
+        
+        if max_shifts_per_employee is None:
+            if num_shifts * num_days % num_employees == 0:
+                max_shifts_per_employee = min_shifts_per_employee
+            else:
+                max_shifts_per_employee = min_shifts_per_employee + 1
+
+        # Add min/max shifts restriction
         for e in all_employees:
             num_shifts_worked: Union[cp_model.LinearExpr, int] = 0
             for d in all_days:
@@ -103,16 +107,15 @@ def employee_scheduling(num_employees, num_shifts, num_days, shift_requests=None
         if status == cp_model.INFEASIBLE:
             return {"Result": "Success",
                     "Solution": "Infeasible"}
-        if status == cp_model.UNKNOWN:
-            return {"Result": "Failure"}
-        
-        return{"Result": "Success",
-                "Optimal": status==cp_model.OPTIMAL,
-                "Solution": daily_shifts(shifts, solver, num_employees, num_days, num_shifts),
-                "RequestsMet": solver.objective_value,
-                "Conflicts": solver.NumConflicts(), # Times the solver tried to assign a value to a variable, that would violate a castraint. Portrays the complexity of the problem.
-                "Branches": solver.NumBranches()
-                }
+        if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+            return{"Result": "Success",
+                    "Optimal": status==cp_model.OPTIMAL,
+                    "Solution": daily_shifts(shifts, solver, num_employees, num_days, num_shifts),
+                    "RequestsMet": solver.objective_value,
+                    "Conflicts": solver.NumConflicts(), # Times the solver tried to assign a value to a variable, that would violate a castraint. Portrays the complexity of the problem.
+                    "Branches": solver.NumBranches()
+                    }
+        return {"Result": "Failure"}
     
     except Exception as e:
         return {"Result": "Error",

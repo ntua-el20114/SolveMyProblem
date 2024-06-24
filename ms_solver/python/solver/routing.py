@@ -218,7 +218,11 @@ def vrp(locations, num_vehicles, depot, max_distance=None):
         solution = routing.SolveWithParameters(search_parameters)
 
         # Return solution.
-        if solution:
+        if solution == routing.ROUTING_INVALID:
+            return {"Result": "Error", "Message": "Invalid input parameters."}
+        if solution == routing.ROUTING_INFEASIBLE:
+            return {"Result": "Success", "Solution": "Infeasible"}
+        if solution == routing.ROUTING_SUCCESS:
             return solution_data(data, manager, routing, solution)
         else:
             return {"Result": "Failure"}
@@ -314,7 +318,11 @@ def cvrp(locations, demands, num_vehicles, capacities, depot, max_distance=None)
         solution = routing.SolveWithParameters(search_parameters)
 
         # Return solution.
-        if solution:
+        if solution == routing.ROUTING_INVALID:
+            return {"Result": "Error", "Message": "Invalid input parameters."}
+        if solution == routing.ROUTING_INFEASIBLE:
+            return {"Result": "Success", "Solution": "Infeasible"}
+        if solution == routing.ROUTING_SUCCESS:
             return solution_data(data, manager, routing, solution)
         else:
             return {"Result": "Failure"}
@@ -415,7 +423,11 @@ def vrptw(locations, time_windows, speed, num_vehicles, depot, max_time=None, ti
         solution = routing.SolveWithParameters(search_parameters)
 
         # Return solution.
-        if solution:
+        if solution == routing.ROUTING_INVALID:
+            return {"Result": "Error", "Message": "Invalid input parameters."}
+        if solution == routing.ROUTING_INFEASIBLE:
+            return {"Result": "Success", "Solution": "Infeasible"}
+        if solution == routing.ROUTING_SUCCESS:
             return vrptw_solution_data(data, manager, routing, solution)
         else:
             return {"Result": "Failure"}

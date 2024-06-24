@@ -46,8 +46,9 @@ def main():
             result = scheduling.employee_scheduling(problem_data["NumEmployees"],
                                                     problem_data["NumShifts"],
                                                     problem_data["NumDays"],
-                                                    problem_data["ShiftRequests"])
-
+                                                    problem_data["ShiftRequests"],
+                                                    problem_data["MinShiftsPerEmployee"],
+                                                    problem_data["MaxShiftsPerEmployee"])
     except KeyError:
         result = "Error: Wrong arguments provided."
     except Exception as e:

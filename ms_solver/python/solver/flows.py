@@ -26,16 +26,20 @@ def maxflow(start_nodes, end_nodes, capacities, source, sink):
         # Find the maximum flow between source and sink.
         solution = smf.solve(source, sink)
 
-        if solution != smf.OPTIMAL:
-            return {"Result": "Failure"}
+        # Return results
+        if solution == smf.INFEASIBLE:
+            return {"Result": "Success", "Solution": "Infeasible"}
+        if solution == smf.OPTIMAL or solution == smf.FEASIBLE:
+            return {
+                "Result": "Success",
+                "Optimal": solution == smf.OPTIMAL,
+                "MaxFlow": smf.optimal_flow(),
+                "ArcFlows": smf.flows(all_arcs).tolist(),
+                "SourceSideMinCut": smf.get_source_side_min_cut(),
+                "SinkSideMinCut": smf.get_sink_side_min_cut()
+            }
+        return {"Result": "Failure"}
         
-        return {
-            "Result": "Success",
-            "MaxFlow": smf.optimal_flow(),
-            "ArcFlows": smf.flows(all_arcs).tolist(),
-            "SourceSideMinCut": smf.get_source_side_min_cut(),
-            "SinkSideMinCut": smf.get_sink_side_min_cut()
-        }
     except Exception as e:
         return {"Result": "Error", "Message": str(e)}
     
@@ -71,14 +75,17 @@ def mincostflow(start_nodes, end_nodes, capacities, unit_costs, supplies):
         solution = smcf.solve()
 
         # Return results
-        if solution != smcf.OPTIMAL:
-                return {"Result": "Failure"}
-            
-        return {
-            "Result": "Success",
-            "MinCost": smcf.optimal_cost(),
-            "ArcFlows": smcf.flows(all_arcs).tolist(),
-            "ArcCosts": smcf.flows(all_arcs).tolist()*unit_costs
-        }
+        if solution == smcf.INFEASIBLE:
+            return {"Result": "Success", "Solution": "Infeasible"}
+        if solution == smcf.OPTIMAL or solution == smcf.FEASIBLE:
+            return {
+                "Result": "Success",
+                "Optimal": solution == smcf.OPTIMAL,
+                "MinCost": smcf.optimal_cost(),
+                "ArcFlows": smcf.flows(all_arcs).tolist(),
+                "ArcCosts": smcf.flows(all_arcs).tolist()*unit_costs
+            }
+        
+        return {"Result": "Failure"}
     except Exception as e:
         return {"Result": "Error", "Message": str(e)}
