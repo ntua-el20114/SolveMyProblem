@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from './Header';
 import '../index.css'; // import the CSS file
-import Highcharts from 'highcharts';
+//import Highcharts from 'highcharts';
 
 function Results() {
   return (
