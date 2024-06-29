@@ -507,4 +507,17 @@ form button:hover {
   background-color: #ff66ce; /* Changes the background color when the list item is hovered */
 }
 
+.results .scrollbox {
+  max-height: 450px; /* Adjust the height as needed */
+  overflow-y: auto; /* Adds vertical scrollbar when necessary */
+  width: calc(100% - 10px); /* Adjust width to account for padding */
+  padding-right: 10px;
+}
+
+.results .scrollbox h1 {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 /*END Results*/

@@ -29,20 +29,22 @@ function Results() {
       <Header />
     <h1 className="left-to-right-slow center-screen">Results</h1>
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      <div style={{ flex: 1, marginRight:'20px'}} className='results'>
-        <h1>Problems</h1>
-        <ul>
-          {problems.map((problem, index) => (
-            <li key={index} onClick={() => setSelectedProblem(problem)}>
-              {problem.name}
-            </li>
-          ))}
-        </ul>
+      <div style={{ flex: 1, marginRight:'20px', marginLeft:'20px', justifyContent: 'center', alignItems: 'center'}} className='results'>
+        <div className='scrollbox'>
+          <h1 className="left-to-right-slow center-screen">Problems</h1>
+          <ul>
+            {problems.map((problem, index) => (
+              <li key={index} onClick={() => setSelectedProblem(problem)}>
+                {problem.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div style={{ flex: 2 }}>
         {selectedProblem ? (
           <div>
-            <h1>{selectedProblem.name}</h1>
+            <h1 className="center-screen">{selectedProblem.name}</h1>
             <p style={{color:'white'}}>{selectedProblem.problemData}</p>
           </div>
         ) : (

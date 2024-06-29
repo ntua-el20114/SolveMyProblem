@@ -22,7 +22,7 @@ import JobShopForm from './JobShopForm';
         alert('All fields must be filled out');
         return;
       }
-      if (inputData == ''){
+      if (inputData === ''){
         alert('Check data before submitting.')
         return;
       }
@@ -57,7 +57,7 @@ import JobShopForm from './JobShopForm';
   const [username, setUsername] = useState('');
   const [solver, setSolver] = useState('');
 
-  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Scheduling', 'Job Shop'];
+  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'];
  
   const handleSolverChange = (e) => {
     setSolver(e.target.value);
@@ -90,8 +90,8 @@ import JobShopForm from './JobShopForm';
       {solver === 'Routing - VRPTW' && <VRPTWForm SendToParent={getInputData}/>}
       {solver === 'Max Flow' && <MaxFlowForm SendToParent={getInputData}/>}
       {solver === 'Min Cost Flow' && <MinFlowForm SendToParent={getInputData}/>}
-      {solver === 'Scheduling' && <SchedulingForm SendToParent={getInputData}/>}
-      {solver === 'Job Shop' && <JobShopForm SendToParent={getInputData}/>}
+      {solver === 'Employee Scheduling' && <SchedulingForm SendToParent={getInputData}/>}
+      {solver === 'Scheduling - Job Shop' && <JobShopForm SendToParent={getInputData}/>}
 
       <button type="submit">Submit</button>
     </form>

@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes){
     },
     solver: {
       type: DataTypes.ENUM,
-      values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow', 'Scheduling', 'Job Shop'],
+      values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'],
       allowNull: false
     },
     problemData: {
