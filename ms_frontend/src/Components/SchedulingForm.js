@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SchedulingForm({ sendToParent }) {
+function SchedulingForm({ SendToParent }) {
   const [numEmployees, setNumEmployees] = useState('');
   const [numShifts, setNumShifts] = useState('');
   const [numDays, setNumDays] = useState('');
@@ -80,7 +80,7 @@ function SchedulingForm({ sendToParent }) {
 
     try {
       alert('Data is valid');
-      sendToParent(formData);
+      SendToParent(formData);
     } catch (error) {
       console.error('Error submitting form:', error);
     }

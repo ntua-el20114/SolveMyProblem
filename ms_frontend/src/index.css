@@ -484,3 +484,27 @@ form button:hover {
 }
 
 /*END Home */
+
+/*Results*/
+
+.results ul {
+  list-style-type: none; /* Removes the default bullet points */
+  padding: 0; /* Removes the default padding */
+}
+
+.results li {
+  border-radius: 5px;
+  background-color: #c2158b; 
+  border: 1px solid #4c0837; /* Adds a border around the list items */
+  margin-bottom: 10px; /* Adds some space between the list items */
+  padding: 15px; /* Adds some padding inside the list items */
+  font-size: 18px; /* Increases the font size */
+  transition: background-color 0.3s ease; /* Adds a transition effect when the background color changes */
+  animation: slide-up 2s ease-in-out forwards;
+}
+
+.results li:hover {
+  background-color: #ff66ce; /* Changes the background color when the list item is hovered */
+}
+
+/*END Results*/

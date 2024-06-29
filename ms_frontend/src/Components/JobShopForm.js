@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 
-function JobShopForm({ sendToParent }) {
+function JobShopForm({ SendToParent }) {
   const [JobsData, setJobsData] = useState('');
 
   const handleFileChange = async (e) => {
@@ -39,7 +39,7 @@ function JobShopForm({ sendToParent }) {
 
     try {
       alert('Data is valid');
-      sendToParent(formData);
+      SendToParent(formData);
     } catch (error) {
       console.error('Error submitting form:', error);
     }
