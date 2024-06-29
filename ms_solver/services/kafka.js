@@ -53,6 +53,8 @@ const init = async () => {
             status: NewProblem.status
           }
           await sendMessage('UPDATED_STATUS', toPending);
+          
+          //solve the problem
 
         } catch (error) {
           console.log('Error receiving message from list', error);

@@ -6,6 +6,8 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var {solveProblem, dummyTest} = require('./routes/utils')
+
 var app = express();
 const port = 3004;
 app.use(cors());
@@ -29,3 +31,5 @@ app.listen(port, () => {
 });
 
 module.exports = app;
+
+dummyTest('JobShop');
