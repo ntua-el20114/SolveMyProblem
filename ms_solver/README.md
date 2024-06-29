@@ -10,6 +10,26 @@ TODO:
 NOTES:
 - In routing, implementing timeout handling internally allows to return partial results. Maybe we should implement that.
 
+INPUT:
+- Allowed null values:
+    - VRP:
+        - MaxDistance
+    - CVRP:
+        - MaxDistance
+    - VRPTW:
+        - MaxTime
+        - TimeSlack
+    - MaxFlow:
+        - none
+    - MinCostFlow:
+        - none
+    - EmpSch:
+        - ShiftRequests
+        - MinShiftsPerEmployee
+        - MaxShiftsPerEmployee
+    - JobShop:
+        - none
+
 RESULTS:
 - Success
     - The solver found an optimal or non-optimal solution.
