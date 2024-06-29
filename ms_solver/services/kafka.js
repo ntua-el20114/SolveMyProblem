@@ -2,6 +2,9 @@
 const { Kafka } = require('kafkajs');
 const dotenv = require('dotenv');
 
+
+var {solveProblem} = require('../routes/utils');
+
 dotenv.config();
 
 const kafka = new Kafka({
@@ -31,11 +34,11 @@ const init = async () => {
         try {
           const formData = JSON.parse(receivedMessage);
           console.log(formData);
-          const { problemId, inputData, timeSubmitted, solver, status } = formData;
+          const { problemId, problemData, timeSubmitted, solver, status } = formData;
 
           const NewProblem = {
             problemId: problemId,
-            inputData: inputData,
+            problemData: problemData,
             timeSubmitted: timeSubmitted,
             solver: solver,
             status: status
@@ -51,11 +54,24 @@ const init = async () => {
           const toPending = {
             problemId : NewProblem.problemId,
             status: NewProblem.status
-          }
+          };
           await sendMessage('UPDATED_STATUS', toPending);
           
           //solve the problem
+          let result = await solveProblem(NewProblem.solver, NewProblem.problemData);
+          console.log("Problem Result:\n", result);
+          
+          //send response
+          await sendMessage('RESULTS_READY', result);
 
+          //update the status to solved
+          NewProblem.status = 'solved';
+          const toSolved = {
+            problemId : NewProblem.problemId,
+            status: NewProblem.status
+          };
+          await sendMessage('UPDATED_STATUS', toSolved);
+          
         } catch (error) {
           console.log('Error receiving message from list', error);
         }

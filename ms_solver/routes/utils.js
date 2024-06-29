@@ -4,11 +4,29 @@ const fs = require('fs')
 /* Solve problem using main.py Python process. */
 function solveProblem(problemType, problemData) {
     return new Promise((resolve, reject) => {
-      var dataToSend = '';
-      var process = spawn('python3', ['./python/main.py', problemType, JSON.stringify(problemData)]);
-  
+      var problemResult = '';
+      data = JSON.stringify(problemData);
+      // type = JSON.stringify(problemType);
+      type = problemType;
+      try{
+        var process = spawn('python3', ['./python/main.py', type, data]);
+      }
+      catch(error){
+        console.error(error);
+        return reject(error);
+      }
+
+      // Check and display print messages. Keep the result of the problem.
       process.stdout.on('data', (data) => {
-        dataToSend += data.toString();
+        const output = data.toString().trim();
+        console.log(output);
+
+        // Save the result of the problem
+        const start = output.indexOf('__START__');
+        const end = output.indexOf('__END__', start);
+        if (start !== -1 && end !== -1) {
+          problemResult = output.substring(start+9, end);
+        }
       });
   
       process.stderr.on('data', (data) => {
@@ -19,7 +37,7 @@ function solveProblem(problemType, problemData) {
         if (code !== 0) {
           return reject(new Error(`child process exited with code ${code}`));
         }
-        resolve(dataToSend);
+        resolve(JSON.parse(problemResult));
       });
     });
   }
