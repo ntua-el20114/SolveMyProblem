@@ -84,6 +84,7 @@ function SchedulingForm({ sendToParent }) {
         Shift Requests (JSON Array):
         <textarea rows="5" cols="50" value={shiftRequests} onChange={(e) => setShiftRequests(e.target.value)} />
       </label>
+      <br />
       <button type="button" onClick={handleSubmit}>Check Data</button>
     </div>
   );

@@ -131,6 +131,7 @@ function VRPTWForm({ SendToParent }) {
         TimeSlack:
         <input type="number" value={TimeSlack} onChange={(e) => setTimeSlack(e.target.value)} />
       </label>
+      <br />
       <button type="button" onClick={handleClick}>Check Data</button>
     </div>
   );

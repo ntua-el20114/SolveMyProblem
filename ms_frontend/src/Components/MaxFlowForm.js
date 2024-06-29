@@ -95,6 +95,7 @@ function MaxFlowForm({ SendToParent }) {
         Sink Node:
         <input type="number" value={sink} onChange={(e) => setSink(e.target.value)} />
       </label>
+      <br />
       <button type="button" onClick={handleClick}>Check Data</button>
     </div>
   );

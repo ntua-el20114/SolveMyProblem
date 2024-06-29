@@ -6,6 +6,7 @@ import VRPTWForm from './VRPTWForm';
 import MaxFlowForm from './MaxFlowForm';
 import MinFlowForm from './MinFlowForm';
 import SchedulingForm from './SchedulingForm';
+import JobShopForm from './JobShopForm';
 
   function ProblemForm({ closeModal }) {
     const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
@@ -56,7 +57,7 @@ import SchedulingForm from './SchedulingForm';
   const [username, setUsername] = useState('');
   const [solver, setSolver] = useState('');
 
-  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Scheduling'];
+  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Scheduling', 'Job Shop'];
  
   const handleSolverChange = (e) => {
     setSolver(e.target.value);
@@ -90,6 +91,7 @@ import SchedulingForm from './SchedulingForm';
       {solver === 'Max Flow' && <MaxFlowForm SendToParent={getInputData}/>}
       {solver === 'Min Cost Flow' && <MinFlowForm SendToParent={getInputData}/>}
       {solver === 'Scheduling' && <SchedulingForm SendToParent={getInputData}/>}
+      {solver === 'Job Shop' && <JobShopForm SendToParent={getInputData}/>}
 
       <button type="submit">Submit</button>
     </form>

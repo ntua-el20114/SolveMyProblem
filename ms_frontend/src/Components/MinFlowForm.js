@@ -92,6 +92,7 @@ function MinFlowForm({ SendToParent }) {
         Supplies (JSON Array):
         <textarea rows="5" cols="50" value={supplies} onChange={(e) => setSupplies(e.target.value)} />
       </label>
+      <br />
       <button type="button" onClick={handleSubmit}>Check Data</button>
     </div>
   );

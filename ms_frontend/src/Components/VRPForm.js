@@ -96,6 +96,7 @@ function VRPForm({ SendToParent }) {
         Locations:
         <textarea rows="10" cols="50" value={Locations} onChange={(e) => setLocations(e.target.value)} />
       </label>
+      <br />
       <button type="button" onClick={handleClick}>Check Data</button>
     </div>
   );
