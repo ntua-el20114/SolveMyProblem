@@ -31,6 +31,9 @@ const Analytics = () => {
 
   async function renderProblemStatisticsChart(data) {
       Highcharts.chart('plot', {
+      accessibility: {
+        enabled: false
+      },
       chart: {
         type: 'bar',
         backgroundColor: '#2c2c2c',

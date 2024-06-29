@@ -179,6 +179,14 @@ button:hover {
   }
 }
 
+.delete-problem {
+  margin-right: 10px;
+  background-color: red;
+}
+.delete-problem:hover {
+  background-color: darkred;
+}
+
 .center-screen {
   display: flex;
   justify-content: center;
@@ -363,6 +371,14 @@ form button {
 
 form button:hover {
   background-color: #c2158b;
+}
+
+.rename {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
 }
 
 /*END Problem Form */
