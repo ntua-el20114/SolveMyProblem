@@ -27,9 +27,9 @@ def maxflow(start_nodes, end_nodes, capacities, source, sink):
         solution = smf.solve(source, sink)
 
         # Return results
-        if solution == smf.INFEASIBLE:
-            return {"Result": "Success", "Solution": "Infeasible"}
-        if solution == smf.OPTIMAL or solution == smf.FEASIBLE:
+        if solution == smf.BAD_INPUT:
+            return {"Result": "Error", "Message": "ortools detected bad input"}
+        if solution == smf.OPTIMAL:
             return {
                 "Result": "Success",
                 "Optimal": solution == smf.OPTIMAL,
@@ -83,7 +83,7 @@ def mincostflow(start_nodes, end_nodes, capacities, unit_costs, supplies):
                 "Optimal": solution == smcf.OPTIMAL,
                 "MinCost": smcf.optimal_cost(),
                 "ArcFlows": smcf.flows(all_arcs).tolist(),
-                "ArcCosts": smcf.flows(all_arcs).tolist()*unit_costs
+                "ArcCosts": (smcf.flows(all_arcs)*unit_costs).tolist()
             }
         
         return {"Result": "Failure"}

@@ -42,8 +42,31 @@ function solveProblem(problemType, problemData) {
     });
   }
   
+  // Translate problem type from verbose frontend format to backend format
+  function translate(problemType) {
+    switch (problemType) {
+      case 'Routing - VRP':
+        return 'VRP';
+      case 'Routing - CVRP':
+        return 'CVRP';
+      case 'Routing - VRPTW':
+        return 'VRPTW';
+      case 'Max Flow':
+        return 'MaxFlow';
+      case 'Min Cost Flow':
+        return 'MinCostFlow';
+      case 'Employee Scheduling':
+        return 'EmpSch';
+      case 'Scheduling - Job Shop':
+        return 'JobShop';
+      default:
+        return problemType;
+    }
+  }
+
   //Solve test routing problem using dummy data
   function dummyTest(problemType) {
+    problemType = translate(problemType);
     const path = `routes/dummy_data/${problemType}.json`;
     fs.readFile(path, 'utf8', (err, jsonString) => {
       if (err) {
