@@ -1,0 +1,22 @@
+{
+  "_comment": "This is a template file. Replace datatype strings with actual values",
+  "Locations": [
+    {
+      "Latitude": "int",
+      "Longitude": "int"
+    },
+    {
+      "Latitude": "int",
+      "Longitude": "int"
+    }
+  ],
+  "Speed": "int",
+  "TimeWindows": [
+    ["int", "int"],
+    ["int", "int"]
+  ],
+  "NumVehicles": "int",
+  "Depot": "int",
+  "MaxTime": "int/null",
+  "TimeSlack": "int/null"
+}

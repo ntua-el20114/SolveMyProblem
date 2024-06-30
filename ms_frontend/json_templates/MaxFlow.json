@@ -1,0 +1,8 @@
+{
+    "_comment": "This is a template file. Replace datatype strings with actual values",
+    "StartNodes": ["int", "int"],
+    "EndNodes": ["int", "int"],
+    "Capacities": ["int", "int"],
+    "Source": "int",
+    "Sink": "int"
+}

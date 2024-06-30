@@ -1,0 +1,9 @@
+{
+    "_comment": "This is a template file. Replace datatype strings with actual values",
+    "NumEmployees": "int",
+    "NumShifts": "int",
+    "NumDays": "int",
+    "ShiftRequests": "[[int, int], [int, int]]/null",
+    "MinShiftsPerEmployee": "int/null",
+    "MaxShiftsPerEmployee": "int/null"
+}
