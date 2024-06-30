@@ -7,6 +7,7 @@ function CVRPForm({ SendToParent }) {
   const [MaxDistance, setMaxDistance] = useState('');
   const [Locations, setLocations] = useState('');
   const [Demands, setDemands] = useState('');
+  const [VehicleCapacities, setVehicleCapacities] = useState('');
 
   const handleFileChange = async (e) => {
     const reader = new FileReader();
@@ -20,6 +21,7 @@ function CVRPForm({ SendToParent }) {
         setDemands(parsedInputData.Demands || []);
         setMaxDistance(parsedInputData.MaxDistance || 0);
         setLocations(JSON.stringify(parsedInputData.Locations, null, 2) || '');
+        setVehicleCapacities(parsedInputData.VehicleCapacities || [])
       } catch (error) {
         alert('Input Data is not a valid JSON object');
       }
@@ -31,6 +33,8 @@ function CVRPForm({ SendToParent }) {
     let parsedDepot = 0;
     let parsedLocations;
     let numberOfNodes = 0;
+    let parsedVehicleCapacities;
+
     try {
       parsedDepot = parseInt(Depot);
     } catch (error) {
@@ -52,7 +56,7 @@ function CVRPForm({ SendToParent }) {
     }
     
     // Check if any field is empty
-    if (!NumVehicles || !Locations) {
+    if (!NumVehicles || !Locations ) {
         alert('Only MaxDistance is optional. All other fields must be filled out');
         return;
     }
@@ -61,6 +65,12 @@ function CVRPForm({ SendToParent }) {
         alert('Depot must be an integer between 0 and ' + (numberOfNodes - 1));
         return;
     }
+
+    if (!Array.isArray(VehicleCapacities) || VehicleCapacities.length !== NumVehicles || !VehicleCapacities.every(num => typeof num === 'number' && num >= 0)) {
+      alert('Vehicle Capacities must be a valid array of integers with ' + NumVehicles + ' elements');
+      return;
+    }
+
     // Check if Demands is an array of integers with numberOfNodes elements
     if (!Array.isArray(Demands) || Demands.length !== numberOfNodes || !Demands.every(num => typeof num === 'number' && num >= 0)) {
       alert('Demands must be a valid array of integers with ' + numberOfNodes + ' elements');
@@ -71,8 +81,9 @@ function CVRPForm({ SendToParent }) {
         NumVehicles,
         Depot: parsedDepot,
         MaxDistance,
-        Demands: Demands,
+        Demands,
         Locations: parsedLocations,
+        VehicleCapacities: parsedVehicleCapacities,
     };
     try {
         // Call the callback function with the form data
@@ -109,6 +120,10 @@ function CVRPForm({ SendToParent }) {
       <label>
         Demands:
         <textarea rows="5" cols="50" value={Demands} onChange={(e) => setDemands(e.target.value)} />
+      </label>
+      <label>
+        Vehicle Capacities:
+        <textarea rows="3" cols="50" value={VehicleCapacities} onChange={(e) => setVehicleCapacities(e.target.value)} />
       </label>
       <label>
         Locations:
