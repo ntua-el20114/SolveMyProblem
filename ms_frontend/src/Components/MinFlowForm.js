@@ -39,11 +39,11 @@ function MinFlowForm({ SendToParent }) {
     }
 
     const formData = {
-      start_nodes: StartNodes,
-      end_nodes: EndNodes,
-      capacities: Capacities,
-      unit_costs: UnitCosts,
-      supplies: Supplies,
+      StartNodes: StartNodes,
+      EndNodes: EndNodes,
+      Capacities: Capacities,
+      UnitCosts: UnitCosts,
+      Supplies: Supplies,
     };
 
     try {

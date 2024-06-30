@@ -33,7 +33,6 @@ function CVRPForm({ SendToParent }) {
     let parsedDepot = 0;
     let parsedLocations;
     let numberOfNodes = 0;
-    let parsedVehicleCapacities;
 
     try {
       parsedDepot = parseInt(Depot);
@@ -83,7 +82,7 @@ function CVRPForm({ SendToParent }) {
         MaxDistance,
         Demands,
         Locations: parsedLocations,
-        VehicleCapacities: parsedVehicleCapacities,
+        VehicleCapacities: VehicleCapacities,
     };
     try {
         // Call the callback function with the form data
