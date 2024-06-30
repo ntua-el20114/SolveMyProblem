@@ -98,7 +98,13 @@ function VRPTWForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        The Vehicle Routing Problem with Time Windows is a VRP which involves
+        scheduling visits to customers who are only available during specific time windows ("TimeWindows").
+        You must set the average vehicle speed ("Speed") and, optionally, you can set the maximum vehicle
+        distance time ("MaxTime"). If needed, vehicles may wait in each node of their path up to a maximum amount of time ("TimeSlack").
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

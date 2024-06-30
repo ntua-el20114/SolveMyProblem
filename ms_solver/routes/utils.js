@@ -19,7 +19,7 @@ function solveProblem(problemType, problemData) {
       // Check and display print messages. Keep the result of the problem.
       process.stdout.on('data', (data) => {
         const output = data.toString().trim();
-        console.log(output);
+        // console.log(output);
 
         // Save the result of the problem
         const start = output.indexOf('__START__');

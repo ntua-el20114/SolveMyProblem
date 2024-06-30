@@ -67,7 +67,7 @@ import JobShopForm from './JobShopForm';
   return (
     <form onSubmit={(event) => handleSubmit(event, InputData)}>
       <label>
-        Name:
+        Problem Name:
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </label>
       <label>

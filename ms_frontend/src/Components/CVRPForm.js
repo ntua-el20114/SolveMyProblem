@@ -84,7 +84,12 @@ function CVRPForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+          The Capacitated Vehicle Routing Problem is a VRP in which vehicles with 
+          limited carrying capacity ("VehicleCapacities") need to pick up
+          or deliver items at various locations ("Demands")
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

@@ -87,7 +87,16 @@ function SchedulingForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        In the Employee Scheduling problem, we want to asign shifts to a number of Employees ("NumEmployees").
+        You can specify the number of days ("NumDays") and the shifts of each day ("NumShifts").
+        Optionally, you may also provide a list of shift requests ("ShiftRequests") for each employee
+        and the maximum and minimum number of shifts per employee ("MinShiftsPerEmployee", "MaxShiftsPerEmployee").
+        We look for a schedule that maximizes the number of requests that are met, 
+        while satisfying the constraints. 
+        If no maximum or minimum shifts are provided, the algorithm will try to distribute the shifts as evenly as possible.
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

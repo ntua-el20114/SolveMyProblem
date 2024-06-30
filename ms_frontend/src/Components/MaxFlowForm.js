@@ -70,10 +70,17 @@ function MaxFlowForm({ SendToParent }) {
   };
 
   return (
-    <div>
-        <label>
-        JSON File:
-        <input type="file" accept=".json" onChange={handleFileChange} />
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        In the Maximum Flow Problem, you need to provide a directed graph by specifying the start node
+        and end note of each edge ("StartNodes", "EndNodes"). Suppose that each edge is a pipe that can
+        transfer up to a certain amount of units ("Capacities"). This "flow of units" is generated from a 
+        source node ("Source") and needs to reach a sink node ("Sink"). We want  to find a flow for which
+        the sum of the flow amounts for the entire network is as large as possible.
+      </p>
+      <label>
+      JSON File:
+      <input type="file" accept=".json" onChange={handleFileChange} />
       </label>
       <label>
         Start Nodes (JSON Array):

@@ -75,7 +75,12 @@ function VRPForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{ display: 'inline-block', width:'50%' }}>   
+      <p style={{textAlign: 'justify'}}>
+          The Vehicle Routing Problem is a generalized version of the famous Traveling Salesperson Problem.
+          You can use multiple vehicles ("NumVehicles"), and choose the starting node ("Depot").
+          Each vehicle can travel up to a maximum total distance ("MaxDistance").
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

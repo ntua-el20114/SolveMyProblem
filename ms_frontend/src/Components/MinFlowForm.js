@@ -67,7 +67,12 @@ function MinFlowForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        The Minimum Cost Flow problem is a form of a flow problem, where each edge has a unit cost for
+        transporting material across it ("UnitCosts"). Here, each node can have a supply or demand of material ("Supplies", negative values indicate demands).
+        The problem is to find a flow with the least total cost.
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

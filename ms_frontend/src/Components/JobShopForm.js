@@ -46,7 +46,14 @@ function JobShopForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        In the Job Shop scheduling problem, a set of jobs is to be processed on a set of machines.
+        Each job consists of a sequence of tasks, where each task has to be processed on a specific machine.
+        Also, each task can be processed only after its preceding tasks have been completed.
+        "JobsData" is a list of jobs, where each job is a list of tasks, and each task is a tuple of (machine, duration).
+        The goal is to find a schedule that minimizes the total time taken to complete all jobs.
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />

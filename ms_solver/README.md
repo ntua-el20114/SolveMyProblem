@@ -40,3 +40,10 @@ RESULTS:
 - Error
     - The solver encountered an error. The error message is returned.
     - Time-out error is included.
+
+TEST PROBLEMS:
+- VRP: Failure
+- CVRP: wrong arguements (frontend)
+- VRPTW: Failure
+- MaxFlow: 'ortools.graph.python.max_flow.SimpleMaxFlow' object has no attribute 'INFEASIBLE'
+- MinCostFlow: frontend
