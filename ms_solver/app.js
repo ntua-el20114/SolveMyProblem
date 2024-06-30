@@ -33,11 +33,11 @@ app.listen(port, () => {
 module.exports = app;
 
 // Perform dummy tests
-console.log('Running dummy tests');
-dummyTest('VRP');
-dummyTest('CVRP');
-dummyTest('VRPTW');
-dummyTest('MaxFlow');
-dummyTest('MinCostFlow');
-dummyTest('EmpSch');
-dummyTest('JobShop');
+// console.log('Running dummy tests');
+// dummyTest('VRP');
+// dummyTest('CVRP');
+// dummyTest('VRPTW');
+// dummyTest('MaxFlow');
+// dummyTest('MinCostFlow');
+// dummyTest('EmpSch');
+// dummyTest('JobShop');

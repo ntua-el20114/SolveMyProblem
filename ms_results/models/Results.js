@@ -1,5 +1,5 @@
 /** Results Model
- * id PK (FK from problems) -> integet [Not Null]
+ * id PK (FK from problems) -> integer [Not Null]
  * userName -> string [Not Null]
  * solver -> enum [Not Null]
  * status -> enum //default: submitted, pending, solved, 
@@ -10,10 +10,14 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes){
   return sequelize.define('Results', {
     problemId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        },
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      },
+    problemName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     userName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -23,7 +27,11 @@ module.exports = function(sequelize, DataTypes){
       values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'],
       allowNull: false
     },
-    problemData: {
+    problemInput: {
+      type: DataTypes.JSON,
+      allowNull: false
+    },
+    problemOutput: {
       type: DataTypes.JSON,
       allowNull: false
     },
@@ -31,8 +39,7 @@ module.exports = function(sequelize, DataTypes){
       type: DataTypes.DATE(6),
       allowNull: false
     },
-    //solver keeps the timestamp of the moment that the problem started solving "pending"
-    SecondsOfSolve: {
+    solveTime: { // in milliseconds
       type: DataTypes.INTEGER,
       allowNull: false
   }
