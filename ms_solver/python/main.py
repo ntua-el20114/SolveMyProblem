@@ -1,7 +1,26 @@
 import json
-import os
 import sys
+import signal
 from solver import *
+
+# Define a signal handler function
+def handle_sigterm(signum, frame):
+    """This is triggered by parent js process when timeout is reached."""
+    print("Termination signal received.")
+
+    result = {"Result": "Failure"}
+
+    # Convert result to JSON string
+    # Mark start and end of the string, to be easily located by the parent process
+    result = json.dumps(result)
+    result = "__START__" + result + "__END__"
+
+    print(result)
+    sys.exit(0)
+
+# Register the signal handler for the SIGTERM signal
+signal.signal(signal.SIGTERM, handle_sigterm)
+
 
 def main():
     """Selects suitable solver and runs it."""
@@ -71,7 +90,7 @@ def main():
     result = "__START__" + result + "__END__"
 
     print(result)
-    exit(0)
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

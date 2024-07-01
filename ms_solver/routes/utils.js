@@ -1,4 +1,5 @@
 var { spawn } = require('child_process');
+const { clear } = require('console');
 const fs = require('fs')
 
 /* Solve problem using main.py Python process. */
@@ -13,37 +14,46 @@ function solveProblem(problemType, problemData) {
     const startTime = Date.now()
     try{
       var process = spawn('python3', ['./python/main.py', type, data]);
+  
+      // Set timeout to terminate the process
+      const timeout = 60000; //milliseconds
+      timeoutId = setTimeout(() => {
+        process.kill();
+        console.log('Python process terminated after timeout');
+      }, timeout);
+
+      // Check and display print messages. Keep the result of the problem.
+      process.stdout.on('data', (data) => {
+        const output = data.toString().trim();
+        // console.log(output);
+  
+        // Save the result of the problem
+        const start = output.indexOf('__START__');
+        const end = output.indexOf('__END__', start);
+        if (start !== -1 && end !== -1) {
+          problemResult = output.substring(start+9, end);
+        }
+      });
+  
+      process.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+      });
+  
+      process.on('close', (code) => {
+        const endTime = Date.now();
+        const solveTime = endTime-startTime;
+        clearTimeout(timeoutId);
+        if (code !== 0) {
+          return reject([new Error(`child process exited with code ${code}`), solveTime]);
+        }
+        resolve([JSON.parse(problemResult), solveTime]);
+      });
     }
     catch(error){
+      clearTimeout(timeoutId);
       console.error(error);
       return reject(error);
     }
-
-    // Check and display print messages. Keep the result of the problem.
-    process.stdout.on('data', (data) => {
-      const output = data.toString().trim();
-      // console.log(output);
-
-      // Save the result of the problem
-      const start = output.indexOf('__START__');
-      const end = output.indexOf('__END__', start);
-      if (start !== -1 && end !== -1) {
-        problemResult = output.substring(start+9, end);
-      }
-    });
-
-    process.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`);
-    });
-
-    process.on('close', (code) => {
-      const endTime = Date.now();
-      const solveTime = endTime-startTime;
-      if (code !== 0) {
-        return reject([new Error(`child process exited with code ${code}`), solveTime]);
-      }
-      resolve([JSON.parse(problemResult), solveTime]);
-    });
   });
 }
   
