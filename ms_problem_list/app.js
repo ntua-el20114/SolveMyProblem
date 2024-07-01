@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./services/database');
+const path = require('path');
 const kafkaService = require('./services/kafka');
 const cors = require('cors');
 const indexRouter = require('./routes/index');
@@ -16,6 +17,10 @@ app.use(cors());
 //  .catch((error) => {
 //    console.error('Error initializing Kafka:', error);
 //  });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
