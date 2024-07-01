@@ -1,6 +1,4 @@
 const express = require('express');
-const db = require('../services/database');
-var initModels = require("../models/init-models");
 
 var router = express.Router();
 const db = require('../services/database');
