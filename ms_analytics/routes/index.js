@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const {calculateStatistics} = require('../utils/data.js');
+const db = require('../services/database');
+var initModels = require("../models/init-models");
+let sequelize;
+let models;
 
 router.get('/analytics', async function(req, res, next) {
   try {
@@ -12,7 +16,7 @@ router.get('/analytics', async function(req, res, next) {
 });
 
 router.post('/delete-problem', async (req, res) => {
-  id = req.body.id; //req.params.id
+  const id = req.body.id; //req.params.id
   try {
     sequelize = await db.getSequelizeInstance();
     models = initModels(sequelize);

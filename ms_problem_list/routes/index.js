@@ -34,7 +34,7 @@ router.get('/problems', async (req, res) => {
 });
 
 router.post('/delete-problem', async (req, res) => {
-  id = req.body.id; //req.params.id
+  const {id} = req.body; //req.params.id
   try {
     sequelize = await db.getSequelizeInstance();
     models = initModels(sequelize);

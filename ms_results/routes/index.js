@@ -1,5 +1,9 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../services/database');
+var initModels = require("../models/init-models");
+let sequelize;
+let models;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -7,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/delete-problem', async (req, res) => {
-  id = req.body.id; //req.params.id
+  const id = req.body.id; //req.params.id
   try {
     sequelize = await db.getSequelizeInstance();
     models = initModels(sequelize);

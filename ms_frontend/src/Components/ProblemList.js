@@ -50,11 +50,19 @@ function ProblemList() {
     };
 
     const handleDelete = async () => {
-        await axios.post('http://localhost:3003/delete-problem', {id: selectedProblem.id}) //send to problem list
-        await axios.post('http://localhost:3006/delete-problem', {id: selectedProblem.id}) //send to analytics
-        await axios.post('http://localhost:3005/delete-problem', {id: selectedProblem.id}) //send to results
-        console.log('Deleting', selectedProblem ? selectedProblem.id : '')
-        setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+        try {
+            // Execute all requests in parallel
+            await Promise.all([
+                axios.post('http://localhost:3003/delete-problem', { id: selectedProblem.id }), //send to problem list
+                axios.post('http://localhost:3006/delete-problem', { id: selectedProblem.id }), //send to analytics
+                axios.post('http://localhost:3005/delete-problem', { id: selectedProblem.id })  //send to results
+            ]);
+            console.log('Deleting', selectedProblem ? selectedProblem.id : '');
+            setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+        } catch (error) {
+            console.error('Error deleting problem:', error);
+            // Handle error (e.g., show error message to the user)
+        }
     };
 
     // useEffect to fetch problems on mount and on modal close
