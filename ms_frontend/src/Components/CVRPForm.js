@@ -19,7 +19,7 @@ function CVRPForm({ SendToParent }) {
         setNumVehicles(parsedInputData.NumVehicles || 0);
         setDepot(parsedInputData.Depot || 0);
         setDemands(parsedInputData.Demands || []);
-        setMaxDistance(parsedInputData.MaxDistance || 0);
+        setMaxDistance(parsedInputData.hasOwnProperty('MaxDistance') ? parsedInputData.MaxDistance : null);
         setLocations(JSON.stringify(parsedInputData.Locations, null, 2) || '');
         setVehicleCapacities(parsedInputData.VehicleCapacities || [])
       } catch (error) {

@@ -22,8 +22,8 @@ function VRPTWForm({ SendToParent }) {
         setSpeed(parsedInputData.Speed || 0);
         setNumVehicles(parsedInputData.NumVehicles || 0);
         setDepot(parsedInputData.Depot || 0);
-        setMaxTime(parsedInputData.MaxTime || 0);
-        setTimeSlack(parsedInputData.TimeSlack || 0);
+        setMaxTime(parsedInputData.hasOwnProperty('MaxTime') ? parsedInputData.MaxDistance : null);
+        setTimeSlack(parsedInputData.hasOwnProperty('TimeSlack') ? parsedInputData.MaxDistance : null);
       } catch (error) {
         alert('Input Data is not a valid JSON object');
       }
@@ -44,8 +44,8 @@ function VRPTWForm({ SendToParent }) {
     }
   
     // Basic validation
-    if (!NumVehicles || !MaxTime || !Locations || !TimeWindows || !Speed || !TimeSlack) {
-      alert('All fields must be filled out');
+    if (!NumVehicles  || !Locations || !TimeWindows || !Speed) {
+      alert('Only MaxTime and TimeSlack are optional. All other fields must be filled out');
       return;
     }
   
@@ -85,8 +85,8 @@ function VRPTWForm({ SendToParent }) {
       Speed: parseFloat(Speed),
       NumVehicles: parseInt(NumVehicles),
       Depot: parsedDepot,
-      MaxTime: parseFloat(MaxTime),
-      TimeSlack: parseFloat(TimeSlack),
+      MaxTime: parseFloat(MaxTime) || null,
+      TimeSlack: parseFloat(TimeSlack) || null,
     };
   
     try {

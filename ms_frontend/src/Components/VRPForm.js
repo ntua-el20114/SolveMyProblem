@@ -16,7 +16,7 @@ function VRPForm({ SendToParent }) {
         parsedInputData = JSON.parse(text);
         setNumVehicles(parsedInputData.NumVehicles|| 0);
         setDepot(parsedInputData.Depot|| 0);
-        setMaxDistance(parsedInputData.MaxDistance|| 0);
+        setMaxDistance(parsedInputData.hasOwnProperty('MaxDistance') ? parsedInputData.MaxDistance : null);
         setLocations(JSON.stringify(parsedInputData.Locations, null, 2)|| '');
       } catch (error) {
         alert('Input Data is not a valid JSON object');
@@ -49,8 +49,8 @@ function VRPForm({ SendToParent }) {
       return;
     }
     // Check if any field is empty
-    if (!NumVehicles || !MaxDistance || !Locations) {
-        alert('All fields must be filled out');
+    if (!NumVehicles || !Locations) {
+        alert('Only MaxDistance is optional. All other fields must be filled out');
         return;
     }
     // Check if Depot is an integer between 0 and numberOfNodes - 1

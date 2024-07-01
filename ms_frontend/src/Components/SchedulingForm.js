@@ -4,9 +4,9 @@ function SchedulingForm({ SendToParent }) {
   const [numEmployees, setNumEmployees] = useState('');
   const [numShifts, setNumShifts] = useState('');
   const [numDays, setNumDays] = useState('');
-  const [shiftRequests, setShiftRequests] = useState('');
-  const [MinShiftsPerEmployee, setMinShiftsPerEmployee] = useState('');
-  const [MaxShiftsPerEmployee, setMaxShiftsPerEmployee] = useState('');
+  const [shiftRequests, setShiftRequests] = useState(null);
+  const [MinShiftsPerEmployee, setMinShiftsPerEmployee] = useState(null);
+  const [MaxShiftsPerEmployee, setMaxShiftsPerEmployee] = useState(null);
 
   const handleFileChange = async (e) => {
     const reader = new FileReader();
@@ -18,9 +18,9 @@ function SchedulingForm({ SendToParent }) {
         setNumEmployees(parsedInputData.NumEmployees || 0);
         setNumShifts(parsedInputData.NumShifts || 0);
         setNumDays(parsedInputData.NumDays || 0);
-        setShiftRequests(JSON.stringify(parsedInputData.ShiftRequests || [[]], null, 2));
-        setMinShiftsPerEmployee(parsedInputData.MinShiftsPerEmployee || 0);
-        setMaxShiftsPerEmployee(parsedInputData.MaxShiftsPerEmployee || 0);
+        setShiftRequests(parsedInputData.ShiftRequests ? JSON.stringify(parsedInputData.ShiftRequests, null, 2) : null); // Keep null if not provided
+        setMinShiftsPerEmployee(parsedInputData.MinShiftsPerEmployee !== undefined ? parsedInputData.MinShiftsPerEmployee : null); // Keep null if not provided
+        setMaxShiftsPerEmployee(parsedInputData.MaxShiftsPerEmployee !== undefined ? parsedInputData.MaxShiftsPerEmployee : null); // Keep null if not provided
       } catch (error) {
         alert('Input Data is not a valid JSON object');
       }
@@ -35,17 +35,17 @@ function SchedulingForm({ SendToParent }) {
     const parsedNumDays = parseInt(numDays, 10);
 
     try {
-      parsedShiftRequests = JSON.parse(shiftRequests);
+      parsedShiftRequests = shiftRequests ? JSON.parse(shiftRequests) : null; // Keep null if not provided
     } catch (error) {
       alert('Error parsing shift requests. Ensure it is a correctly formatted JSON array.');
       return;
     }
     
-    if (MinShiftsPerEmployee !== '' && !Number.isInteger(parseFloat(MinShiftsPerEmployee))) {
+    if (MinShiftsPerEmployee !== null && !Number.isInteger(parseFloat(MinShiftsPerEmployee))) {
       alert('Minimum shifts per employee, if provided, must be a valid number.');
       return;
     }
-    if (MaxShiftsPerEmployee !== '' && !Number.isInteger(parseFloat(MaxShiftsPerEmployee))) {
+    if (MaxShiftsPerEmployee !== null && !Number.isInteger(parseFloat(MaxShiftsPerEmployee))) {
       alert('Maximum shifts per employee, if provided, must be a valid number.');
       return;
     }
@@ -64,7 +64,7 @@ function SchedulingForm({ SendToParent }) {
       return;
     }
 
-    if (!Array.isArray(parsedShiftRequests)) {
+    if (parsedShiftRequests !== null && !Array.isArray(parsedShiftRequests)) {
       alert('Shift requests input must be an array.');
       return;
     }
