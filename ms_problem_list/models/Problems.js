@@ -35,10 +35,10 @@ module.exports = function(sequelize, DataTypes){
       type: DataTypes.DATE(6),
       allowNull: false
     },
-    timeSolved: { 
-      type: DataTypes.DATE(6),
-      allowNull: true
-    },
+    // timeSolved: { 
+    //   type: DataTypes.DATE(6),
+    //   allowNull: true
+    // },
     solver: {
       type: DataTypes.ENUM,
       values: ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow', 'Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'],

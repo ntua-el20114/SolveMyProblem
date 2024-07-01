@@ -134,7 +134,6 @@ function ProblemList() {
                             <th>Name</th>
                             <th>User Name</th>
                             <th>Time Submitted</th>
-                            <th>Time Solved</th>
                             <th>Solver</th>
                             <th>Status</th>
                             <th></th>
@@ -146,7 +145,6 @@ function ProblemList() {
                                 <td><b>{problem.name}</b></td>
                                 <td>{problem.userName}</td>
                                 <td>{new Date(problem.timeSubmitted).toLocaleString()}</td>
-                                <td>{problem.timeSolved ? new Date(problem.timeSolved).toLocaleString() : 'N/A'}</td>
                                 <td>{problem.solver}</td>
                                 <td>{problem.status}</td>
                                 <td style={{verticalAlign:' middle', textAlign: 'center', padding: '0px'}}>
