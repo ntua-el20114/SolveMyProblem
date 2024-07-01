@@ -1,0 +1,119 @@
+ntua-el20014Q
+@workspace Can you help me dockerize my project?
+
+Copilot:
+
+To dockerize your project, you'll need to create Dockerfiles for each of your microservices (ms_results, ms_problem_list, etc.) and the frontend application (ms_frontend). Here's a basic guide on how to create Dockerfiles for each component and a docker-compose.yml file to orchestrate the containers.
+
+Dockerizing the Node.js Microservices
+Create a Dockerfile in each microservice directory (ms_results, ms_problem_list, etc.)
+
+# Use the official Node.js 14 image.
+# https://hub.docker.com/_/node
+FROM node:14
+
+# Create and change to the app directory.
+WORKDIR /usr/src/app
+
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY package*.json ./
+
+# Install production dependencies.
+RUN npm install --only=production
+
+# Copy local code to the container image.
+COPY . .
+
+# Expose port 3000 to the Docker host, so we can access it
+# from the outside.
+EXPOSE 3000
+
+CMD [ "node", "services/database.js" ]
+
+For the React frontend (ms_frontend), use this Dockerfile:
+
+# Use the official lightweight Node.js 14 image.
+# https://hub.docker.com/_/node
+FROM node:14-slim
+
+# Create and change to the app directory.
+WORKDIR /usr/src/app
+
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY package*.json ./
+
+# Install production dependencies.
+RUN npm install --only=production
+
+# Copy local code to the container image.
+COPY . .
+
+# Build the app for production.
+RUN npm run build
+
+# Install `serve` to run the application.
+RUN npm install -g serve
+
+# Run the web service on container startup.
+CMD [ "serve", "-s", "build" ]
+
+# Expose port 5000 to the Docker host, so we can access it
+# from the outside.
+EXPOSE 5000
+
+
+Docker Compose
+Create a docker-compose.yml at the root of your project to orchestrate your services. This is a basic setup and might need adjustments based on your specific requirements.
+
+version: '3.8'
+services:
+  ms_results:
+    build: ./ms_results
+    ports:
+      - "3001:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=results_db
+
+  ms_problem_list:
+    build: ./ms_problem_list
+    ports:
+      - "3002:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=problems_db
+
+  ms_frontend:
+    build: ./ms_frontend
+    ports:
+      - "3000:5000"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+
+
+
+This docker-compose.yml file defines the services, their build contexts, and the ports they expose. It also includes a MySQL service as an example database. You'll need to adjust the database service according to your actual database setup and credentials.
+
+Building and Running with Docker Compose
+To build and start your services, run:
+
+docker-compose up --build
+
+This command builds the images for your services (if they're not already built) and starts the containers.

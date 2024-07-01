@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": "deployment",
+        "action": "container structuring",
+        "scope": "container configuration",
+        "action experience": 1,
+        "prog lang": "yaml",
+        "other prog lang": "<fill in>",
+        "aimodel":"copilot",
+        "aimodel version": "<fill in>",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": "online full",
+        "experience with tool": 4,
+        "time allocated (h)": "0.1",
+        "time saved estimate (h)": "1", 
+        "quality of ai help": 4,
+        "knowledge acquired": 4,
+        "generic feeling - now": 3,
+        "generic feeling - future": 4,
+        "threat level": 1,
+        "notes": "<fill in>"
+    }
+}
