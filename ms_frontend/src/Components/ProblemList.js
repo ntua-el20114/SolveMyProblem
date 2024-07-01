@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import ProblemForm from './ProblemForm';
 import Header from './Header';
 import '../index.css'; // import the CSS file
+import axios from 'axios';
 
 function ProblemList() {
     const [isProblemModalOpen, setIsProblemModalOpen] = useState(false);
@@ -49,7 +50,11 @@ function ProblemList() {
     };
 
     const handleDelete = async () => {
+        await axios.post('http://localhost:3003/delete-problem', {id: selectedProblem.id}) //send to problem list
+        await axios.post('http://localhost:3006/delete-problem', {id: selectedProblem.id}) //send to analytics
+        await axios.post('http://localhost:3005/delete-problem', {id: selectedProblem.id}) //send to results
         console.log('Deleting', selectedProblem ? selectedProblem.id : '')
+        setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
     };
 
     // useEffect to fetch problems on mount and on modal close
