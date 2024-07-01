@@ -98,7 +98,7 @@ function Results() {
 function displayResults(result, type){
   result = JSON.parse(result)
   // Handle Errors and Failures
-  if (result.Result == "Error"){
+  if (result.Result === "Error"){
     return (
       <div>
         <h2 style={{color:'#ff5452'}}>Error</h2>  
@@ -108,7 +108,7 @@ function displayResults(result, type){
       </div>
   )
   }
-  if (result.Result == "Failure"){
+  if (result.Result === "Failure"){
     return (
     <div>
       <h2 style={{color:'#ffad43'}}>Failure</h2>

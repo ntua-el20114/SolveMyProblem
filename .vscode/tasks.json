@@ -28,6 +28,32 @@
             }
         },
         {
+            "label": "Start Zookeeper(3.7.1)",
+            "type": "shell",
+            "command": "cd ../kafka_2.13-3.7.1/ && ./bin/zookeeper-server-start.sh config/zookeeper.properties",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Kafka(3.7.1)",
+            "type": "shell",
+            "command": "cd ../kafka_2.13-3.7.1/ && ./bin/kafka-server-start.sh config/server.properties",
+            "problemMatcher": [],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            }
+        },
+        {
             "label": "Start Choreographer",
             "type": "shell",
             "command": "cd ms_choreographer && node app.js",
