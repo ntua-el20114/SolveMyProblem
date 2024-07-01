@@ -1,0 +1,7 @@
+{
+    "_comment": "This is a template file. Replace datatype strings with actual values",
+    "JobsData": [
+    [["int", "int"], ["int", "int"]],
+    [["int", "int"]]
+]
+}

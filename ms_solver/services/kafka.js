@@ -2,6 +2,9 @@
 const { Kafka } = require('kafkajs');
 const dotenv = require('dotenv');
 
+
+var {solveProblem} = require('../routes/utils');
+
 dotenv.config();
 
 const kafka = new Kafka({
@@ -31,17 +34,20 @@ const init = async () => {
         try {
           const formData = JSON.parse(receivedMessage);
           console.log(formData);
-          const { problemId, inputData, timeSubmitted, solver, status } = formData;
+          const { problemId, problemData, timeSubmitted, solver, status, userName, name} = formData;
 
           const NewProblem = {
             problemId: problemId,
-            inputData: inputData,
+            problemName: name,
+            problemData: problemData,
             timeSubmitted: timeSubmitted,
             solver: solver,
-            status: status
+            status: status,
+            userName: userName
           };
 
           console.log('New problem with ID:', NewProblem.problemId);
+          console.log('New problem with name:', NewProblem.problemName);
           console.log('New problem with status:', NewProblem.status);
 
           //change the status to pending and send it back to the list
@@ -51,11 +57,35 @@ const init = async () => {
           const toPending = {
             problemId : NewProblem.problemId,
             status: NewProblem.status
-          }
+          };
           await sendMessage('UPDATED_STATUS', toPending);
           
           //solve the problem
+          let [result, solveTime]= await solveProblem(NewProblem.solver, NewProblem.problemData);
+          console.log("Problem Result:\n", result);
+          console.log("Solve Time:", solveTime, "ms");
+          
+          //send results
+          let resultsReady = {
+            problemId: NewProblem.problemId,
+            problemName: NewProblem.problemName,
+            userName: NewProblem.userName,
+            solver: NewProblem.solver,
+            problemInput: NewProblem.problemData,
+            problemOutput: result,
+            timeSubmitted: NewProblem.timeSubmitted,
+            solveTime: solveTime
+          }
+          await sendMessage('RESULTS_READY', resultsReady);
 
+          //update the status to solved
+          NewProblem.status = 'solved';
+          const toSolved = {
+            problemId : NewProblem.problemId,
+            status: NewProblem.status
+          };
+          await sendMessage('UPDATED_STATUS', toSolved);
+          
         } catch (error) {
           console.log('Error receiving message from list', error);
         }

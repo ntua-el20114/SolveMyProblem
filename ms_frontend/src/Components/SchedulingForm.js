@@ -4,9 +4,9 @@ function SchedulingForm({ SendToParent }) {
   const [numEmployees, setNumEmployees] = useState('');
   const [numShifts, setNumShifts] = useState('');
   const [numDays, setNumDays] = useState('');
-  const [shiftRequests, setShiftRequests] = useState('');
-  const [MinShiftsPerEmployee, setMinShiftsPerEmployee] = useState('');
-  const [MaxShiftsPerEmployee, setMaxShiftsPerEmployee] = useState('');
+  const [shiftRequests, setShiftRequests] = useState(null);
+  const [MinShiftsPerEmployee, setMinShiftsPerEmployee] = useState(null);
+  const [MaxShiftsPerEmployee, setMaxShiftsPerEmployee] = useState(null);
 
   const handleFileChange = async (e) => {
     const reader = new FileReader();
@@ -15,12 +15,12 @@ function SchedulingForm({ SendToParent }) {
       let parsedInputData;
       try {
         parsedInputData = JSON.parse(text);
-        setNumEmployees(parsedInputData.NumEmployees.toString() || '');
-        setNumShifts(parsedInputData.NumShifts.toString() || '');
-        setNumDays(parsedInputData.NumDays.toString() || '');
-        setShiftRequests(JSON.stringify(parsedInputData.ShiftRequests, null, 2) || '');
-        setMinShiftsPerEmployee(parsedInputData.MinShiftsPerEmployee.toString() || '');
-        setMaxShiftsPerEmployee(parsedInputData.MaxShiftsPerEmployee.toString() || '');
+        setNumEmployees(parsedInputData.NumEmployees || 0);
+        setNumShifts(parsedInputData.NumShifts || 0);
+        setNumDays(parsedInputData.NumDays || 0);
+        setShiftRequests(parsedInputData.ShiftRequests ? JSON.stringify(parsedInputData.ShiftRequests, null, 2) : null); // Keep null if not provided
+        setMinShiftsPerEmployee(parsedInputData.MinShiftsPerEmployee !== undefined ? parsedInputData.MinShiftsPerEmployee : null); // Keep null if not provided
+        setMaxShiftsPerEmployee(parsedInputData.MaxShiftsPerEmployee !== undefined ? parsedInputData.MaxShiftsPerEmployee : null); // Keep null if not provided
       } catch (error) {
         alert('Input Data is not a valid JSON object');
       }
@@ -28,24 +28,24 @@ function SchedulingForm({ SendToParent }) {
     reader.readAsText(e.target.files[0]);
   };
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     let parsedShiftRequests, parsedMinShiftsPerEmployee, parsedMaxShiftsPerEmployee;
     const parsedNumEmployees = parseInt(numEmployees, 10);
     const parsedNumShifts = parseInt(numShifts, 10);
     const parsedNumDays = parseInt(numDays, 10);
 
     try {
-      parsedShiftRequests = JSON.parse(shiftRequests);
+      parsedShiftRequests = shiftRequests ? JSON.parse(shiftRequests) : null; // Keep null if not provided
     } catch (error) {
       alert('Error parsing shift requests. Ensure it is a correctly formatted JSON array.');
       return;
     }
     
-    if (MinShiftsPerEmployee !== '' && !Number.isNumber(MinShiftsPerEmployee)) {
+    if (MinShiftsPerEmployee !== null && !Number.isInteger(parseFloat(MinShiftsPerEmployee))) {
       alert('Minimum shifts per employee, if provided, must be a valid number.');
       return;
     }
-    if (MaxShiftsPerEmployee !== '' && !Number.isNumber(MaxShiftsPerEmployee)) {
+    if (MaxShiftsPerEmployee !== null && !Number.isInteger(parseFloat(MaxShiftsPerEmployee))) {
       alert('Maximum shifts per employee, if provided, must be a valid number.');
       return;
     }
@@ -64,7 +64,7 @@ function SchedulingForm({ SendToParent }) {
       return;
     }
 
-    if (!Array.isArray(parsedShiftRequests)) {
+    if (parsedShiftRequests !== null && !Array.isArray(parsedShiftRequests)) {
       alert('Shift requests input must be an array.');
       return;
     }
@@ -87,7 +87,16 @@ function SchedulingForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{width:'50%'}}>
+      <p style={{textAlign: 'justify'}}>
+        In the Employee Scheduling problem, we want to asign shifts to a number of Employees ("NumEmployees").
+        You can specify the number of days ("NumDays") and the shifts of each day ("NumShifts").
+        Optionally, you may also provide a list of shift requests ("ShiftRequests") for each employee
+        and the maximum and minimum number of shifts per employee ("MinShiftsPerEmployee", "MaxShiftsPerEmployee").
+        We look for a schedule that maximizes the number of requests that are met, 
+        while satisfying the constraints. 
+        If no maximum or minimum shifts are provided, the algorithm will try to distribute the shifts as evenly as possible.
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />
@@ -117,7 +126,7 @@ function SchedulingForm({ SendToParent }) {
         <input type="number" value={MaxShiftsPerEmployee} onChange={(e) => setMaxShiftsPerEmployee(e.target.value)} />
       </label>
       <br />
-      <button type="button" onClick={handleSubmit}>Check Data</button>
+      <button type="button" onClick={handleClick}>Check Data</button>
     </div>
   );
 }

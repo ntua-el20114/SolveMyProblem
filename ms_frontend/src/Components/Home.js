@@ -23,7 +23,7 @@ function Home() {
       <Link to="/analytics" className="qLink">
         <img src="/analytics.png" alt=""/>
         <p className="qTitle">Analytics</p>
-        <p className="qSubtitle">Watch the analytics of problem submission!</p>
+        <p className="qSubtitle">See the stats of problem submissions!</p>
       </Link>
       </div>
     </div>

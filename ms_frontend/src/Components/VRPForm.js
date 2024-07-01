@@ -16,7 +16,7 @@ function VRPForm({ SendToParent }) {
         parsedInputData = JSON.parse(text);
         setNumVehicles(parsedInputData.NumVehicles|| 0);
         setDepot(parsedInputData.Depot|| 0);
-        setMaxDistance(parsedInputData.MaxDistance|| 0);
+        setMaxDistance(parsedInputData.hasOwnProperty('MaxDistance') ? parsedInputData.MaxDistance : null);
         setLocations(JSON.stringify(parsedInputData.Locations, null, 2)|| '');
       } catch (error) {
         alert('Input Data is not a valid JSON object');
@@ -49,8 +49,8 @@ function VRPForm({ SendToParent }) {
       return;
     }
     // Check if any field is empty
-    if (!NumVehicles || !MaxDistance || !Locations) {
-        alert('All fields must be filled out');
+    if (!NumVehicles || !Locations) {
+        alert('Only MaxDistance is optional. All other fields must be filled out');
         return;
     }
     // Check if Depot is an integer between 0 and numberOfNodes - 1
@@ -75,7 +75,12 @@ function VRPForm({ SendToParent }) {
   };
 
   return (
-    <div>
+    <div style={{ display: 'inline-block', width:'50%' }}>   
+      <p style={{textAlign: 'justify'}}>
+          The Vehicle Routing Problem is a generalized version of the famous Traveling Salesperson Problem.
+          You can use multiple vehicles ("NumVehicles"), and choose the starting node ("Depot").
+          Each vehicle can travel up to a maximum total distance ("MaxDistance").
+      </p>
       <label>
         JSON File:
         <input type="file" accept=".json" onChange={handleFileChange} />
