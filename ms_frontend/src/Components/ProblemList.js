@@ -59,6 +59,7 @@ function ProblemList() {
             ]);
             console.log('Deleting', selectedProblem ? selectedProblem.id : '');
             setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+            closeDeleteModal();
         } catch (error) {
             console.error('Error deleting problem:', error);
             // Handle error (e.g., show error message to the user)
