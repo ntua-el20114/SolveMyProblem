@@ -12,7 +12,7 @@
 ### Dependencies:
 
 - Nodejs 20.15.0+
-- Java (for kafka)
+- Java 11 or above (for kafka)
 - kafka 2.13-3.7.0
 - Python latest version
 - mysql server
