@@ -1,0 +1,6 @@
+{
+    "name":"test${test_count}",
+    "username":"JMeter",
+    "solver":"[SOLVER]",
+    "inputData":{}
+}

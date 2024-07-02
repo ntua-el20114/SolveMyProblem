@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="SolveMyProblem">
+      <stringProp name="TestPlan.comments">Tests for the SaaS project</stringProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Visit homepage">
+        <intProp name="ThreadGroup.num_threads">52</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">12</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <stringProp name="TestPlan.comments">Visit home page</stringProp>
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">3000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/VisitPage.csv</stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Data requests">
+        <stringProp name="TestPlan.comments">Direct HTTP calls for data access and manipulation</stringProp>
+        <intProp name="ThreadGroup.num_threads">44</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">26</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET analytics" enabled="true">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">3006</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/analytics</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET results" enabled="true">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">3005</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/results</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET problems" enabled="true">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">3003</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/problems</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/DataRequests.csv</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="New problem">
+        <stringProp name="TestPlan.comments">Submits new problem through kafka messaging</stringProp>
+        <intProp name="ThreadGroup.num_threads">17</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">3</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="Counter" enabled="true">
+          <stringProp name="CounterConfig.start">0</stringProp>
+          <stringProp name="CounterConfig.end"></stringProp>
+          <stringProp name="CounterConfig.incr">1</stringProp>
+          <stringProp name="CounterConfig.name">test_count</stringProp>
+          <stringProp name="CounterConfig.format"></stringProp>
+          <boolProp name="CounterConfig.per_user">false</boolProp>
+          <stringProp name="TestPlan.comments">id for number of test / problem submitted</stringProp>
+        </CounterConfig>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="VRP1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-VRP&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Routing - VRP&quot;,     &quot;inputData&quot;:{         &quot;Locations&quot;: [           {             &quot;Latitude&quot;: 37.99983328183838,             &quot;Longitude&quot;: 23.74317714798427           },           {             &quot;Latitude&quot;: 37.966783510525985,             &quot;Longitude&quot;: 23.778605533642235           },           {             &quot;Latitude&quot;: 37.9990464764814,             &quot;Longitude&quot;: 23.773251398190194           },           {             &quot;Latitude&quot;: 37.974070236340665,             &quot;Longitude&quot;: 23.737519890565082           },           {             &quot;Latitude&quot;: 37.99763705556787,             &quot;Longitude&quot;: 23.76632669971703           },           {             &quot;Latitude&quot;: 37.987158185269436,             &quot;Longitude&quot;: 23.760040398809927           },           {             &quot;Latitude&quot;: 37.96565952612894,             &quot;Longitude&quot;: 23.78044816563277           },           {             &quot;Latitude&quot;: 38.00816194011881,             &quot;Longitude&quot;: 23.743726736188382           },           {             &quot;Latitude&quot;: 37.983474656462256,             &quot;Longitude&quot;: 23.73256864917707           },           {             &quot;Latitude&quot;: 37.96362413346355,             &quot;Longitude&quot;: 23.77785820154608           },           {             &quot;Latitude&quot;: 37.96581060070882,             &quot;Longitude&quot;: 23.72133687257313           },           {             &quot;Latitude&quot;: 37.97624293546459,             &quot;Longitude&quot;: 23.740238201740137           },           {             &quot;Latitude&quot;: 38.00566809733227,             &quot;Longitude&quot;: 23.728089082692076           },           {             &quot;Latitude&quot;: 38.00132387722171,             &quot;Longitude&quot;: 23.75830400972441           },           {             &quot;Latitude&quot;: 37.96320247915091,             &quot;Longitude&quot;: 23.785174964462342           },           {             &quot;Latitude&quot;: 37.965357705819066,             &quot;Longitude&quot;: 23.74320004992697           },           {             &quot;Latitude&quot;: 37.9692186084866,             &quot;Longitude&quot;: 23.785110852487332           },           {             &quot;Latitude&quot;: 37.98271697637991,             &quot;Longitude&quot;: 23.73542153051244           },           {             &quot;Latitude&quot;: 37.97230013076112,             &quot;Longitude&quot;: 23.788423933330492           },           {             &quot;Latitude&quot;: 37.97827880279073,             &quot;Longitude&quot;: 23.75884558944574           }         ],         &quot;NumVehicles&quot;: 3,         &quot;Depot&quot;: 0,         &quot;MaxDistance&quot;: 13000       } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="VRP2" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-VRP&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Routing - VRP&quot;,     &quot;inputData&quot;: {       &quot;Locations&quot;: [         {           &quot;Latitude&quot;: 37.952869509379454,           &quot;Longitude&quot;: 23.75069077501496         },         {           &quot;Latitude&quot;: 38.002587619596845,           &quot;Longitude&quot;: 23.75410130129327         },         {           &quot;Latitude&quot;: 37.98431139020142,           &quot;Longitude&quot;: 23.74687348010615         },         {           &quot;Latitude&quot;: 37.98223598120821,           &quot;Longitude&quot;: 23.72259632840998         },         {           &quot;Latitude&quot;: 37.96959421335427,           &quot;Longitude&quot;: 23.72646362934896         },         {           &quot;Latitude&quot;: 37.960865396481104,           &quot;Longitude&quot;: 23.71225235268419         },         {           &quot;Latitude&quot;: 37.984891421215444,           &quot;Longitude&quot;: 23.767237662138843         },         {           &quot;Latitude&quot;: 37.98598180613667,           &quot;Longitude&quot;: 23.764565419515314         },         {           &quot;Latitude&quot;: 37.974495428614496,           &quot;Longitude&quot;: 23.730424860825668         },         {           &quot;Latitude&quot;: 37.96682751718977,           &quot;Longitude&quot;: 23.780639144527125         },         {           &quot;Latitude&quot;: 37.97611655788575,           &quot;Longitude&quot;: 23.777420212531506         },         {           &quot;Latitude&quot;: 37.958791683278264,           &quot;Longitude&quot;: 23.73736269022995         },         {           &quot;Latitude&quot;: 37.9771674577192,           &quot;Longitude&quot;: 23.728771862912208         },         {           &quot;Latitude&quot;: 38.00987022076512,           &quot;Longitude&quot;: 23.74908127190086         },         {           &quot;Latitude&quot;: 37.99091862048673,           &quot;Longitude&quot;: 23.744056963926184         },         {           &quot;Latitude&quot;: 37.99393276161416,           &quot;Longitude&quot;: 23.767177644715755         },         {           &quot;Latitude&quot;: 37.9972016538649,           &quot;Longitude&quot;: 23.70124046622525         },         {           &quot;Latitude&quot;: 37.999560434483385,           &quot;Longitude&quot;: 23.798832004418394         },         {           &quot;Latitude&quot;: 37.98315228896878,           &quot;Longitude&quot;: 23.781989301351476         },         {           &quot;Latitude&quot;: 37.998313130400064,           &quot;Longitude&quot;: 23.751093090252954         },         {           &quot;Latitude&quot;: 37.99015337093875,           &quot;Longitude&quot;: 23.782331742239787         },         {           &quot;Latitude&quot;: 38.00844075096611,           &quot;Longitude&quot;: 23.72780222352149         },         {           &quot;Latitude&quot;: 37.97397369612211,           &quot;Longitude&quot;: 23.70644273042597         },         {           &quot;Latitude&quot;: 37.955074366831596,           &quot;Longitude&quot;: 23.742974154286188         },         {           &quot;Latitude&quot;: 37.96839905588792,           &quot;Longitude&quot;: 23.785375398885247         },         {           &quot;Latitude&quot;: 37.993155822339126,           &quot;Longitude&quot;: 23.78365444414029         },         {           &quot;Latitude&quot;: 37.98356403598068,           &quot;Longitude&quot;: 23.773244825974306         },         {           &quot;Latitude&quot;: 38.00354975450752,           &quot;Longitude&quot;: 23.787775643570907         },         {           &quot;Latitude&quot;: 37.98795046039705,           &quot;Longitude&quot;: 23.724644115796547         },         {           &quot;Latitude&quot;: 37.989711463038624,           &quot;Longitude&quot;: 23.773570784390227         },         {           &quot;Latitude&quot;: 38.0069365510489,           &quot;Longitude&quot;: 23.762173933086867         },         {           &quot;Latitude&quot;: 37.99303836926921,           &quot;Longitude&quot;: 23.776901377181904         },         {           &quot;Latitude&quot;: 37.96744010600828,           &quot;Longitude&quot;: 23.753506048650216         },         {           &quot;Latitude&quot;: 37.9728592471149,           &quot;Longitude&quot;: 23.773119239783625         },         {           &quot;Latitude&quot;: 37.98483297519177,           &quot;Longitude&quot;: 23.766320906858734         },         {           &quot;Latitude&quot;: 37.95622836418228,           &quot;Longitude&quot;: 23.745495148148063         },         {           &quot;Latitude&quot;: 37.993710073569325,           &quot;Longitude&quot;: 23.717348427917532         },         {           &quot;Latitude&quot;: 37.95405701829207,           &quot;Longitude&quot;: 23.753636790964723         },         {           &quot;Latitude&quot;: 37.97124090910776,           &quot;Longitude&quot;: 23.745685089764468         },         {           &quot;Latitude&quot;: 38.00623053015713,           &quot;Longitude&quot;: 23.79937658266112         },         {           &quot;Latitude&quot;: 37.9813450812125,           &quot;Longitude&quot;: 23.799360279544565         },         {           &quot;Latitude&quot;: 37.99247491798142,           &quot;Longitude&quot;: 23.703948988742496         },         {           &quot;Latitude&quot;: 37.95040063496377,           &quot;Longitude&quot;: 23.71139856043195         },         {           &quot;Latitude&quot;: 37.96975921198933,           &quot;Longitude&quot;: 23.759572373961515         },         {           &quot;Latitude&quot;: 38.00506264147352,           &quot;Longitude&quot;: 23.792109044619032         },         {           &quot;Latitude&quot;: 37.97001064420357,           &quot;Longitude&quot;: 23.78220065164807         },         {           &quot;Latitude&quot;: 37.99519109099626,           &quot;Longitude&quot;: 23.733958186380676         },         {           &quot;Latitude&quot;: 37.951573900078195,           &quot;Longitude&quot;: 23.760619698190304         },         {           &quot;Latitude&quot;: 38.00569764066176,           &quot;Longitude&quot;: 23.763144930336583         },         {           &quot;Latitude&quot;: 37.97070889870387,           &quot;Longitude&quot;: 23.741252313464848         },         {           &quot;Latitude&quot;: 37.9504383294518,           &quot;Longitude&quot;: 23.70758378316311         },         {           &quot;Latitude&quot;: 37.97615027591078,           &quot;Longitude&quot;: 23.751654246537093         },         {           &quot;Latitude&quot;: 37.98298165045895,           &quot;Longitude&quot;: 23.725906451261242         },         {           &quot;Latitude&quot;: 38.003827601429315,           &quot;Longitude&quot;: 23.722041776685916         },         {           &quot;Latitude&quot;: 37.96061944373332,           &quot;Longitude&quot;: 23.799085835776086         },         {           &quot;Latitude&quot;: 38.007854675482214,           &quot;Longitude&quot;: 23.777173216668512         },         {           &quot;Latitude&quot;: 37.997024250067135,           &quot;Longitude&quot;: 23.708992084147205         },         {           &quot;Latitude&quot;: 37.987258128810076,           &quot;Longitude&quot;: 23.78328090468491         },         {           &quot;Latitude&quot;: 38.001133113887505,           &quot;Longitude&quot;: 23.700029852676895         },         {           &quot;Latitude&quot;: 37.96614740309379,           &quot;Longitude&quot;: 23.730137176767567         },         {           &quot;Latitude&quot;: 37.98471905487172,           &quot;Longitude&quot;: 23.74889145383908         },         {           &quot;Latitude&quot;: 37.95152584608965,           &quot;Longitude&quot;: 23.72251490416988         },         {           &quot;Latitude&quot;: 37.95783542002337,           &quot;Longitude&quot;: 23.75891395501254         },         {           &quot;Latitude&quot;: 37.969714916482005,           &quot;Longitude&quot;: 23.783804173148738         },         {           &quot;Latitude&quot;: 37.95579163217891,           &quot;Longitude&quot;: 23.788284986884992         },         {           &quot;Latitude&quot;: 37.99939839307219,           &quot;Longitude&quot;: 23.781345268372966         },         {           &quot;Latitude&quot;: 37.95967657715088,           &quot;Longitude&quot;: 23.742728473516028         },         {           &quot;Latitude&quot;: 37.97928385591035,           &quot;Longitude&quot;: 23.739538248048625         },         {           &quot;Latitude&quot;: 37.99776335462359,           &quot;Longitude&quot;: 23.78368438670551         },         {           &quot;Latitude&quot;: 37.987058794911384,           &quot;Longitude&quot;: 23.724947820160367         },         {           &quot;Latitude&quot;: 37.95335813624227,           &quot;Longitude&quot;: 23.793968517493575         },         {           &quot;Latitude&quot;: 37.986534806263265,           &quot;Longitude&quot;: 23.740124055791686         },         {           &quot;Latitude&quot;: 37.98898243660425,           &quot;Longitude&quot;: 23.77864395860953         },         {           &quot;Latitude&quot;: 37.95543794228646,           &quot;Longitude&quot;: 23.77005724588043         },         {           &quot;Latitude&quot;: 37.97466077199864,           &quot;Longitude&quot;: 23.705283110856186         },         {           &quot;Latitude&quot;: 37.971717033806385,           &quot;Longitude&quot;: 23.7526983519777         },         {           &quot;Latitude&quot;: 38.005672627609485,           &quot;Longitude&quot;: 23.782081751882902         },         {           &quot;Latitude&quot;: 37.99603507318003,           &quot;Longitude&quot;: 23.77667920080451         },         {           &quot;Latitude&quot;: 37.97999689582317,           &quot;Longitude&quot;: 23.736086931969275         },         {           &quot;Latitude&quot;: 37.969130482396736,           &quot;Longitude&quot;: 23.72617924479867         },         {           &quot;Latitude&quot;: 37.971902072084866,           &quot;Longitude&quot;: 23.744116156304905         },         {           &quot;Latitude&quot;: 38.00422101588983,           &quot;Longitude&quot;: 23.782279115538806         },         {           &quot;Latitude&quot;: 37.970766463486044,           &quot;Longitude&quot;: 23.758650536060937         },         {           &quot;Latitude&quot;: 38.0064193104917,           &quot;Longitude&quot;: 23.71052077863753         },         {           &quot;Latitude&quot;: 37.96634624858492,           &quot;Longitude&quot;: 23.726865331732693         },         {           &quot;Latitude&quot;: 37.98515735191177,           &quot;Longitude&quot;: 23.79535051411707         },         {           &quot;Latitude&quot;: 37.98676244671088,           &quot;Longitude&quot;: 23.701145830396975         },         {           &quot;Latitude&quot;: 37.96088950618157,           &quot;Longitude&quot;: 23.740422084187106         },         {           &quot;Latitude&quot;: 37.99334269176015,           &quot;Longitude&quot;: 23.769530167782683         },         {           &quot;Latitude&quot;: 37.953758757016715,           &quot;Longitude&quot;: 23.79205319147844         },         {           &quot;Latitude&quot;: 37.95988077160399,           &quot;Longitude&quot;: 23.75569947352677         },         {           &quot;Latitude&quot;: 37.982670527187366,           &quot;Longitude&quot;: 23.716848537670984         },         {           &quot;Latitude&quot;: 37.996430996239695,           &quot;Longitude&quot;: 23.796440437038402         },         {           &quot;Latitude&quot;: 37.95130420365727,           &quot;Longitude&quot;: 23.7924602941498         },         {           &quot;Latitude&quot;: 38.00324525035587,           &quot;Longitude&quot;: 23.745204534027554         },         {           &quot;Latitude&quot;: 37.98810703541731,           &quot;Longitude&quot;: 23.787298865415103         },         {           &quot;Latitude&quot;: 37.95566151064863,           &quot;Longitude&quot;: 23.743470324453867         },         {           &quot;Latitude&quot;: 37.950260608696325,           &quot;Longitude&quot;: 23.730659819227224         },         {           &quot;Latitude&quot;: 37.95257331594858,           &quot;Longitude&quot;: 23.72144563777585         },         {           &quot;Latitude&quot;: 38.00478205476561,           &quot;Longitude&quot;: 23.77050508662622         },         {           &quot;Latitude&quot;: 38.008741624496864,           &quot;Longitude&quot;: 23.76154333161155         },         {           &quot;Latitude&quot;: 37.996071468778666,           &quot;Longitude&quot;: 23.721550756932963         },         {           &quot;Latitude&quot;: 37.992734002139144,           &quot;Longitude&quot;: 23.70460409984526         },         {           &quot;Latitude&quot;: 38.00846217501473,           &quot;Longitude&quot;: 23.78848278346576         },         {           &quot;Latitude&quot;: 37.995061316764236,           &quot;Longitude&quot;: 23.7706540908899         },         {           &quot;Latitude&quot;: 37.968643489111265,           &quot;Longitude&quot;: 23.725422367361897         },         {           &quot;Latitude&quot;: 37.979996603994636,           &quot;Longitude&quot;: 23.79313547410516         },         {           &quot;Latitude&quot;: 37.985855756228574,           &quot;Longitude&quot;: 23.7887860796196         },         {           &quot;Latitude&quot;: 37.95057018790136,           &quot;Longitude&quot;: 23.720624076399137         },         {           &quot;Latitude&quot;: 37.98516448251913,           &quot;Longitude&quot;: 23.76805540021626         },         {           &quot;Latitude&quot;: 37.97904004893132,           &quot;Longitude&quot;: 23.798559341606886         },         {           &quot;Latitude&quot;: 38.00915903627921,           &quot;Longitude&quot;: 23.76118109563746         },         {           &quot;Latitude&quot;: 37.99404767752486,           &quot;Longitude&quot;: 23.751267251968205         },         {           &quot;Latitude&quot;: 37.9988539431183,           &quot;Longitude&quot;: 23.77064389466412         },         {           &quot;Latitude&quot;: 37.95116932896279,           &quot;Longitude&quot;: 23.749106581156635         },         {           &quot;Latitude&quot;: 37.967186126218024,           &quot;Longitude&quot;: 23.741844211958558         },         {           &quot;Latitude&quot;: 37.98139534172148,           &quot;Longitude&quot;: 23.78400656519142         },         {           &quot;Latitude&quot;: 37.954368122971395,           &quot;Longitude&quot;: 23.799885214951704         },         {           &quot;Latitude&quot;: 37.9676085395246,           &quot;Longitude&quot;: 23.769715600711326         },         {           &quot;Latitude&quot;: 37.991485525153294,           &quot;Longitude&quot;: 23.724491554480625         },         {           &quot;Latitude&quot;: 37.987323709788214,           &quot;Longitude&quot;: 23.776676473715888         },         {           &quot;Latitude&quot;: 37.9656340041845,           &quot;Longitude&quot;: 23.79621638081771         },         {           &quot;Latitude&quot;: 37.95274210774149,           &quot;Longitude&quot;: 23.78284822097694         },         {           &quot;Latitude&quot;: 37.98350410860473,           &quot;Longitude&quot;: 23.778101265526534         },         {           &quot;Latitude&quot;: 37.96006996019173,           &quot;Longitude&quot;: 23.725433922450563         },         {           &quot;Latitude&quot;: 37.970413513918174,           &quot;Longitude&quot;: 23.75351547883735         },         {           &quot;Latitude&quot;: 37.99145879165041,           &quot;Longitude&quot;: 23.75456721056552         },         {           &quot;Latitude&quot;: 38.006401544173464,           &quot;Longitude&quot;: 23.713662383293517         },         {           &quot;Latitude&quot;: 37.99028693820277,           &quot;Longitude&quot;: 23.73073244931421         },         {           &quot;Latitude&quot;: 37.98885589974614,           &quot;Longitude&quot;: 23.744338897051694         },         {           &quot;Latitude&quot;: 38.00716164480657,           &quot;Longitude&quot;: 23.748781392030633         },         {           &quot;Latitude&quot;: 37.95680020732691,           &quot;Longitude&quot;: 23.77048033612286         },         {           &quot;Latitude&quot;: 37.95972525981795,           &quot;Longitude&quot;: 23.740431108890203         },         {           &quot;Latitude&quot;: 37.98437450558076,           &quot;Longitude&quot;: 23.746013590360963         },         {           &quot;Latitude&quot;: 38.008149506552655,           &quot;Longitude&quot;: 23.722086715058477         },         {           &quot;Latitude&quot;: 38.00839843698392,           &quot;Longitude&quot;: 23.700430935958618         },         {           &quot;Latitude&quot;: 38.00435869758746,           &quot;Longitude&quot;: 23.72932203393949         },         {           &quot;Latitude&quot;: 37.9671122701017,           &quot;Longitude&quot;: 23.732555001485593         },         {           &quot;Latitude&quot;: 37.98778363055489,           &quot;Longitude&quot;: 23.794711189148185         },         {           &quot;Latitude&quot;: 37.97125267461899,           &quot;Longitude&quot;: 23.77910894911648         },         {           &quot;Latitude&quot;: 37.98584538314936,           &quot;Longitude&quot;: 23.732379990594108         },         {           &quot;Latitude&quot;: 37.95041012828152,           &quot;Longitude&quot;: 23.70488168714869         },         {           &quot;Latitude&quot;: 37.96569926972177,           &quot;Longitude&quot;: 23.756921139133816         },         {           &quot;Latitude&quot;: 37.990126188724155,           &quot;Longitude&quot;: 23.762917124706583         },         {           &quot;Latitude&quot;: 37.98903910397176,           &quot;Longitude&quot;: 23.74972475327461         },         {           &quot;Latitude&quot;: 38.00588854720454,           &quot;Longitude&quot;: 23.734720942158678         },         {           &quot;Latitude&quot;: 37.971067324168764,           &quot;Longitude&quot;: 23.767053543989743         },         {           &quot;Latitude&quot;: 37.9690010802593,           &quot;Longitude&quot;: 23.7502322391538         },         {           &quot;Latitude&quot;: 37.99665196711437,           &quot;Longitude&quot;: 23.725493447948175         },         {           &quot;Latitude&quot;: 37.983484951535196,           &quot;Longitude&quot;: 23.75572596950224         },         {           &quot;Latitude&quot;: 38.00520727339384,           &quot;Longitude&quot;: 23.745847980141335         },         {           &quot;Latitude&quot;: 37.96308521339061,           &quot;Longitude&quot;: 23.706084286606796         },         {           &quot;Latitude&quot;: 38.00827516614078,           &quot;Longitude&quot;: 23.710256412326615         },         {           &quot;Latitude&quot;: 38.00220693039454,           &quot;Longitude&quot;: 23.719805913856447         },         {           &quot;Latitude&quot;: 37.97061480569997,           &quot;Longitude&quot;: 23.78503189622328         },         {           &quot;Latitude&quot;: 37.986803857242215,           &quot;Longitude&quot;: 23.724206387113806         },         {           &quot;Latitude&quot;: 38.00100761246607,           &quot;Longitude&quot;: 23.700647147770148         },         {           &quot;Latitude&quot;: 37.99058272919213,           &quot;Longitude&quot;: 23.750656308645716         },         {           &quot;Latitude&quot;: 37.97881022011314,           &quot;Longitude&quot;: 23.72951537492377         },         {           &quot;Latitude&quot;: 37.98295723568413,           &quot;Longitude&quot;: 23.748696004447467         },         {           &quot;Latitude&quot;: 37.99563382446127,           &quot;Longitude&quot;: 23.732063009782188         },         {           &quot;Latitude&quot;: 37.973193412834576,           &quot;Longitude&quot;: 23.758518251912033         },         {           &quot;Latitude&quot;: 37.96491976609083,           &quot;Longitude&quot;: 23.71892981643249         },         {           &quot;Latitude&quot;: 37.95960704953925,           &quot;Longitude&quot;: 23.70198090729076         },         {           &quot;Latitude&quot;: 37.969574959149405,           &quot;Longitude&quot;: 23.71444065410894         },         {           &quot;Latitude&quot;: 37.99728373530421,           &quot;Longitude&quot;: 23.749867949314858         },         {           &quot;Latitude&quot;: 37.99844790127793,           &quot;Longitude&quot;: 23.731575963260497         },         {           &quot;Latitude&quot;: 37.969001349040454,           &quot;Longitude&quot;: 23.725835134559404         },         {           &quot;Latitude&quot;: 37.97456718319344,           &quot;Longitude&quot;: 23.74877026474655         },         {           &quot;Latitude&quot;: 37.99203254029359,           &quot;Longitude&quot;: 23.706419702521377         },         {           &quot;Latitude&quot;: 37.98743849879759,           &quot;Longitude&quot;: 23.74308313446559         },         {           &quot;Latitude&quot;: 37.97869237665117,           &quot;Longitude&quot;: 23.704392071858503         },         {           &quot;Latitude&quot;: 37.99387515707356,           &quot;Longitude&quot;: 23.713721214176395         },         {           &quot;Latitude&quot;: 37.97401469986426,           &quot;Longitude&quot;: 23.71316336292181         },         {           &quot;Latitude&quot;: 37.962829318095814,           &quot;Longitude&quot;: 23.730903327115655         },         {           &quot;Latitude&quot;: 37.992825859910695,           &quot;Longitude&quot;: 23.721810704280983         },         {           &quot;Latitude&quot;: 37.9864925094728,           &quot;Longitude&quot;: 23.730480521036775         },         {           &quot;Latitude&quot;: 37.970133099656714,           &quot;Longitude&quot;: 23.798641174009802         },         {           &quot;Latitude&quot;: 37.986503425122855,           &quot;Longitude&quot;: 23.724954336891265         },         {           &quot;Latitude&quot;: 37.97012725657215,           &quot;Longitude&quot;: 23.732330385207725         },         {           &quot;Latitude&quot;: 38.008843467817435,           &quot;Longitude&quot;: 23.724318823832533         },         {           &quot;Latitude&quot;: 37.96848636319664,           &quot;Longitude&quot;: 23.777331878100004         },         {           &quot;Latitude&quot;: 37.958415469598414,           &quot;Longitude&quot;: 23.74611708236561         },         {           &quot;Latitude&quot;: 37.95567327176781,           &quot;Longitude&quot;: 23.754149579141913         },         {           &quot;Latitude&quot;: 37.97289412061377,           &quot;Longitude&quot;: 23.78466332685932         },         {           &quot;Latitude&quot;: 37.97788009205275,           &quot;Longitude&quot;: 23.787357379767354         },         {           &quot;Latitude&quot;: 37.955832923736914,           &quot;Longitude&quot;: 23.783142343240954         },         {           &quot;Latitude&quot;: 37.99908277955099,           &quot;Longitude&quot;: 23.77548465662388         },         {           &quot;Latitude&quot;: 38.00723817414004,           &quot;Longitude&quot;: 23.78444087390262         },         {           &quot;Latitude&quot;: 38.001120924732696,           &quot;Longitude&quot;: 23.756434996338417         },         {           &quot;Latitude&quot;: 37.97922850252552,           &quot;Longitude&quot;: 23.743777214120666         },         {           &quot;Latitude&quot;: 37.958259618884625,           &quot;Longitude&quot;: 23.725525465100958         },         {           &quot;Latitude&quot;: 37.957155668971886,           &quot;Longitude&quot;: 23.789186872178345         },         {           &quot;Latitude&quot;: 37.976250015060735,           &quot;Longitude&quot;: 23.704194074452634         },         {           &quot;Latitude&quot;: 38.00841427946208,           &quot;Longitude&quot;: 23.76012906513604         },         {           &quot;Latitude&quot;: 37.96329755345301,           &quot;Longitude&quot;: 23.727852366576762         },         {           &quot;Latitude&quot;: 37.99542779656454,           &quot;Longitude&quot;: 23.799565181958148         },         {           &quot;Latitude&quot;: 37.96791032277724,           &quot;Longitude&quot;: 23.763688601633625         },         {           &quot;Latitude&quot;: 37.96449109909061,           &quot;Longitude&quot;: 23.71885652445368         },         {           &quot;Latitude&quot;: 37.96836091668519,           &quot;Longitude&quot;: 23.7100967004828         }       ],       &quot;NumVehicles&quot;: 8,       &quot;Depot&quot;: 0,       &quot;MaxDistance&quot;: null     } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="CVRP1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-CVRP&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Routing - CVRP&quot;,     &quot;inputData&quot;:{         &quot;Locations&quot;: [           {             &quot;Latitude&quot;: 37.99983328183838,             &quot;Longitude&quot;: 23.74317714798427           },           {             &quot;Latitude&quot;: 37.966783510525985,             &quot;Longitude&quot;: 23.778605533642235           },           {             &quot;Latitude&quot;: 37.9990464764814,             &quot;Longitude&quot;: 23.773251398190194           },           {             &quot;Latitude&quot;: 37.974070236340665,             &quot;Longitude&quot;: 23.737519890565082           },           {             &quot;Latitude&quot;: 37.99763705556787,             &quot;Longitude&quot;: 23.76632669971703           },           {             &quot;Latitude&quot;: 37.987158185269436,             &quot;Longitude&quot;: 23.760040398809927           },           {             &quot;Latitude&quot;: 37.96565952612894,             &quot;Longitude&quot;: 23.78044816563277           },           {             &quot;Latitude&quot;: 38.00816194011881,             &quot;Longitude&quot;: 23.743726736188382           },           {             &quot;Latitude&quot;: 37.983474656462256,             &quot;Longitude&quot;: 23.73256864917707           },           {             &quot;Latitude&quot;: 37.96362413346355,             &quot;Longitude&quot;: 23.77785820154608           },           {             &quot;Latitude&quot;: 37.96581060070882,             &quot;Longitude&quot;: 23.72133687257313           },           {             &quot;Latitude&quot;: 37.97624293546459,             &quot;Longitude&quot;: 23.740238201740137           },           {             &quot;Latitude&quot;: 38.00566809733227,             &quot;Longitude&quot;: 23.728089082692076           },           {             &quot;Latitude&quot;: 38.00132387722171,             &quot;Longitude&quot;: 23.75830400972441           },           {             &quot;Latitude&quot;: 37.96320247915091,             &quot;Longitude&quot;: 23.785174964462342           },           {             &quot;Latitude&quot;: 37.965357705819066,             &quot;Longitude&quot;: 23.74320004992697           },           {             &quot;Latitude&quot;: 37.9692186084866,             &quot;Longitude&quot;: 23.785110852487332           },           {             &quot;Latitude&quot;: 37.98271697637991,             &quot;Longitude&quot;: 23.73542153051244           },           {             &quot;Latitude&quot;: 37.97230013076112,             &quot;Longitude&quot;: 23.788423933330492           },           {             &quot;Latitude&quot;: 37.97827880279073,             &quot;Longitude&quot;: 23.75884558944574           }         ],         &quot;Depot&quot;: 0,         &quot;Demands&quot; : [0, 2, 3 , 4, 5, 4, 3, 2, 3, 4, 5, 4, 3, 2, 3, 4, 5, 4, 3, 2],         &quot;NumVehicles&quot;: 3,         &quot;VehicleCapacities&quot;: [22, 22, 22],         &quot;MaxDistance&quot;: null       } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="VRPTW1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-VRPTW&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Routing - VRPTW&quot;,     &quot;inputData&quot;:{         &quot;Locations&quot;: [           {             &quot;Latitude&quot;: 37.99983328183838,             &quot;Longitude&quot;: 23.74317714798427           },           {             &quot;Latitude&quot;: 37.966783510525985,             &quot;Longitude&quot;: 23.778605533642235           },           {             &quot;Latitude&quot;: 37.9990464764814,             &quot;Longitude&quot;: 23.773251398190194           },           {             &quot;Latitude&quot;: 37.974070236340665,             &quot;Longitude&quot;: 23.737519890565082           },           {             &quot;Latitude&quot;: 37.99763705556787,             &quot;Longitude&quot;: 23.76632669971703           },           {             &quot;Latitude&quot;: 37.987158185269436,             &quot;Longitude&quot;: 23.760040398809927           },           {             &quot;Latitude&quot;: 37.96565952612894,             &quot;Longitude&quot;: 23.78044816563277           },           {             &quot;Latitude&quot;: 38.00816194011881,             &quot;Longitude&quot;: 23.743726736188382           },           {             &quot;Latitude&quot;: 37.983474656462256,             &quot;Longitude&quot;: 23.73256864917707           },           {             &quot;Latitude&quot;: 37.96362413346355,             &quot;Longitude&quot;: 23.77785820154608           },           {             &quot;Latitude&quot;: 37.96581060070882,             &quot;Longitude&quot;: 23.72133687257313           },           {             &quot;Latitude&quot;: 37.97624293546459,             &quot;Longitude&quot;: 23.740238201740137           },           {             &quot;Latitude&quot;: 38.00566809733227,             &quot;Longitude&quot;: 23.728089082692076           },           {             &quot;Latitude&quot;: 38.00132387722171,             &quot;Longitude&quot;: 23.75830400972441           },           {             &quot;Latitude&quot;: 37.96320247915091,             &quot;Longitude&quot;: 23.785174964462342           },           {             &quot;Latitude&quot;: 37.965357705819066,             &quot;Longitude&quot;: 23.74320004992697           },           {             &quot;Latitude&quot;: 37.9692186084866,             &quot;Longitude&quot;: 23.785110852487332           }         ],         &quot;Speed&quot;: 100,         &quot;TimeWindows&quot;: [           [0, 100],           [70, 240],           [100, 300],           [160, 360],           [100, 260],           [0, 100],           [50, 200],           [0, 80],           [50, 200],           [0, 60],           [100, 320],           [100, 300],           [0, 100],           [50, 200],           [70, 160],           [100, 300],           [110, 300]         ],         &quot;NumVehicles&quot;: 3,         &quot;Depot&quot;: 0,         &quot;MaxTime&quot;: 190,         &quot;TimeSlack&quot;: 50       } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="MaxFlow1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-MaxFlow&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Max Flow&quot;,     &quot;inputData&quot;:{         &quot;StartNodes&quot;: [0, 0, 0, 1, 1, 2, 2, 3, 3],         &quot;EndNodes&quot;: [1, 2, 3, 2, 4, 3, 4, 2, 4],         &quot;Capacities&quot;: [20, 30, 10, 40, 30, 10, 20, 5, 20],         &quot;Source&quot;: 0,         &quot;Sink&quot;: 4     } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="MinCostFlow1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-MinCostFlow&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Min Cost Flow&quot;,     &quot;inputData&quot;:{         &quot;StartNodes&quot;: [0, 0, 1, 1, 1, 2, 2, 3, 4],         &quot;EndNodes&quot;: [1, 2, 2, 3, 4, 3, 4, 4, 2],         &quot;Capacities&quot;: [15, 8, 20, 4, 10, 15, 4, 20, 5],         &quot;UnitCosts&quot;: [4, 4, 2, 2, 6, 1, 3, 2, 3],         &quot;Supplies&quot;: [20, 0, 0, -5, -15]     } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="EmpSch1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-Employee Scheduling&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Employee Scheduling&quot;,     &quot;inputData&quot;:{         &quot;NumEmployees&quot;: 5,         &quot;NumShifts&quot;: 3,         &quot;NumDays&quot;: 7,         &quot;ShiftRequests&quot;: [[0, 0, 2], [0, 4, 2], [0, 5, 1], [0, 6, 2],                           [1, 2, 1], [1, 3, 1], [1, 4, 0], [1, 6, 2],                           [2, 0, 1], [2, 1, 1], [2, 3, 0], [2, 5, 1],                           [3, 0, 2], [3, 2, 0], [3, 3, 1], [3, 5, 0],                           [4, 1, 2], [4, 2, 1], [4, 4, 0], [4, 5, 1]],         &quot;MinShiftsPerEmployee&quot;: null,         &quot;MaxShiftsPerEmployee&quot;: null     } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="JobShop1" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">NEW_PROBLEM</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${test_count}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">{     &quot;name&quot;:&quot;test${test_count}-JobShop&quot;,     &quot;username&quot;:&quot;JMeter&quot;,     &quot;solver&quot;:&quot;Scheduling - Job Shop&quot;,     &quot;inputData&quot;:{         &quot;JobsData&quot;: [         [[0, 3], [1, 2], [2, 2]],         [[0, 2], [2, 1], [1, 4]],         [[1, 4], [2, 3]]         ]     } }</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/NewProblem.csv</stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
