@@ -1,5 +1,6 @@
 # Dependency directories
 **/node_modules/
+!/ms_frontend/node_modules
 !/ms_frontend/node_modules/react-scripts/config/webpack.config.js
 
 # Logs
