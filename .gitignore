@@ -2,6 +2,8 @@
 # Ignore all node_modules directories
 **/node_modules/
 
+/data
+
 # Specifically include the required path by unignoring progressively
 !/ms_frontend/node_modules/
 !/ms_frontend/node_modules/react-scripts/
