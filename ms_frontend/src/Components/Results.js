@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import '../index.css'; // import the CSS file
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 function Results() {
   const [results, setResults] = useState([]);
@@ -14,7 +16,7 @@ function Results() {
 
   const fetchResults = async () => {
     try {
-      const response = await fetch('http://localhost:3005/results');
+      const response = await fetch(`http://${process.env.RESULTS}:3005/results`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

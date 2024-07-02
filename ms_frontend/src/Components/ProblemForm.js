@@ -7,6 +7,8 @@ import MaxFlowForm from './MaxFlowForm';
 import MinFlowForm from './MinFlowForm';
 import SchedulingForm from './SchedulingForm';
 import JobShopForm from './JobShopForm';
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
   function ProblemForm({ closeModal }) {
     const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
@@ -34,7 +36,7 @@ import JobShopForm from './JobShopForm';
         inputData
       };
       try {
-          const response = await fetch('http://localhost:3002/new-problem', {
+          const response = await fetch(`http://${process.env.DATA_INPUT}:3002/new-problem`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

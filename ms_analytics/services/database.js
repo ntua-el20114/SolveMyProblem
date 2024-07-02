@@ -7,7 +7,7 @@ const initialSequelize = new Sequelize("", process.env.DB_USER, process.env.DB_P
     dialect: 'mysql', //process.env.DB_DIALECT,
     logging: false, // Set to true if you want to see the SQL queries
   });
-  
+
   
   const db = {};
   db.sequelize=initialSequelize;

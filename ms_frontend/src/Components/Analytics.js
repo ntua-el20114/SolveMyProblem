@@ -3,13 +3,15 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import '../index.css'; // Import the CSS file
 import Highcharts from 'highcharts';
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const Analytics = () => {
   const [analyticsData, setAnalyticsData] = useState({ submitted: 0, pending: 0, solved: 0 });
 
   const fetchProblems = async () => {
     try {
-      const response = await fetch('http://localhost:3006/analytics');
+      const response = await fetch(`http://${process.env.ANALYTICS}:3006/analytics`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
