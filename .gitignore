@@ -1,6 +1,11 @@
 # Dependency directories
+# Ignore all node_modules directories
 **/node_modules/
-!/ms_frontend/node_modules
+
+# Specifically include the required path by unignoring progressively
+!/ms_frontend/node_modules/
+!/ms_frontend/node_modules/react-scripts/
+!/ms_frontend/node_modules/react-scripts/config/
 !/ms_frontend/node_modules/react-scripts/config/webpack.config.js
 
 # Logs
