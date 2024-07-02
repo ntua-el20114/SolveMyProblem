@@ -16,7 +16,7 @@ function Results() {
 
   const fetchResults = async () => {
     try {
-      const response = await fetch(`http://${process.env.RESULTS}:3005/results`);
+      const response = await fetch(`http://0.0.0.0:3005/results`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

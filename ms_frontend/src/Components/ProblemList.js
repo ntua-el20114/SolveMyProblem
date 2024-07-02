@@ -40,7 +40,7 @@ function ProblemList() {
     // Function to fetch problems
     const fetchProblems = async () => {
         try {
-            const response = await fetch(`http://${process.env.PROBLEM_LIST}:3003/problems`);
+            const response = await fetch(`http://0.0.0.0:3003/problems`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -55,9 +55,9 @@ function ProblemList() {
         try {
             // Execute all requests in parallel
             await Promise.all([
-                axios.post(`http://${process.env.PROBLEM_LIST}:3003/delete-problem`, { id: selectedProblem.id }), //send to problem list
-                axios.post(`http://${process.env.ANALYTICS}:3006/delete-problem`, { id: selectedProblem.id }), //send to analytics
-                axios.post(`http://${process.env.RESULTS}:3005/delete-problem`, { id: selectedProblem.id })  //send to results
+                axios.post(`http://0.0.0.0:3003/delete-problem`, { id: selectedProblem.id }), //send to problem list
+                axios.post(`http://0.0.0.0:3006/delete-problem`, { id: selectedProblem.id }), //send to analytics
+                axios.post(`http://0.0.0.0:3005/delete-problem`, { id: selectedProblem.id })  //send to results
             ]);
             console.log('Deleting', selectedProblem ? selectedProblem.id : '');
             setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload

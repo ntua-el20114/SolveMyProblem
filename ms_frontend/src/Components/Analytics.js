@@ -11,7 +11,7 @@ const Analytics = () => {
 
   const fetchProblems = async () => {
     try {
-      const response = await fetch(`http://${process.env.ANALYTICS}:3006/analytics`);
+      const response = await fetch(`http://0.0.0.0:3006/analytics`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

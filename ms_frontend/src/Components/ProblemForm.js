@@ -36,7 +36,7 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
         inputData
       };
       try {
-          const response = await fetch(`http://${process.env.DATA_INPUT}:3002/new-problem`, {
+          const response = await fetch(`http://0.0.0.0:3002/new-problem`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

@@ -5,6 +5,12 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: tery
+      MYSQL_PASSWORD: tery
+    command: --init-file /docker-entrypoint-initdb.d/user.sql
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./user.sql:/docker-entrypoint-initdb.d/user.sql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -58,6 +64,7 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_analytics
 
   ms_choreographer:
     build: ./ms_choreographer
@@ -70,11 +77,12 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_choreographer
 
   ms_data_input:
     build: ./ms_data_input
     ports:
-      - "3002:3009"
+      - "3002:3002"
     env_file:
       - ./ms_data_input/.env
     depends_on:
@@ -82,6 +90,7 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_data_input
 
   ms_results:
     build: ./ms_results
@@ -94,6 +103,7 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_results
 
   ms_problem_list:
     build: ./ms_problem_list
@@ -106,6 +116,7 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_problem_list
   
   ms_solver:
     build: ./ms_solver
@@ -118,6 +129,7 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+    hostname: ms_solver
 
   ms_frontend:
     build: ./ms_frontend
