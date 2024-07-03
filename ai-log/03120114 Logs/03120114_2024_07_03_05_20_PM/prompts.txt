@@ -1,0 +1,39 @@
+ntua-el20114: I have a javascript program that runs a python sub-process to perform some computations. I want the parent js process to keep the execution time of the python sub-process
+
+GitHub Copilot: To achieve this, you can use the `child_process` module in Node.js to spawn the Python subprocess. Then, you can measure the execution time by recording the time before starting the subprocess and calculating the difference once the subprocess has finished executing. Here's a step-by-step plan in pseudocode:
+
+1. Import the `child_process` module.
+2. Define the path to the Python script you want to execute.
+3. Record the start time using `Date.now()`.
+4. Use `child_process.spawn()` to execute the Python script.
+5. Listen to the `close` event of the subprocess to determine when it has finished executing.
+6. Once the subprocess has finished, record the end time using `Date.now()`.
+7. Calculate the execution time by subtracting the start time from the end time.
+8. Print or use the execution time as needed.
+
+Here's how you can implement it in JavaScript:
+
+```javascript
+const { spawn } = require('child_process');
+
+// Path to your Python script
+const pythonScriptPath = 'path/to/your/script.py';
+
+// Start time
+const startTime = Date.now();
+
+const pythonProcess = spawn('python', [pythonScriptPath]);
+
+pythonProcess.on('close', (code) => {
+    // End time
+    const endTime = Date.now();
+
+    // Calculate execution time
+    const executionTime = endTime - startTime;
+
+    console.log(`Python script execution time: ${executionTime} ms`);
+    console.log(`Python script exited with code ${code}`);
+});
+```
+
+Replace `'path/to/your/script.py'` with the actual path to your Python script. This code assumes that the Python executable is accessible in your system's PATH. If it's not, you may need to specify the full path to the Python executable as the first argument of `spawn`.

@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": "coding",
+        "action": "data design",
+        "scope": "backend",
+        "action experience": 2,
+        "prog lang": "yaml/json",
+        "other prog lang": "<fill in>",
+        "aimodel": "copilot",
+        "aimodel version": "1.208.0",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": "online full",
+        "experience with tool": 4,
+        "time allocated (h)": "0.3",
+        "time saved estimate (h)": "0.0", 
+        "quality of ai help": 0,
+        "knowledge acquired": 0,
+        "generic feeling - now": 0,
+        "generic feeling - future": 0,
+        "threat level": 4,
+        "notes": "<fill in>"
+    }
+}

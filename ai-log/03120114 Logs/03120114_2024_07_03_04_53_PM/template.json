@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": "coding",
+        "action": "choreography design",
+        "scope": "messaging design",
+        "action experience": 1,
+        "prog lang": "js",
+        "other prog lang": "<fill in>",
+        "aimodel": "copilot",
+        "aimodel version": "1.208.0",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": "online full",
+        "experience with tool": 4,
+        "time allocated (h)": "0.1",
+        "time saved estimate (h)": "1", 
+        "quality of ai help": 5,
+        "knowledge acquired": 4,
+        "generic feeling - now": 4,
+        "generic feeling - future": 4,
+        "threat level": 1,
+        "notes": "<fill in>"
+    }
+}

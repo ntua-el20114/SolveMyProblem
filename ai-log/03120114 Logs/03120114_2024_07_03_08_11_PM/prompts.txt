@@ -1,0 +1,22 @@
+ntua-el20114: In matplotlib, can i put a text box on my plot?
+
+GitHub Copilot: Yes, in Matplotlib, you can put a text box on your plot using the `text` function for simple text, or `annotate` for text with an arrow pointing to a place on the plot. For more complex text boxes, you can use the `FancyBboxPatch` object for customization.
+
+Here's a simple example using `text` to add a text box:
+
+```python
+import matplotlib.pyplot as plt
+
+# Sample data
+x = [1, 2, 3, 4]
+y = [10, 20, 25, 30]
+
+plt.plot(x, y)
+
+# Adding a text box
+plt.text(2, 25, 'Sample Text', fontsize=12, bbox=dict(facecolor='red', alpha=0.5))
+
+plt.show()
+```
+
+This code snippet creates a plot and adds a text box with "Sample Text" at the coordinates (2, 25) on the plot. The `bbox` parameter is used to create a bounding box around the text for better visibility, with a red background and 50% transparency.

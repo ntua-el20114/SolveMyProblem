@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": "coding",
+        "action": "source code authoring",
+        "scope": "backend",
+        "action experience": 1,
+        "prog lang": "js-node",
+        "other prog lang": "<fill in>",
+        "aimodel": "copilot",
+        "aimodel version": "1.208.0",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": "online full",
+        "experience with tool": 4,
+        "time allocated (h)": "0.2",
+        "time saved estimate (h)": "1.5", 
+        "quality of ai help": 5,
+        "knowledge acquired": 5,
+        "generic feeling - now": 5,
+        "generic feeling - future": 5,
+        "threat level": 1,
+        "notes": "<fill in>"
+    }
+}
