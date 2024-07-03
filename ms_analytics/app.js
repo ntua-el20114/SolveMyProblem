@@ -9,6 +9,12 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 app.use(cors());
+function setCorsHeaders(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+}
+app.use(setCorsHeaders);
+
 const port = 3006;
 
 // Kafkannot analytics
