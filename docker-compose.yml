@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:5.7
+    image: mysql:8.4
     ports:
       - "3306:3306"
     environment:
@@ -144,11 +144,16 @@ services:
         condition: service_healthy
   
   jmeter:
-    image: justb4/jmeter:latest # Use the official JMeter image or your custom image (e.g., my-jmeter)
+    build: ./testing # Use the official JMeter image or your custom image (e.g., my-jmeter)
     container_name: jmeter
     volumes:
-      - .:/jmeter/testing # Mount the directory containing your JMeter test plans
-      - ./results:/jmeter/testing/results # Directory for JMeter test results
+      - ./testing:/jmeter/testing # Mount the directory containing your JMeter test plans
+      - ./testing/results:/jmeter/testing/results # Directory for JMeter test results
+    ports:
+      - "8080:8080"
+    
     depends_on:
-      - ms_frontend
-      - ms_solver
+      kafka1:
+        condition: service_healthy
+      db:
+        condition: service_healthy

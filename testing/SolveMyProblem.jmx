@@ -23,7 +23,7 @@
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
           <stringProp name="TestPlan.comments">Visit home page</stringProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/</stringProp>
@@ -162,7 +162,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET analytics" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
           <stringProp name="HTTPSampler.port">3006</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/analytics</stringProp>
@@ -176,7 +176,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET results" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
           <stringProp name="HTTPSampler.port">3005</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/results</stringProp>
@@ -190,7 +190,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET problems" enabled="true">
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
           <stringProp name="HTTPSampler.port">3003</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/problems</stringProp>
@@ -305,7 +305,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -343,7 +343,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -381,7 +381,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -419,7 +419,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -457,7 +457,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -495,7 +495,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -533,7 +533,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
@@ -571,7 +571,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">localhost:9092</stringProp>
+                <stringProp name="Argument.value">kafka1:29092</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
