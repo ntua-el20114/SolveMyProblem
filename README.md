@@ -1,34 +1,32 @@
-# NTUA ECE SAAS 2024 PROJECT SolveMyProblem
-  
-## TEAM (40)
+![alt text](logo.png)
 
+# NTUA ECE SAAS 2024 PROJECT SolveMyProblem
+SolveMyProblem solves hard algorithmic problems, using efficient algorithms based on the OR Tools library.
+Currently the system supports routing, graph flow and scheduling problems. Its multi-threaded architecture allows it to handle multiple problems simultaneously.
+As a SolveMyProblem user, you can:
+👉 Submit new problems to be solved.
+👉 View all your previous problems, along with their solutions presented in a eye-pleasing, dark themed UI.
+👉 View various statistics about the submitted problems, through comprehensive graphs.
+
+To submit a new problem, you can choose between filling a form and uploading a json file (although the json file method is highly encouraged).
+The solution values of the problem are presented through the UI and can be downloaded in a json format.
+
+## TEAM (40)
 | Name | Α.Μ. |
 | --- | --- |
-| Mike | 03120114 |
-| Nick | 03120014 |
-| Tereza | 03120403 |
+| Michael Raftopoulos | 03120114 |
+| Nick Oikonomou | 03120014 |
+| Tereza Vassiliou | 03120403 |
 
 
-### Dependencies:
-
-- Nodejs 20.15.0+
-- Java 11 or above (for kafka)
-- kafka 2.13-3.7.0
-- Python latest version
-- mysql server
-
+### Run the web app:
 To run the app you need to:
-- Start mysql server
-- Start Zookeeper and Kafka server (commands below)
-- run ```./install_deps.sh``` to install node and python modules
-- Start all microservices
-- Visit localhost:3000 to interact with the frontend
+- Make sure your local mysql server is down: `systemctl stop mysql`
+- Start docker server: `systemctl start docker`
+- Run `sudo docker compose up  --build `
+- The application should automatically launch on your default browser
+- If not, visit the frontend address that appears on your terminal (each time you launch the app, a different address is assigned)
 
-inside: /kafka_2.13-3.7.0, do: (in separate terminals)
-
-```console
-bin/zookeeper-server-start.sh config/zookeeper.properties
-```
-```console
-bin/kafka-server-start.sh config/server.properties
-```
+### Input files
+You can find templates for the input files in the *json_templates* directory.
+For input file examples, you can go to *testing/input_files*.
