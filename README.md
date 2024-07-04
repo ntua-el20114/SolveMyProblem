@@ -30,3 +30,9 @@ To run the app you need to:
 ### Input files
 You can find templates for the input files in the *json_templates* directory.
 For input file examples, you can go to *testing/input_files*.
+
+
+### Stress tests
+To perform a stress test, run `jmeter -n -t SolveMyProblem.jmx` within the *jmeter* container.
+All test result appear in *testing/results* directory, in the form of csv files.
+You may also execute `python testing/plot_results.py` to generate a plot from the csv file results.
