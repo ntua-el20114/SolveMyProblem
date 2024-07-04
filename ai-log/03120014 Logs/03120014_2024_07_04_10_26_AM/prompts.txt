@@ -1,0 +1,705 @@
+help me solve this error:
+react-dom.development.js:86 Warning: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
+    at input
+    at label
+    at div
+    at VRPForm (http://localhost:3000/main.437266e….hot-update.js:27:3)
+    at form
+    at ProblemForm (http://localhost:3000/static/js/bundle.js:1604:3)
+    at div
+    at div
+    at div
+    at ProblemList (http://localhost:3000/static/js/bundle.js:1846:102)
+    at RenderedRoute (http://localhost:3000/static/js/bundle.js:89798:5)
+    at Routes (http://localhost:3000/static/js/bundle.js:90489:5)
+    at div
+    at Router (http://localhost:3000/static/js/bundle.js:90423:15)
+    at BrowserRouter (http://localhost:3000/static/js/bundle.js:88376:5)
+    at App
+
+ProblemForm.js:
+import React, { useState } from 'react';
+import '../index.css';
+import VRPForm from './VRPForm';
+import CVRPForm from './CVRPForm';
+import VRPTWForm from './VRPTWForm';
+import MaxFlowForm from './MaxFlowForm';
+import MinFlowForm from './MinFlowForm';
+import SchedulingForm from './SchedulingForm';
+import JobShopForm from './JobShopForm';
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
+  function ProblemForm({ closeModal }) {
+    const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
+
+    const getInputData = (FormDataFromInput) => {
+      setInputData(FormDataFromInput);
+    };
+
+    const handleSubmit = async (event, inputData) => {
+      event.preventDefault();
+      // Check if any field is empty
+      if (!name || !username || !solver) {
+        alert('All fields must be filled out');
+        return;
+      }
+      if (inputData === ''){
+        alert('Check data before submitting.')
+        return;
+      }
+
+      const formData = {
+        name,
+        username,
+        solver,
+        inputData
+      };
+      try {
+          const response = await fetch(http://0.0.0.0:3002/new-problem, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+          });
+          if (response.ok) {
+              console.log('Form submitted successfully');
+              closeModal(); // close the modal when the form is submitted successfully
+          } else {
+              console.log('Form submission failed');
+          }
+      } catch (error) {
+          console.error('Error submitting form:', error);
+      }
+    };
+
+
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [solver, setSolver] = useState('');
+
+  const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'];
+ 
+  const handleSolverChange = (e) => {
+    setSolver(e.target.value);
+    setInputData('');
+  };
+
+  return (
+    <form onSubmit={(event) => handleSubmit(event, InputData)}>
+      <label>
+        Problem Name:
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      </label>
+      <label>
+        Username:
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      </label>
+      <label>
+        Solver:
+        <select value={solver} onChange={handleSolverChange}>
+          <option key={0} value="">Select a solver</option>
+          {solvers.map((solver) => (
+            <option key={solver} value={solver}>
+              {solver}
+            </option>
+          ))}
+        </select>
+      </label>
+      {solver === 'Routing - VRP' && <VRPForm SendToParent={getInputData}/>}
+      {solver === 'Routing - CVRP' && <CVRPForm SendToParent={getInputData}/>}
+      {solver === 'Routing - VRPTW' && <VRPTWForm SendToParent={getInputData}/>}
+      {solver === 'Max Flow' && <MaxFlowForm SendToParent={getInputData}/>}
+      {solver === 'Min Cost Flow' && <MinFlowForm SendToParent={getInputData}/>}
+      {solver === 'Employee Scheduling' && <SchedulingForm SendToParent={getInputData}/>}
+      {solver === 'Scheduling - Job Shop' && <JobShopForm SendToParent={getInputData}/>}
+
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+export default ProblemForm;
+
+ProblemList.js:
+import React, { useState, useEffect} from 'react';
+import ProblemForm from './ProblemForm';
+import Header from './Header';
+import '../index.css'; // import the CSS file
+import axios from 'axios';
+import path from 'path';
+require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+
+function ProblemList() {
+    const [isProblemModalOpen, setIsProblemModalOpen] = useState(false);
+    const [problems, setProblems] = useState([]); // State to store the list of problems
+    const [reloadCounter, setReloadCounter] = useState(0); // State to trigger reload
+    //const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // New state for delete confirmation modal
+    const [selectedProblem, setSelectedProblem] = useState(null); // State to store the selected problem for editing
+    
+
+    const openProblemModal = () => {
+        setIsProblemModalOpen(true);
+    };
+
+    const closeProblemModal = () => {
+        setIsProblemModalOpen(false);
+        setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+    };
+
+    const openDeleteModal = (problem) => {
+        if (!(problem.status === 'solved')) {
+            alert('Only solved problems can be deleted');
+            return;
+        }
+        setSelectedProblem(problem);
+        setIsDeleteModalOpen(true);
+    };
+
+    const closeDeleteModal = () => { // Close delete confirmation modal
+        setIsDeleteModalOpen(false);
+    };
+
+    // Function to fetch problems
+    const fetchProblems = async () => {
+        try {
+            const response = await fetch(http://0.0.0.0:3003/problems);
+            if (!response.ok) {
+                throw new Error(HTTP error! status: ${response.status});
+            }
+            const data = await response.json();
+            setProblems(data); // Update the state with the fetched problems
+        } catch (error) {
+            console.error('Error fetching problems:', error);
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            // Execute all requests in parallel
+            await Promise.all([
+                axios.post(http://0.0.0.0:3003/delete-problem, { id: selectedProblem.id }), //send to problem list
+                axios.post(http://0.0.0.0:3006/delete-problem, { id: selectedProblem.id }), //send to analytics
+                axios.post(http://0.0.0.0:3005/delete-problem, { id: selectedProblem.id })  //send to results
+            ]);
+            console.log('Deleting', selectedProblem ? selectedProblem.id : '');
+            setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+            closeDeleteModal();
+        } catch (error) {
+            console.error('Error deleting problem:', error);
+            // Handle error (e.g., show error message to the user)
+        }
+    };
+
+    // useEffect to fetch problems on mount and on modal close
+    useEffect(() => {
+        fetchProblems();
+    }, [reloadCounter]); // Depend on reloadCounter to trigger effect
+
+    /*
+    const openEditModal = (problem) => {
+        setSelectedProblem(problem);
+        setIsEditModalOpen(true);
+    };
+
+    const closeEditModal = () => {
+        setIsEditModalOpen(false);
+        setReloadCounter(prevCount => prevCount + 1); // Increment to trigger reload
+    };
+
+    {isEditModalOpen && (
+                <div className="modal">
+                    <div className="modal-content" style={{width: '30%'}}>
+                        <span className="close" onClick={closeEditModal}>&times;</span>
+                        <h2 style={{textAlign: 'center'}}>Edit Problem</h2>
+                        <input className="rename" type="text" defaultValue={selectedProblem ? selectedProblem.name : ''} />
+                        <button onClick={() => console.log('Renaming', selectedProblem ? selectedProblem.id : '')}>Rename</button>
+                    </div>
+                </div>
+            )}
+
+            <img src='/edit.png' alt='Edit' onClick={() => openEditModal(problem)} style={{cursor: 'pointer', maxWidth:'20px', marginRight: '10px'}}/>
+
+    */
+
+    return (
+        <div>
+            <Header />
+            <img src = '/add.png' alt='' onClick={openProblemModal} className='add-button right-to-left-fast'/>
+            <h1 className="left-to-right-slow center-screen">Problem List</h1>
+            
+
+            {isProblemModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeProblemModal}>
+                            &times;
+                        </span>
+                        <ProblemForm closeModal={closeProblemModal} />
+                    </div>
+                </div>
+            )}
+
+            {isDeleteModalOpen && (
+                <div className="modal">
+                    <div className="modal-content" style={{width: '30%'}}>
+                        <span className="close" onClick={closeDeleteModal}>&times;</span>
+                        <h2>Are you sure you want to delete this problem?</h2>
+                        <button className="delete-problem" onClick={handleDelete}>Yes, Delete</button>
+                        <button onClick={closeDeleteModal}>Cancel</button>
+                    </div>
+                </div>
+            )}
+
+            <div className='problem-list'>
+                <div className="scrollbox">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>User Name</th>
+                            <th>Time Submitted</th>
+                            <th>Solver</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {problems.map((problem) => (
+                            <tr key={problem.id}>
+                                <td><b>{problem.name}</b></td>
+                                <td>{problem.userName}</td>
+                                <td>{new Date(problem.timeSubmitted).toLocaleString()}</td>
+                                <td>{problem.solver}</td>
+                                <td>{problem.status}</td>
+                                <td style={{verticalAlign:' middle', textAlign: 'center', padding: '0px'}}>
+                                    <img src='/delete-hover.png' alt='Delete' onClick={() => openDeleteModal(problem)} style={{cursor: 'pointer', maxWidth:'20px'}}/>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default ProblemList;
+ChatGPT
+The warning you're encountering, Warning: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen., typically occurs in React when an input component alternates between controlled and uncontrolled states. This means that the value prop of an input field is initially defined and later becomes undefined (or vice versa), which is not allowed.
+
+Here are the key steps to resolve this issue:
+
+Ensure Default Values: Always initialize state variables that are used as value props for input elements. If a state variable can be undefined, provide a default value.
+
+Conditional Rendering and State Reset: When you change the solver state, make sure the component that depends on it (like the form components) has their state properly initialized and reset. This avoids scenarios where an input field’s value becomes undefined.
+
+Check Controlled Components: Ensure that all input fields have their value controlled by React state. Avoid using both defaultValue and value simultaneously for the same input.
+
+Consistent State Handling: Ensure that the state changes do not inadvertently lead to undefined values.
+
+Let's dive into the code and make the necessary adjustments to fix these issues.
+
+Step-by-Step Fixes
+1. Initialize State Properly
+Ensure all state variables used in controlled components have default values.
+
+jsx
+Copy code
+const [name, setName] = useState('');
+const [username, setUsername] = useState('');
+const [solver, setSolver] = useState('');
+2. Handle Input Changes Properly
+Ensure that state changes are managed correctly and consistently. If an input is controlled, ensure its value never becomes undefined.
+
+3. Update the handleSolverChange Function
+When the solver changes, the corresponding form should reset its state properly.
+
+jsx
+Copy code
+const handleSolverChange = (e) => {
+  setSolver(e.target.value);
+  setInputData(''); // Reset input data whenever solver changes
+};
+4. Ensure All Input Fields Have a Value
+Update all the form input fields to ensure they always have a value.
+
+jsx
+Copy code
+<form onSubmit={(event) => handleSubmit(event, InputData)}>
+  <label>
+    Problem Name:
+    <input 
+      type="text" 
+      value={name || ''} 
+      onChange={(e) => setName(e.target.value)} 
+    />
+  </label>
+  <label>
+    Username:
+    <input 
+      type="text" 
+      value={username || ''} 
+      onChange={(e) => setUsername(e.target.value)} 
+    />
+  </label>
+  <label>
+    Solver:
+    <select 
+      value={solver || ''} 
+      onChange={handleSolverChange}
+    >
+      <option key={0} value="">Select a solver</option>
+      {solvers.map((solver) => (
+        <option key={solver} value={solver}>
+          {solver}
+        </option>
+      ))}
+    </select>
+  </label>
+  {solver === 'Routing - VRP' && <VRPForm SendToParent={getInputData} />}
+  {solver === 'Routing - CVRP' && <CVRPForm SendToParent={getInputData} />}
+  {solver === 'Routing - VRPTW' && <VRPTWForm SendToParent={getInputData} />}
+  {solver === 'Max Flow' && <MaxFlowForm SendToParent={getInputData} />}
+  {solver === 'Min Cost Flow' && <MinFlowForm SendToParent={getInputData} />}
+  {solver === 'Employee Scheduling' && <SchedulingForm SendToParent={getInputData} />}
+  {solver === 'Scheduling - Job Shop' && <JobShopForm SendToParent={getInputData} />}
+
+  <button type="submit">Submit</button>
+</form>
+5. Update the Child Components to Ensure Consistent State Handling
+In child components like VRPForm, ensure the props and state are consistent and controlled.
+
+For example, ensure that the SendToParent callback is called with a proper default value:
+
+jsx
+Copy code
+// Example for VRPForm
+function VRPForm({ SendToParent }) {
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    SendToParent(formData);
+  };
+
+  return (
+    <div>
+      <input 
+        name="someField" 
+        type="text" 
+        value={formData.someField || ''} 
+        onChange={handleChange} 
+      />
+    </div>
+  );
+}
+6. Check for Unintended State Updates in ProblemList.js
+Ensure that state changes in ProblemList.js do not lead to unintended undefined states in ProblemForm.
+
+Make sure any state that is passed down or depends on user input is always initialized and reset correctly.
+
+jsx
+Copy code
+const [isProblemModalOpen, setIsProblemModalOpen] = useState(false);
+const [problems, setProblems] = useState([]);
+const [selectedProblem, setSelectedProblem] = useState(null);
+
+// Open and close modal functions must ensure state is reset properly
+const openProblemModal = () => {
+  setIsProblemModalOpen(true);
+};
+
+const closeProblemModal = () => {
+  setIsProblemModalOpen(false);
+  setReloadCounter((prevCount) => prevCount + 1);
+  setSelectedProblem(null); // Reset selected problem when closing modal
+};
+Summary
+By ensuring that all input fields are consistently controlled and do not switch between controlled and uncontrolled states, you can resolve the warning. Make sure to initialize all state variables and reset them appropriately when changes occur.
+
+If you follow these steps and update your components to manage state consistently, the warning should be resolved.
+
+import React, { useState } from 'react';
+import '../index.css';
+
+function VRPForm({ SendToParent }) {
+  const [NumVehicles, setNumVehicles] = useState('');
+  const [Depot, setDepot] = useState('');
+  const [MaxDistance, setMaxDistance] = useState('');
+  const [Locations, setLocations] = useState('');
+
+  const handleFileChange = async (e) => {
+    const reader = new FileReader();
+    reader.onload = async (e) => { 
+      const text = (e.target.result);
+      let parsedInputData;
+      try {
+        parsedInputData = JSON.parse(text);
+        setNumVehicles(parsedInputData.NumVehicles|| 0);
+        setDepot(parsedInputData.Depot|| 0);
+        setMaxDistance(parsedInputData.hasOwnProperty('MaxDistance') ? parsedInputData.MaxDistance : null);
+        setLocations(JSON.stringify(parsedInputData.Locations, null, 2)|| '');
+      } catch (error) {
+        alert('Input Data is not a valid JSON object');
+        return;
+      }
+    };
+    try{
+    reader.readAsText(e.target.files[0]);
+    }
+    catch (error) {
+        console.error('Error reading file:', error);
+        alert('Error reading file');
+        return;
+    }  
+  };
+
+  const handleClick = async () => {
+    let parsedDepot = 0;
+    let parsedLocations;
+    let numberOfNodes = 0;
+    try {
+      parsedDepot = parseInt(Depot);
+    } catch (error) {
+        alert('Depot must be an integer');
+        return;
+    }
+    try {
+      parsedLocations = JSON.parse(Locations);
+    } catch (error) {
+      alert('Locations must be a valid JSON object');
+      return;
+    } 
+    try {
+      numberOfNodes = Array.isArray(parsedLocations) ? parsedLocations.length : Object.keys(parsedLocations).length;
+    }
+    catch (error) {
+      alert('Locations must be a valid JSON object');
+      return;
+    }
+    // Check if any field is empty
+    if (!NumVehicles || !Locations) {
+        alert('Only MaxDistance is optional. All other fields must be filled out');
+        return;
+    }
+    // Check if Depot is an integer between 0 and numberOfNodes - 1
+    if (!Number.isInteger(parsedDepot) || parsedDepot < 0 || parsedDepot >= numberOfNodes) {
+        alert('Depot must be an integer between 0 and ' + (numberOfNodes - 1));
+        return;
+    }
+
+    const formData = {
+        NumVehicles,
+        Depot: parsedDepot,
+        MaxDistance,
+        Locations: parsedLocations,
+    };
+    try{
+    alert('Data is valid')
+    SendToParent(formData);
+    } catch (error) {
+        console.error('Error submitting form:', error);
+
+    }
+  };
+
+  return (
+    <div style={{ display: 'inline-block', width:'50%' }}>   
+      <p style={{textAlign: 'justify'}}>
+          The Vehicle Routing Problem is a generalized version of the famous Traveling Salesperson Problem.
+          You can use multiple vehicles ("NumVehicles"), and choose the starting node ("Depot").
+          Each vehicle can travel up to a maximum total distance ("MaxDistance").
+      </p>
+      <label>
+        JSON File:
+        <input type="file" accept=".json" onChange={handleFileChange} />
+      </label>
+      <label>
+        NumVehicles:
+        <input type="number" value={NumVehicles} onChange={(e) => setNumVehicles(e.target.value)} />
+      </label>
+      <label>
+        Depot:
+        <input type="number" value={Depot} onChange={(e) => setDepot(e.target.value)} />
+      </label>
+      <label>
+        MaxDistance:
+        <input type="number" value={MaxDistance} onChange={(e) => setMaxDistance(e.target.value)} />
+      </label>
+      <label>
+        Locations:
+        <textarea rows="10" cols="50" value={Locations} onChange={(e) => setLocations(e.target.value)} />
+      </label>
+      <br />
+      <button type="button" onClick={handleClick}>Check Data</button>
+    </div>
+  );
+}
+
+export default VRPForm;
+
+
+this is the one that cause the previous error?
+ChatGPT
+The VRPForm component is indeed a potential source of the "controlled to uncontrolled" input warning. This warning occurs when an input element’s value prop changes from a defined value to undefined (or vice versa), leading to an inconsistent state.
+
+Here’s a step-by-step review of the potential issues in the VRPForm component that might be causing this warning:
+
+Issues in the Code
+Default Value Assignment:
+
+Input fields should always have a defined value to avoid changing from undefined to defined or vice versa. Inputs should never have undefined as a value, as it could lead to the error you are encountering.
+Handling Empty or Null Values:
+
+When setting state based on the parsed JSON, ensure that default values are used to prevent fields from becoming undefined.
+Initialization of State:
+
+States like NumVehicles, Depot, and MaxDistance need to be initialized with appropriate default values (like an empty string or zero) to prevent undefined states.
+Handling File Input Properly:
+
+Ensure the file input handling is robust and always sets default values if the JSON parsing fails or does not include expected keys.
+Fixes and Improvements
+1. Ensure Default Values for Inputs
+Ensure that all input fields have default values to avoid them being set to undefined.
+
+jsx
+Copy code
+const [NumVehicles, setNumVehicles] = useState('');
+const [Depot, setDepot] = useState('');
+const [MaxDistance, setMaxDistance] = useState('');
+const [Locations, setLocations] = useState('');
+2. Modify the handleFileChange Method
+Update the file reading process to ensure all fields have default values and handle errors appropriately.
+
+jsx
+Copy code
+const handleFileChange = (e) => {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    let parsedInputData;
+    try {
+      parsedInputData = JSON.parse(text);
+      setNumVehicles(parsedInputData.NumVehicles || ''); // Default to empty string
+      setDepot(parsedInputData.Depot || ''); // Default to empty string
+      setMaxDistance(parsedInputData.MaxDistance || ''); // Default to empty string
+      setLocations(JSON.stringify(parsedInputData.Locations, null, 2) || ''); // Default to empty string
+    } catch (error) {
+      alert('Input Data is not a valid JSON object');
+      console.error('JSON parsing error:', error);
+    }
+  };
+  
+  if (e.target.files[0]) {
+    reader.readAsText(e.target.files[0]);
+  } else {
+    alert('No file selected');
+  }
+};
+3. Update the handleClick Method
+Ensure Depot and Locations are validated properly to avoid them being undefined.
+
+jsx
+Copy code
+const handleClick = () => {
+  let parsedDepot = 0;
+  let parsedLocations;
+
+  try {
+    parsedDepot = parseInt(Depot, 10); // Convert Depot to integer
+    if (isNaN(parsedDepot)) throw new Error('Depot is not a number');
+  } catch (error) {
+    alert('Depot must be an integer');
+    return;
+  }
+
+  try {
+    parsedLocations = JSON.parse(Locations);
+  } catch (error) {
+    alert('Locations must be a valid JSON object');
+    return;
+  }
+
+  if (!NumVehicles || !Locations) {
+    alert('Only MaxDistance is optional. All other fields must be filled out');
+    return;
+  }
+
+  const numberOfNodes = Array.isArray(parsedLocations) ? parsedLocations.length : Object.keys(parsedLocations).length;
+
+  if (!Number.isInteger(parsedDepot) || parsedDepot < 0 || parsedDepot >= numberOfNodes) {
+    alert(`Depot must be an integer between 0 and ${numberOfNodes - 1}`);
+    return;
+  }
+
+  const formData = {
+    NumVehicles,
+    Depot: parsedDepot,
+    MaxDistance: MaxDistance || null,
+    Locations: parsedLocations,
+  };
+
+  alert('Data is valid');
+  SendToParent(formData);
+};
+4. Update the Component JSX
+Ensure each input element has a controlled value and that state changes propagate properly.
+
+jsx
+Copy code
+return (
+  <div style={{ display: 'inline-block', width: '50%' }}>
+    <p style={{ textAlign: 'justify' }}>
+      The Vehicle Routing Problem is a generalized version of the famous Traveling Salesperson Problem.
+      You can use multiple vehicles ("NumVehicles"), and choose the starting node ("Depot").
+      Each vehicle can travel up to a maximum total distance ("MaxDistance").
+    </p>
+    <label>
+      JSON File:
+      <input type="file" accept=".json" onChange={handleFileChange} />
+    </label>
+    <label>
+      NumVehicles:
+      <input
+        type="number"
+        value={NumVehicles || ''} // Ensure NumVehicles is always a string or number, not undefined
+        onChange={(e) => setNumVehicles(e.target.value)}
+      />
+    </label>
+    <label>
+      Depot:
+      <input
+        type="number"
+        value={Depot || ''} // Ensure Depot is always a string or number, not undefined
+        onChange={(e) => setDepot(e.target.value)}
+      />
+    </label>
+    <label>
+      MaxDistance:
+      <input
+        type="number"
+        value={MaxDistance || ''} // Ensure MaxDistance is always a string or number, not undefined
+        onChange={(e) => setMaxDistance(e.target.value)}
+      />
+    </label>
+    <label>
+      Locations:
+      <textarea
+        rows="10"
+        cols="50"
+        value={Locations || ''} // Ensure Locations is always a string, not undefined
+        onChange={(e) => setLocations(e.target.value)}
+      />
+    </label>
+    <br />
+    <button type="button" onClick={handleClick}>Check Data</button>
+  </div>
+);
