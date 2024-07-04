@@ -31,6 +31,8 @@ To run the app you need to:
 You can find templates for the input files in the *json_templates* directory.
 For input file examples, you can go to *testing/input_files*.
 
+## Documentation
+You can view all UML diagrams and the vpp file, along with the microservices description in the *architecture* directory.
 
 ### Stress tests
 To perform a stress test, run `jmeter -n -t SolveMyProblem.jmx` within the *jmeter* container.
