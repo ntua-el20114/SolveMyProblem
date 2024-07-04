@@ -142,3 +142,13 @@ services:
         condition: service_healthy
       db:
         condition: service_healthy
+  
+  jmeter:
+    image: justb4/jmeter:latest # Use the official JMeter image or your custom image (e.g., my-jmeter)
+    container_name: jmeter
+    volumes:
+      - .:/jmeter/testing # Mount the directory containing your JMeter test plans
+      - ./results:/jmeter/testing/results # Directory for JMeter test results
+    depends_on:
+      - ms_frontend
+      - ms_solver
