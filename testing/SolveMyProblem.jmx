@@ -23,7 +23,7 @@
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
           <stringProp name="TestPlan.comments">Visit home page</stringProp>
-          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
+          <stringProp name="HTTPSampler.domain">ms_frontend</stringProp>
           <stringProp name="HTTPSampler.port">3000</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/</stringProp>
@@ -144,7 +144,7 @@
                 <connectTime>true</connectTime>
               </value>
             </objProp>
-            <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/VisitPage.csv</stringProp>
+            <stringProp name="filename">/jmeter/testing/results/VisitPage.csv</stringProp>
           </ResultCollector>
           <hashTree/>
         </hashTree>
@@ -162,7 +162,7 @@
       </ThreadGroup>
       <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET analytics" enabled="true">
-          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
+          <stringProp name="HTTPSampler.domain">ms_analytics</stringProp>
           <stringProp name="HTTPSampler.port">3006</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/analytics</stringProp>
@@ -176,7 +176,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET results" enabled="true">
-          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
+          <stringProp name="HTTPSampler.domain">ms_results</stringProp>
           <stringProp name="HTTPSampler.port">3005</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/results</stringProp>
@@ -190,7 +190,7 @@
         </HTTPSamplerProxy>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET problems" enabled="true">
-          <stringProp name="HTTPSampler.domain">0.0.0.0</stringProp>
+          <stringProp name="HTTPSampler.domain">ms_problem_list</stringProp>
           <stringProp name="HTTPSampler.port">3003</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
           <stringProp name="HTTPSampler.path">/problems</stringProp>
@@ -274,7 +274,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/DataRequests.csv</stringProp>
+          <stringProp name="filename">/jmeter/testing/results/DataRequests.csv</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
@@ -675,7 +675,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">/home/michael/Documents/School/8th Semester/Software as a Service/saas2024-40/testing/results/NewProblem.csv</stringProp>
+          <stringProp name="filename">/jmeter/testing/results/NewProblem.csv</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
