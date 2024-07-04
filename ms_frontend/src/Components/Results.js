@@ -98,7 +98,7 @@ function Results() {
 }
 
 function displayResults(result, type){
-  result = JSON.parse(result)
+  
   // Handle Errors and Failures
   if (result.Result === "Error"){
     return (

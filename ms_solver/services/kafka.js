@@ -9,7 +9,14 @@ dotenv.config();
 
 const kafka = new Kafka({
   clientId: 'solver',
-  brokers: [process.env.KAFKA_BROKER]
+  brokers: [process.env.KAFKA_BROKER],
+  connectionTimeout: 30000,  // Increase timeout
+  requestTimeout: 30000,     // Increase request timeout
+  retry: {
+    retries: 10,             // Increase retry attempts
+    initialRetryTime: 1000,  // Increase initial retry time
+    factor: 2,               // Exponential backoff factor
+  }
 });
 
 const consumer = kafka.consumer({ groupId: 'solver-group' });

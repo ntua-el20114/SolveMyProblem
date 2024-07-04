@@ -1,25 +1,27 @@
-FROM python:3.10 AS build
+# Start with a base image that has both Python and Node.js
+FROM python:3.10
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
 WORKDIR /usr/src/app
-RUN python -m venv /usr/src/app/venv
-ENV PATH="/usr/src/app/venv/bin:$PATH"
 
-RUN . /usr/src/app/venv/bin/activate
+# Upgrade pip and install ortools
+RUN pip install --upgrade pip ortools
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-FROM node:20
-
-WORKDIR /usr/src/app
-COPY --from=build /usr/src/app/venv /usr/src/app/venv
-
-ENV PATH="/usr/src/app/venv/bin:$PATH"
-ENV NODE_ENV=container
-
+# Copy package.json files and install Node.js dependencies
 COPY package*.json ./
 RUN npm install
 
+# Copy the application code
 COPY . .
+
+# Verify ortools installation
+RUN python3 -c "import ortools; print('ortools is available')"
+
+# Expose the application port
 EXPOSE 3004
-CMD [ "node", "app.js" ]
+
+# Command to run the application
+CMD ["node", "app.js"]
