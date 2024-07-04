@@ -23,9 +23,17 @@ function SchedulingForm({ SendToParent }) {
         setMaxShiftsPerEmployee(parsedInputData.MaxShiftsPerEmployee !== undefined ? parsedInputData.MaxShiftsPerEmployee : null); // Keep null if not provided
       } catch (error) {
         alert('Input Data is not a valid JSON object');
+        return;
       }
     };
+    try{
     reader.readAsText(e.target.files[0]);
+    }
+    catch (error) {
+        console.error('Error reading file:', error);
+        alert('Error reading file');
+        return;
+    }  
   };
 
   const handleClick = () => {

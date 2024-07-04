@@ -11,7 +11,10 @@ import path from 'path';
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
   function ProblemForm({ closeModal }) {
-    const [InputData, setInputData] = useState(''); // Declare InputData as a state variable
+    const [InputData, setInputData] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [solver, setSolver] = useState('');
 
     const getInputData = (FormDataFromInput) => {
       setInputData(FormDataFromInput);
@@ -53,11 +56,6 @@ require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
           console.error('Error submitting form:', error);
       }
     };
-
-
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [solver, setSolver] = useState('');
 
   const solvers = ['Routing - VRP', 'Routing - CVRP', 'Routing - VRPTW', 'Max Flow','Min Cost Flow', 'Employee Scheduling', 'Scheduling - Job Shop'];
  
