@@ -1,0 +1,23 @@
+{
+    "answers": {
+        "phase": "deployment",
+        "action": "code management",
+        "scope": "deployment scripts",,
+        "action experience": 2,
+        "prog lang": "yaml/json",
+        "other prog lang": "<fill in>",
+        "aimodel": "chatgpt",
+        "aimodel version": "<fill in>",
+        "lmstudio-hosted aimodel": "<fill-in>",
+        "tool option": "online free",
+        "experience with tool": 1,
+        "time allocated (h)": "0.5",
+        "time saved estimate (h)": "1", 
+        "quality of ai help": 2,
+        "knowledge acquired": 3,
+        "generic feeling - now": 3,
+        "generic feeling - future": 4,
+        "threat level": 1,
+        "notes": "<fill in>"
+    }
+}
