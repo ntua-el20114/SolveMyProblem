@@ -4,7 +4,7 @@
         "action": "container structuring",
         "scope": "container configuration",
         "action experience": 1,
-        "prog lang": "yaml",
+        "prog lang": "yaml/json",
         "other prog lang": "<fill in>",
         "aimodel":"copilot",
         "aimodel version": "<fill in>",
