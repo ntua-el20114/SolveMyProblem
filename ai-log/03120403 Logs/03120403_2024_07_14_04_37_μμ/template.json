@@ -2,7 +2,7 @@
     "answers": {
         "phase": "deployment",
         "action": "code management",
-        "scope": "deployment scripts",,
+        "scope": "deployment scripts",
         "action experience": 2,
         "prog lang": "yaml/json",
         "other prog lang": "<fill in>",
