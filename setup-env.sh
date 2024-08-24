@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define base Kafka configurations
-KAFKA_CONFIG="KAFKA_BROKER=kafka1:9092 # Use Docker service name for Kafka broker\nKAFKAJS_NO_PARTITIONER_WARNING=1"
+KAFKA_CONFIG="KAFKA_BROKER=kafka1:29092 # Use Docker service name for Kafka broker\nKAFKAJS_NO_PARTITIONER_WARNING=1"
 
 # Define base database configurations
 DB_CONFIG="DB_USER=tery\nDB_PASSWORD=tery\nDB_HOST=db\nDB_DIALECT=mysql"
