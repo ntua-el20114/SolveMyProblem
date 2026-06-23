@@ -12,8 +12,11 @@
 SolveMyProblem solves hard algorithmic problems, using efficient algorithms based on the OR Tools library.
 Currently the system supports routing, graph flow and scheduling problems. Its multi-threaded architecture allows it to handle multiple problems simultaneously.
 As a SolveMyProblem user, you can:
+
 👉 Submit new problems to be solved.
+
 👉 View all your previous problems, along with their solutions presented in a eye-pleasing, dark themed UI.
+
 👉 View various statistics about the submitted problems, through comprehensive graphs.
 
 To submit a new problem, you can choose between filling a form and uploading a json file (although the json file method is highly encouraged).
